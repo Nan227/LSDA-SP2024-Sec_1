@@ -1,0 +1,23 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+```{r}
+names = c('Jin', 'Mark')
+scores = c(90, 99)
+
+l = list(
+  "Name" = names,
+  "Score" = scores
+)
+
+```
+
+```{r}
+l['Name']
+l['Score']
+
+l$Name
+l$Score
+```
+

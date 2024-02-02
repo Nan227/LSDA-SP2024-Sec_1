@@ -1,0 +1,108 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+# Simple LR
+## Read dataset
+
+```{r}
+dat = read.csv("Advertising.csv")
+
+```
+
+## model-1: Sales~TV
+```{r}
+model = lm(Sales~TV, data = dat)
+```
+
+**coefficients**
+```{r}
+model$coefficients
+```
+**CI**
+```{r}
+confint.lm(model)
+```
+**summary**
+```{r}
+summary(model)
+```
+
+```{r}
+model$fitted.values
+model$residuals
+
+hist(model$residuals)
+```
+## plot
+```{r}
+b = model$coefficients[1]
+a = model$coefficients[2]
+
+plot(dat$TV, dat$Sales, pch=20) # plot(dat$Sales ~ dat$TV)
+# abline(b,a, col='red',lwd=2)
+abline(model$coefficients, col='red',lwd=2)
+```
+
+## model-2: Sales~radio
+```{r}
+model2 = lm(Sales~Radio, data = dat)
+summary(model2)
+```
+
+## model-3: Sales~Newspaper
+```{r}
+model3 = lm(Sales~Newspaper, data = dat)
+summary(model3)
+```
+# multiple LR
+## model 4
+```{r}
+
+# model4 = lm(Sales~TV+Radio+Newspaper, data=dat)
+model4 = lm(Sales~., data=dat)
+
+summary(model4)
+```
+## correlation
+```{r}
+cor(dat)
+```
+
+
+```{r}
+plot(dat$Radio, dat$Newspaper, pch=20)
+```
+
+## adj-R^2
+```{r}
+m1 = lm(Sales~TV, data=dat)
+summary(m1)
+```
+add one more variable with random values
+
+```{r}
+set.seed(0201)
+x = sample(1:200)
+x2 = sample(1:200)
+x3 = sample(1:200)
+
+
+m2 = lm(Sales~TV+x+x2+x3, data = dat)
+summary(m2)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
