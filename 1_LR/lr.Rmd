@@ -80,6 +80,8 @@ plot(dat$Radio, dat$Newspaper, pch=20)
 m1 = lm(Sales~TV, data=dat)
 summary(m1)
 ```
+
+## why R-sq is not good
 add one more variable with random values
 
 ```{r}
@@ -92,8 +94,68 @@ x3 = sample(1:200)
 m2 = lm(Sales~TV+x+x2+x3, data = dat)
 summary(m2)
 ```
+## prediction, CI, PI
+```{r}
 
+model4 = lm(Sales~., data=dat)
 
+summary(model4)
+
+```
+
+### prediction
+```{r}
+new_data = data.frame(
+  TV = c(200, 250),
+  Radio = c(100, 50),
+  Newspaper = c(20, 50)
+)
+  
+predict(model4, newdata = new_data)
+```
+### CI
+```{r}
+predict(model4, newdata = new_data, interval = 'confidence')
+```
+### PI
+```{r}
+predict(model4, newdata = new_data, interval = 'predict')
+```
+
+# Qualitative preditors
+
+```{r}
+library(ISLR2)
+
+model_own = lm(Balance~Own, data = Credit)
+
+summary(model_own)
+
+```
+```{r}
+model_region = lm(Balance~Region, data = Credit)
+summary(model_region)
+```
+
+## relevel
+```{r}
+Region_a = relevel(Credit$Region, ref="South")
+
+model_region_a = lm(Balance~Region_a, data = Credit)
+summary(model_region_a)
+```
+## Interaction
+```{r}
+# model_interaction = lm(Sales ~ TV*Radio, data=dat)
+model_interaction = lm(Sales ~ TV+Radio+TV:Radio, data=dat)
+
+summary(model_interaction)
+```
+# Qudratic model
+```{r}
+model_q = lm(mpg~horsepower+I(horsepower^2), data=Auto)
+summary(model_q)
+```
 
 
 
