@@ -1,6 +1,10 @@
 ---
 title: "R Notebook"
-output: html_notebook
+output:
+  html_document:
+    df_print: paged
+  html_notebook: default
+  pdf_document: default
 ---
 
 # Simple LR
@@ -144,7 +148,7 @@ Region_a = relevel(Credit$Region, ref="South")
 model_region_a = lm(Balance~Region_a, data = Credit)
 summary(model_region_a)
 ```
-## Interaction
+# Interaction
 ```{r}
 # model_interaction = lm(Sales ~ TV*Radio, data=dat)
 model_interaction = lm(Sales ~ TV+Radio+TV:Radio, data=dat)
@@ -157,10 +161,63 @@ model_q = lm(mpg~horsepower+I(horsepower^2), data=Auto)
 summary(model_q)
 ```
 
+# scatterplot matrix
+```{r}
+library(ISLR2)
 
+pairs(Auto)
+# plot(Auto)
 
+```
 
+```{r}
+model = lm(mpg~displacement+weight, data = Auto)
 
+model.1 = lm(mpg~displacement+weight + displacement*weight, data = Auto) 
+
+summary(model)
+summary(model.1)
+```
+# other considerations
+## 1. nonlinearity
+```{r}
+library(ISLR2)
+model = lm(mpg~.-name, data=Auto)
+summary(model)
+```
+Residual plot
+```{r}
+plot(model$residuals~model$fitted.values)
+```
+```{r}
+model.2 = lm(sqrt(mpg)~.-name, data=Auto)
+plot(model.2$residuals~model.2$fitted.values)
+```
+
+```{r}
+model.log = lm(log(mpg)~.-name, data=Auto)
+plot(model.log$residuals~model.log$fitted.values)
+```
+## 4. outlier
+```{r}
+boxplot(Auto$horsepower)
+```
+
+## 6. collinearity
+```{r}
+pairs(Auto)
+```
+```{r}
+model.displacement = lm(displacement~.-mpg-name, data=Auto)
+
+smry = summary(model.displacement)
+smry$r.squared
+```
+
+```{r}
+vif.displacement = 1/(1-smry$r.squared)
+vif.displacement
+```
 
 
 
