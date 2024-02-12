@@ -1,0 +1,70 @@
+
+# model with balance
+```{r}
+library(ISLR2)
+
+View(Default)
+
+glm.balance = glm(default~balance, data=Default, family = binomial)
+
+summary(glm.balance)
+```
+## prediction
+```{r}
+new_data = data.frame(balance=1000)
+```
+
+
+```{r}
+t =  predict(glm.balance, newdata = new_data)
+
+exp(t)/(1+exp(t))
+```
+
+
+```{r}
+predict(glm.balance, newdata = new_data, type="response")
+```
+# model with student
+```{r}
+glm.student = glm(default~student, data = Default, family = binomial)
+
+summary(glm.student)
+```
+# model with all variables
+```{r}
+glm.all = glm(default~., data = Default, family = "binomial")
+summary(glm.all)
+```
+## prediction
+```{r}
+new_data = data.frame( student="Yes", balance = 1500, income=40000)
+
+predict(glm.all, newdata = new_data, type= 'response')
+
+```
+
+
+## boxplot
+```{r}
+boxplot(Default$income)
+boxplot(Default$balance)
+```
+
+```{r}
+boxplot(Default$balance~Default$student)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
