@@ -1,0 +1,28 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+```{r}
+library(ISLR2)
+View(Default)
+
+```
+
+# LDA
+```{r}
+library(MASS)
+
+lda.fit = lda(default~balance, data = Default)
+
+lda.fit
+```
+```{r}
+lda.pre = predict(lda.fit, newdata = Default )
+
+names(lda.pre)
+```
+
+```{r}
+lda.pre$posterior
+```
+
