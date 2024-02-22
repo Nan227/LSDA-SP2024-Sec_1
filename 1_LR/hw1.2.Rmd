@@ -1,0 +1,87 @@
+---
+title: "HW 1 Piyaporn (pp712) separate work of the group"
+output:
+  html_document:
+    df_print: paged
+  html_notebook: default
+  pdf_document: default
+---
+
+## Class: 33:136:487:01 LG SCALE DATA ANALY
+
+##### Prof. Jin Wang
+
+##### Piyaporn Puangprasert(pp712) This homework we separate work from Steven
+
+##### Due date: Feb 15, 2024
+##### --------------------------------------------------------------
+
+##### read the data file
+
+```{r}
+dat = read.csv("Auto1a.csv")
+names(dat)
+```
+
+### 2. mutiple linear regression 
+
+##### Scatterplot matrix that include all the variable in the dataset
+
+```{r}
+library(ISLR2)
+dat = read.csv("Auto1a.csv")
+pairs(Auto)
+
+```
+##### Compute the matrix of correlations between the variables using the function
+
+```{r}
+cor= cor(dat[,-9])
+cor
+```
+
+##### Use the lm() function to perform a multiple linear regression with mpg as the response and all other variables except name as the predictors. Use the summary() function to print the results. Comment on the output.
+
+##### Is there a relationship between the predictors and the response? 
+###### Answer: Yes, b/c the  relationship between the predictors and the response of weight, year, and origin ( p-value < 0.05)
+
+##### Which predictors appear to have a statistically significant relationship to the response? 
+###### Answer: Yes, b/c the  relationship between the predictors and the response of weight, year, and origin ( p-value < 0.05)
+
+##### What does the coefficient for the year variable suggest? 
+
+###### Answer:  the coefficient for the year variable suggest is 0.730911899
+
+
+```{r}
+model4 = lm(mpg~. - name, data = dat)
+summary(model4)
+``` 
+##### Use the * symbols to fit linear regression models with interaction effects. Do any interactions appear to be statistically significant?
+##### Answer Yes,it shows the p-value < 0.05
+
+```{r}
+model5 = lm(mpg ~ horsepower * weight ,data = dat)
+
+summary(model5)
+```
+
+## model_interaction
+```{r}
+model_interaction = lm(mpg ~.*.-name, data=dat)
+
+summary(model_interaction)
+```
+
+## model-3: coefficients
+
+```{r}
+model4$coefficients
+```
+## mpg and year
+```{r}
+model = lm(mpg~year, data = dat)
+summary(model)
+```
+#### Answer the mpg and year are both have siatistically significant relationship to the response variable b/c the p value < 0.05
+

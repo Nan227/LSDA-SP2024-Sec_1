@@ -1,0 +1,106 @@
+---
+title: "HW 1 Steven(sap407) and Piyaporn (pp712)"
+output:
+  html_document:
+    df_print: paged
+  html_notebook: default
+  pdf_document: default
+---
+
+## Class: 33:136:487:01 LG SCALE DATA ANALY
+
+##### Prof. Jin Wang
+
+##### Piyaporn Puangprasert(pp712) and Steven Panagakos(sap407)
+##### Due date: Feb 15, 2024
+##### --------------------------------------------------------------
+
+##### read the data file
+
+```{r}
+dat = read.csv("Auto1a.csv")
+names(dat)
+```
+
+## model-1: mpg~horsepower
+```{r}
+model = lm(mpg~horsepower, data = dat)
+```
+
+**coefficients**
+```{r}
+model$coefficients
+```
+**CI**
+```{r}
+confint.lm(model)
+```
+**summary**
+```{r}
+summary(model)
+```
+##### I.Is there a relationship between the predictor and the response? Why?
+##### Answer: 
+
+##### II. How strong is the relationship between the predictor and the response?
+##### Answer: 
+
+##### III. Is the relationship between the predictor and the response positive or negative? 
+##### Answer:
+
+##### IV What is the Predicted mpg with hoursepower of 98%
+
+```{r}
+
+predict_mpg = predict(model, data.frame(horsepower = 98))
+predict_mpg
+```
+### 2. mutiple linear regression 
+
+##### Scatterplot matrix that include all the variable in the dataset
+
+```{r}
+library(ISLR2)
+dat = read.csv("Auto1a.csv")
+pairs(Auto)
+
+```
+##### Compute the matrix of correlations between the variables using the function
+
+```{r}
+cor= cor(dat[,-9])
+cor
+```
+
+##### Use the lm() function to perform a multiple linear regression with mpg as the response and all other variables except name as the predictors. Use the summary() function to print the results. Comment on the output. For instance: 
+##### Is there a relationship between the predictors and the response? 
+
+##### Which predictors appear to have a statistically significant relationship to the response? 
+
+##### What does the coefficient for the year variable suggest? 
+
+```{r}
+model4 = lm(mpg~. - name, data = dat)
+summary(model4)
+``` 
+##### Use the * symbols to fit linear regression models with interaction effects. Do any interactions appear to be statistically significant?
+
+```{r}
+model5 = lm(mpg ~. * . -name,data = dat)
+
+model5
+```
+
+## model_interaction
+```{r}
+model_interaction = lm(mpg ~.*.-name, data=dat)
+
+summary(model_interaction)
+```
+
+## model-3: interaction
+```{r}
+interaction_model <- lm(mpg ~ . * . - name, data = dat) 
+summary(interaction_model)
+```
+

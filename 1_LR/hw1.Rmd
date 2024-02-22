@@ -1,0 +1,86 @@
+---
+title: "HW 1 "
+output:
+  html_document:
+    df_print: paged
+  html_notebook: default
+  pdf_document: default
+---
+
+## Class: 33:136:487:01 LG SCALE DATA ANALY
+
+##### Prof. Jin Wang
+
+##### Piyaporn Puangprasert(pp712) This homework we separate work 
+
+##### Due date: Feb 15, 2024
+##### --------------------------------------------------------------
+
+##### read the data file
+
+```{r}
+dat = read.csv("Auto1a.csv")
+names(dat)
+```
+
+## model-1: mpg~horsepower
+```{r}
+model = lm(mpg~horsepower, data = dat)
+```
+
+**coefficients**
+```{r}
+model$coefficients
+```
+**CI**
+```{r}
+confint.lm(model)
+```
+**summary**
+```{r}
+summary(model)
+```
+##### a hypothesis test 
+##### hypothesis,
+##### H0 : β1 = β2 = ··· = βp = 0
+##### versus the alternative
+##### Ha : at least one βj is non-zero
+
+##### hypothesis test is performed by computing the F-statistic
+##### This F-statistic = 535.8 on 1 that means  it  evidence against the null hypothesis H0. Or the large F-statistic suggests that at least one of the advertising media must be related to mpg.
+
+##### I.Is there a relationship between the predictor and the response? Why?
+##### Answer: Yes, b/c the coefficient for the predictor(horspower) is significantly differnt from zero. The "p-value" at B0 and B1 < 2.2e-16" < 0.05 (very small) or there is an association between the predictor and the response. 
+
+##### II. How strong is the relationship between the predictor and the response?
+
+##### Answer: After checking at R square = 0.6 (not strong relationship between the mpg and hourspower(predictor and the response)) ( if close to 1 that means strong relationship)
+
+##### III. Is the relationship between the predictor and the response positive or negative? 
+##### Answer: Yes, b/c p value less than 0.05 (response negative)
+
+##### IV What is the Predicted mpg with hoursepower of 98%
+##### Answer: a housepower is giving 23.86675 of mpg or the predicted mpg for a horsepower of 98 is approximately 23.87.
+
+```{r}
+
+predict_mpg = predict(model, data.frame(horsepower = 98))
+predict_mpg
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

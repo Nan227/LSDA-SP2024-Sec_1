@@ -12,6 +12,11 @@ output:
 
 ```{r}
 dat = read.csv("Advertising.csv")
+head(dat)
+names(dat)[names(dat) == "ï..TV"] <- "TV"
+
+# Check the updated column names
+names(dat)
 
 ```
 
