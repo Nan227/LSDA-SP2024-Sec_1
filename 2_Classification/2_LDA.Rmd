@@ -9,6 +9,8 @@ View(Default)
 ```
 
 # LDA
+
+## balance
 ```{r}
 library(MASS)
 
@@ -16,6 +18,7 @@ lda.fit = lda(default~balance, data = Default)
 
 lda.fit
 ```
+## prediction
 ```{r}
 lda.pre = predict(lda.fit, newdata = Default )
 
@@ -25,4 +28,105 @@ names(lda.pre)
 ```{r}
 lda.pre$posterior
 ```
+
+## all 3 variables
+```{r}
+library(MASS)
+
+lda.all = lda(default~., data=Default)
+lda.all
+```
+
+```{r}
+new_data = data.frame(balance = 1000, income=4000, student='No')
+
+lda.pred = predict(lda.all, newdata = new_data)
+lda.pred$posterior
+```
+
+```{r}
+lda.pred = predict(lda.all, newdata = Default)
+lda.pred$class 
+```
+
+## training error rate
+```{r}
+1- mean(lda.pred$class == Default$default)
+```
+```{r}
+table(Default$default)
+```
+```{r}
+table(lda.pred$class, Default$default)
+```
+```{r}
+lda.pred$class[1:10]
+
+lda.pred$posterior[1:10,]
+```
+
+## improve sensitivity
+```{r}
+pred.class = rep("NO", nrow(Default))
+
+lda.pred.prob = lda.pred$posterior[,2]
+
+pred.class[lda.pred.prob>0.1] = "Yes"
+
+# table(pred.class)
+table(pred.class, Default$default)
+```
+```{r}
+sensitivity = 193/333
+specificity = 9435/(9435+232)
+
+print(sensitivity)
+print(specificity)
+```
+
+```{r}
+table(lda.pred$class)
+```
+
+## ROC Curve
+
+```{r}
+library(MASS)
+
+lda.all = lda(default~., data=Default)
+lda.pre = predict(lda.all, newdata = Default )
+pred.prob = lda.pre$posterior[,2]
+
+# threshold = 0.2
+
+tp.rates = c()
+fp.rates = c()
+for (threshold in seq(0.1, 0.94, 0.01) ) {
+  
+  pred.class = rep("No", nrow(Default))
+  pred.class[pred.prob>threshold] = "Yes"
+  
+  confusion.materix = table(pred.class, Default$default)
+  
+  tn = confusion.materix['No', 'No']
+  fn = confusion.materix['No', 'Yes']
+  fp = confusion.materix['Yes', 'No']
+  tp = confusion.materix['Yes', 'Yes']
+  
+  tp.rate = tp/(fn+tp)
+  fp.rate = fp/(tn+fp)
+  
+  tp.rates = c(tp.rates, tp.rate)
+  fp.rates = c(fp.rates, fp.rate)
+}
+
+# print(tp.rate)
+# print(fp.rate)
+```
+
+```{r}
+plot(fp.rates, tp.rates)
+```
+
+
 
