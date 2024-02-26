@@ -128,5 +128,48 @@ for (threshold in seq(0.1, 0.94, 0.01) ) {
 plot(fp.rates, tp.rates)
 ```
 
+# QDA
+```{r}
+library(MASS)
+
+qda.all = qda(default~., data=Default)
+qda.all
+```
+```{r}
+qda.pred = predict(qda.all, newdata = Default)
+```
+
+```{r}
+table(qda.pred$class, Default$default)
+```
+```{r}
+# overall error rate
+(31+239)/10000
+
+```
+```{r}
+qda.pred$posterior
+```
+
+```{r}
+boxplot(Default$balance~Default$student)
+```
+
+# Naive Bayes
+```{r}
+library(e1071)
+
+nb.fit = naiveBayes(default~., data = Default)
+
+nb.pred.class = predict(nb.fit, newdata=Default)
+```
+
+```{r}
+table(nb.pred.class, Default$default)
+```
+
+
+
+
 
 
