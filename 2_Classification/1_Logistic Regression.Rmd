@@ -3,7 +3,7 @@
 ```{r}
 library(ISLR2)
 
-View(Default)
+# View(Default)
 
 glm.balance = glm(default~balance, data=Default, family = binomial)
 
@@ -33,7 +33,9 @@ summary(glm.student)
 ```
 # model with all variables
 ```{r}
+library(ISLR2)
 glm.all = glm(default~., data = Default, family = "binomial")
+
 summary(glm.all)
 ```
 ## prediction
@@ -55,7 +57,48 @@ boxplot(Default$balance)
 boxplot(Default$balance~Default$student)
 ```
 
+# confusion matrix
+```{r}
+library(ISLR2)
 
+# logistic regression model
+glm.all = glm(default~., data = Default, family = "binomial")
+
+# get predicted probability
+prob = predict(glm.all, newdata = Default, type = 'response')
+
+# get predicted y values
+pred = rep('No', nrow(Default))
+pred[prob>0.5] = 'Yes'
+
+# confusion matrix
+table(pred, Default$default)
+```
+
+
+```{r}
+N = nrow(Weekly)
+train.set = Weekly[1:900,]
+test.set = Weekly[901:N, ]
+
+# logistic regression
+lr.model = glm(Direction~Lag2, data = train.set, family = binomial)
+
+# get predicted probability
+prob.test = predict(lr.model, newdata = test.set, type = 'response')
+
+# get predicted y values
+pred.test = rep('Down', nrow(test.set))
+pred.test[prob.test>0.5] = 'Up'
+
+# confusion matrix
+tab.test = table(pred.test, test.set$Direction)
+
+# the overall fraction of correct predictions
+sum(diag(tab.test))/sum(tab.test)
+
+
+```
 
 
 
