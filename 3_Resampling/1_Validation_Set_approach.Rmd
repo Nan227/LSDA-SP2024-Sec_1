@@ -1,0 +1,107 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+```{r}
+library(ISLR2)
+set.seed(2024)
+
+N = nrow(Auto)
+train.indices = sample(N,N/2)
+
+dat.train = Auto[train.indices,]
+dat.val = Auto[-train.indices,]
+```
+
+# Linear model
+
+## fit the linear model with training set
+```{r}
+lm.train = lm(mpg~horsepower, data = dat.train)
+# lm.train = lm(mpg~horsepower, data=Auto, subset = train.indices)
+
+# summary(lm.train)
+```
+## Validation MSE
+```{r}
+y_pred_val = predict(lm.train, newdata = dat.val)
+y_val = dat.val$mpg
+
+mean((y_val - y_pred_val)^2)
+
+```
+# Quadratic model
+```{r}
+lm.train.q = lm(mpg~horsepower + I(horsepower^2), data = dat.train)
+# summary(lm.train.q)
+
+y_pred_val = predict(lm.train.q, newdata = dat.val)
+y_val = dat.val$mpg
+
+mean((y_val - y_pred_val)^2)
+
+```
+# polynomial models
+```{r}
+val_mses = c()
+
+for (p in 1:10) {
+  lm.train.poly = lm(mpg~ poly(horsepower,p), data = dat.train)
+  
+  y_pred_val = predict(lm.train.poly, newdata = dat.val)
+  y_val = dat.val$mpg
+  
+  val_mse = mean((y_val - y_pred_val)^2)
+  
+  val_mses = c(val_mses, val_mse)
+}
+
+plot(val_mses, pch=20, col='blue', type = 'b')
+
+```
+
+```{r}
+set.seed(2025)
+plot(val_mses, pch=20, col='blue', type = 'b', ylim = c(15, 30))
+
+
+N = nrow(Auto)
+
+ for (j in c(1:9)){ 
+  train.indices = sample(N,N/2)
+  
+  dat.train = Auto[train.indices,]
+  dat.val = Auto[-train.indices,]
+  
+  val_mses = c()
+  for (p in 1:10) {
+    lm.train.poly = lm(mpg~ poly(horsepower,p), data = dat.train)
+    
+    y_pred_val = predict(lm.train.poly, newdata = dat.val)
+    y_val = dat.val$mpg
+    
+    val_mse = mean((y_val - y_pred_val)^2)
+    
+    val_mses = c(val_mses, val_mse)
+  }
+  
+  lines(val_mses, pch=20, col=j, type = 'b')
+ }
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
