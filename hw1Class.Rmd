@@ -1,0 +1,25 @@
+---
+title: "HW-2 Classification: Piyaporn Puangprasert"
+output: html_notebook
+---
+```{r}
+library(ISLR2)
+# load "Weekly" data set
+data("Weekly")
+head(data)
+```
+
+```{r}
+names(data)
+```
+
+# fix the head from "i..TV" -> TV
+```{r}
+
+```
+
+
+
+
+
+

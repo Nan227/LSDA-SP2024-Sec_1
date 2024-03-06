@@ -55,7 +55,49 @@ boxplot(Default$balance)
 boxplot(Default$balance~Default$student)
 ```
 
+## com 
+```{r}
+library(ISLR2)
+# glm.all
+glm.all = glm(default~., data = Default, family = "binomial")
 
+# get predict probability
+prob = predict(glm.all, newdata = Default, type = 'response')
+
+
+pred = rep('No', nrow(Default))
+pred[prob>0.5]= 'Yes'
+
+# confusion matrix
+table(pred,Default$default)
+
+     
+```
+# HW2.1
+```{r}
+N= nrow(Weekly)
+train.set = Default[1:900,]
+test.set = Weekly[901: N,]
+
+# 2.4
+lr.model = glm(Direction~Lag2, data = train.set, family = binomial)
+
+# get predict probability
+prob.test = predict(lr.model, newdata = test.set, type = 'response')
+
+
+#get predicted y value
+pred.test = rep('Down', nrow(test.set))
+pred.test[prob.test >0.5]= 'Up'
+
+# confusion matrix
+tab.test = table(pred.test,test.set$Direction)
+
+#the overall fraction of correct prediction
+sum(diag(tab.test))/sum(tab.test)
+
+
+```
 
 
 

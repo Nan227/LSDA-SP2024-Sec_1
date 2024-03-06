@@ -1,0 +1,167 @@
+---
+title: "HW-2 Classification: Piyaporn Puangprasert"
+output: html_notebook
+---
+
+## Class: 33:136:487:01 LG SCALE DATA ANALY
+
+##### Prof. Jin Wang
+
+##### Piyaporn Puangprasert(pp712) team with Steven Panagakos (He may sent separate homework)
+
+##### Due date: Mar 3, 2024
+##### --------------------------------------------------------------
+
+##### read the Weekly file
+```{r}
+library(ISLR2)
+# load "Weekly" data set
+attach(Weekly)
+pairs(Weekly)
+```
+
+```{r}
+names(Weekly)
+```
+
+#### Veiw full Weekly data set
+
+```{r}
+View(Weekly)
+```
+
+## model weeklyview: Direction with 5 lag
+```{r}
+WeeklyView = glm(Direction~Lag1+Lag2+Lag3+Lag4+Lag5+Volume, data=Weekly, family=binomial)
+summary(WeeklyView)
+```
+#### Answer I. Base on this result, only Lag 2 appears to be statistically significant because of the p-value < 0.05
+
+#### II.Compute the Comfusion matrix and overall fraction of correct predictions
+```{r}
+predicted_dir <- ifelse(predict(WeeklyView, type = "response") > 0.5, "Up", "Down")
+conf_matrix <- table(predicted_dir, Weekly$Direction)
+conf_matrix
+overall_correct <- sum(diag(conf_matrix)) / sum(conf_matrix)
+overall_correct
+```
+##### The confusion matric can showsthe type of mistakes make by the logistic regression model. It shows ho w correct classify Up or Down. /the identifies type of errors made by model that can be the wrong class. For example this True Positive (TP is up 557), True Negatives(TN )is "Down " 54 times when the market down. False Positive(FT) shows incorrect predicted at 48, and False Negative is Down 430 
+ 
+#### Calculate prediction =(57+557)/(54 + 48 + 430+557) = 0.56
+
+```{r}
+(557+54)/(54+48+430+557)
+```
+#### the Up trends = 557/(48+557) = 0.92
+```{r}
+557/(557+48)
+```
+#### the Down trend = 54/(430+54)
+```{r}
+54/(54+430)
+```
+ 
+## 2. Divide the full data set and Training set
+```{r}
+train_data = Weekly[1:900,]
+test_data = Weekly [901:nrow(Weekly),]
+```
+ 
+#### 2.2 Fit the logistic regression model using the training data set with Lag2 as only precidtor
+```{r}
+train_model = glm(Direction~ Lag2, data = train_data, family = binomial)
+```
+
+#### 2.3 Comput the confusion matrix and overall fraction of the test data
+ 
+### confusion matrix
+```{r}
+# glm.all
+glm.all = glm(Direction~., data = Weekly, family = "binomial")
+
+# get predict probability
+prob = predict(glm.all, newdata = Weekly, type = 'response')
+
+
+pred = rep('Down', nrow(Weekly))
+pred[prob>0.5]= 'Up'
+
+# confusion matrix
+table(pred,Weekly$Direction)
+
+```
+# from outsource
+```{r}
+test_prob <- predict(train_model, newdata = test_data, type = "response")
+test_predicted_direction <- ifelse(test_prob > 0.5, "Up", "Down")
+
+test_conf_matrix <- table(test_predicted_direction, test_data$Direction)
+test_overall_correct <- sum(diag(test_conf_matrix)) / sum(test_conf_matrix)
+
+test_overall_correct
+```
+### 2.4
+```{r}
+thresholds <- c(0.52, 0.53, 0.54)
+best_correct <- 0
+best_threshold <- 0
+
+for (threshold in thresholds) {
+  train_preds <- ifelse(predict(train_model, type = "response") > threshold, "Up", "Down")
+  train_conf_matrix <- table(train_preds, train_data$Direction)
+  train_correct <- sum(diag(train_conf_matrix)) / sum(train_conf_matrix)
+  
+  if (train_correct > best_correct) {
+    best_correct <- train_correct
+    best_threshold <- threshold
+  }
+}
+
+best_threshold
+ 
+```
+### That mean the 0.53 threshold gives the best result.
+
+### 2.5
+```{r}
+test_preds <- ifelse(predict(train_model, newdata = test_data, type = "response") > best_threshold, "Up", "Down")
+new_test_conf_matrix <- table(test_preds, test_data$Direction)
+new_test_overall_correct <- sum(diag(new_test_conf_matrix)) / sum(new_test_conf_matrix)
+
+new_test_overall_correct
+```
+### 3.1
+```{r}
+library(MASS)
+lda_model <- lda(Direction ~ Lag2, data = train_data)
+```
+
+### 3.2 
+```{r}
+lda_test_pred <- predict(lda_model, newdata = test_data)$class
+lda_test_conf_matrix <- table(lda_test_pred, test_data$Direction)
+lda_test_overall_correct <- sum(diag(lda_test_conf_matrix)) / sum(lda_test_conf_matrix)
+lda_test_overall_correct
+```
+
+## test_overall_correct is 0.5396835 and lda_test_overall_correct is 0.5449735 lad_test have more percentate correction prediction.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

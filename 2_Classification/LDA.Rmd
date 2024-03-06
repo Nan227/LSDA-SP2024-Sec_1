@@ -6,13 +6,15 @@ output: html_notebook
 This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
 
 Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+# lda
 
 ```{r}
 library(ISLR2)
 library(MASS)
-lda.all = lda(default~., data = Default)
-lda.all
 
+dim(Default)
+lda.all = lda(default~., data = Default)
+lda.pred = predict(lda.all, newdata = Default)
 ```
 
 Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
@@ -25,10 +27,169 @@ library(MASS)
 lda.pre = prenewdata(lda.fit)
 ```
 
+
+#
 ```{r}
-new_data = data.frame(balance = 1000, income = 4000, student = "NO")
-lda.pred = predict(lda.all, new_data)
-lda.pred$posterior
+N = nrow(Default)
+1-sum(lda.pred$class == Default$default)/N
+
+```
+#
+```{r}
+table(Default$default)
+
+```
+
+# how many 
+# compare with real class
+```{r}
+table(lda.pred$class, Default$default)
+
+```
+# sensitivity = 79/333 = 0.237 Yes:yes 
+#           NO | Yes
+# TN  NO   9645| 254  FN
+# FP  YES    22|  79  TP
+# _________________
+#         9667 |  333 
+
+# new one
+
+#pred.class   No  Yes
+#       No  9435  140
+#       Yes  232  193
+
+
+# care only for overall error rate
+# Specsivity 9645/(9645+22) = .9977 
+```{r}
+head(Default)
+
+```
+
+
+
+
+# predict first 5 row
+```{r}
+names(lda.pred)
+lda.pred$class[1:5]
+lda.pred$posterior[1:5,]
+```
+
+# improve sensitivity
+
+# How to improve prabletility *** 0
+# predict yes manual
+```{r}
+N = nrow(Default)
+pred.prob.yes = lda.pred$posterior[,"Yes"]
+
+threshold = 0.3
+pred.class =rep("No", N)
+
+pred.class[pred.prob.yes > threshold] = "Yes"
+
+# sum(lda.pred$class == pred.class)
+table(pred.class, Default$default)
+
+```
+# ROC curve
+# improve sensitivity
+
+# How to improve prabletility *** 0
+# predict yes manual
+```{r}
+N = nrow(Default)
+pred.prob.yes = lda.pred$posterior[,"Yes"]
+
+threshold = 0.3
+pred.class =rep("No", N)
+
+pred.class[pred.prob.yes > threshold] = "Yes"
+
+
+tab = table(pred.class, Default$default)
+tn = tab['No', 'No'] #x,y
+fn = tab['No', 'Yes']
+fp = tab['Yes', 'No']
+tp = tab ['Yes' , 'Yes']
+
+tp.rate = tp/(tp + fn)
+fp.rate = fp/ (fp+tn)
+
+tp.rate
+fp.rate
+```
+
+```{r}
+N = nrow(Default)
+pred.prob.yes = lda.pred$posterior[,"Yes"]
+
+threshold = 0.3
+pred.class =rep("No", N)
+
+pred.class[pred.prob.yes > threshold] = "Yes"
+
+
+tab = table(pred.class, Default$default)
+
+tn = tab['No', 'No']
+tn
+
+```
+
+#real one
+
+# For loop
+
+# improve sensitivity
+
+# How to improve prabletility *** 0
+# predict yes manual
+```{r}
+N = nrow(Default)
+pred.prob.yes = lda.pred$posterior[,"Yes"]
+
+#threshold = 0.3
+for (threshold in seq(0.1,0.94,0.01)){
+  pred.class =rep("No", N)
+
+  pred.class[pred.prob.yes > threshold] = "Yes"
+
+
+  tab = table(pred.class, Default$default)
+  tn = tab['No', 'No'] #x,y
+  fn = tab['No', 'Yes']
+  fp = tab['Yes', 'No']
+  tp = tab ['Yes' , 'Yes']
+
+  tp.rate = tp/(tp + fn)
+  fp.rate = fp/ (fp+tn)
+
+  tp.rates = c(tp.rates, tp.rate)
+  fp.rates = c(fp.rates, fp.rate)
+
+}
+```
+
+
+plot
+```{r}
+plot(fp.rates,tp.rates)
+```
+
+```{r}
+threshld = 0.2
+
+library(MASS)
+lda.all = lda(default~., data= Default)
+lda.pre = predict(lda.all,newdata = Default)
+pred.prob = lda.pre$posterior[,2]
+pred.class = rep("No", nrow(Default))
+pred.class[pred.prob>threshld] = "Yes"
+table(pred.class, Default$default)
+head(Default)
 ```
 
 

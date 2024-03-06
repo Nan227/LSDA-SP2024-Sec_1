@@ -1756,83 +1756,88 @@ display: none;
 
 
 <!-- rnb-text-begin -->
-<p>This is an <a href="http://rmarkdown.rstudio.com">R Markdown</a>
-Notebook. When you execute code within the notebook, the results appear
-beneath the code.</p>
-<p>Try executing this chunk by clicking the <em>Run</em> button within
-the chunk or by placing your cursor inside it and pressing
-<em>Ctrl+Shift+Enter</em>. # lda</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShJU0xSMilcbmxpYnJhcnkoTUFTUylcblxuZGltKERlZmF1bHQpXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShJU0xSMilcbmRpbShEZWZhdWx0KVxuXG5cbmRhdC55ID0gRGVmYXVsdFtEZWZhdWx0JGRlZmF1bHQgPT0gJ1llcycsXVxuZGF0Lm4gPSBEZWZhdWx0W0RlZmF1bHQkZGVmYXVsdCA9PSAnTm8nLF1cblxuZGF0ID0gcmJpbmQoZGF0LnlbMTo1LCBdLCBkYXQublsxOjQsIF0pXG5kYXQgPSBkYXRbLGMoMSwzKV1cblxuYGBgIn0= -->
 <pre class="r"><code>library(ISLR2)
-library(MASS)
+dim(Default)
 
-dim(Default)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDEwMDAwICAgICA0XG4ifQ== -->
-<pre><code>[1] 10000     4</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGRhLmFsbCA9IGxkYShkZWZhdWx0fi4sIGRhdGEgPSBEZWZhdWx0KVxubGRhLnByZWQgPSBwcmVkaWN0KGxkYS5hbGwsIG5ld2RhdGEgPSBEZWZhdWx0KVxuYGBgIn0= -->
-<pre class="r"><code>lda.all = lda(default~., data = Default)
-lda.pred = predict(lda.all, newdata = Default)</code></pre>
+
+dat.y = Default[Default$default == &#39;Yes&#39;,]
+dat.n = Default[Default$default == &#39;No&#39;,]
+
+dat = rbind(dat.y[1:5, ], dat.n[1:4, ])
+dat = dat[,c(1,3)]
+</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Add a new chunk by clicking the <em>Insert Chunk</em> button on the
-toolbar or by pressing <em>Ctrl+Alt+I</em>.</p>
-<p>When you save the notebook, an HTML file containing the code and
-output will be saved alongside it (click the <em>Preview</em> button or
-press <em>Ctrl+Shift+K</em> to preview the HTML file).</p>
-<p>The preview shows you a rendered HTML copy of the contents of the
-editor. Consequently, unlike <em>Knit</em>, <em>Preview</em> does not
-run any R code chunks. Instead, the output of the chunk when it was last
-run in the editor is displayed.</p>
+<p>#Pi # Pi</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShNQVNTKVxubGRhLnByZSA9IHByZW5ld2RhdGEobGRhLmZpdClcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGlfeWVzID0gbWVhbihkYXQkZGVmYXVsdCA9PSAnWWVzJylcbnBpX25vID0gbWVhbihkYXQkZGVmYXVsdCA9PSAnTm8nKVxucHJpbnQocGlfeWVzKVxucHJpbnQocGlfbm8pXG5gYGAifQ== -->
+<pre class="r"><code>pi_yes = mean(dat$default == &#39;Yes&#39;)
+pi_no = mean(dat$default == &#39;No&#39;)
+print(pi_yes)
+print(pi_no)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<div id="mu" class="section level1">
+<h1>mu</h1>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubXVfeWVzID0gbWVhbihkYXRbZGF0JGRlZmF1bHQgPT0gJ1llcycsMl0pXG5tdV9ubyA9IG1lYW4oZGF0W2RhdCRkZWZhdWx0ID09ICdObycsMl0pXG5tdV95ZXNcbm11X25vXG5gYGAifQ== -->
+<pre class="r"><code>mu_yes = mean(dat[dat$default == &#39;Yes&#39;,2])
+mu_no = mean(dat[dat$default == &#39;No&#39;,2])
+mu_yes
+mu_no</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="sigma" class="section level1">
+<h1>sigma</h1>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueDEgPSBkYXRbZGF0JGRlZmF1bHQgPT0nWWVzJywyXVxueDAgPSBkYXRbZGF0JGRlZmF1bHQgPT0nTm8nLDJdXG5cbnNpZ21hID0gc3VtKHgxLW11X3llcyleMlxuc2lnbWFcbmBgYCJ9 -->
+<pre class="r"><code>x1 = dat[dat$default ==&#39;Yes&#39;,2]
+x0 = dat[dat$default ==&#39;No&#39;,2]
+
+sigma = sum(x1-mu_yes)^2
+sigma</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShNQVNTKVxubGRhLmFsbCA9IGxkYShkZWZhdWx0fi4sIGRhdGEgPSBEYXVsdClcbmxkYS5wcmUgPSBwcmVkaWN0KGxkYS5hbGwsbmV3ZGF0YSA9IERlZmF1bHQpXG5wcmVkLnByb2IgPSBsZGEucHJlJHBvc3RlcmlvclssMl1cblxucHJlZFxuYGBgIn0= -->
 <pre class="r"><code>library(MASS)
-lda.pre = prenewdata(lda.fit)</code></pre>
+lda.all = lda(default~., data = Dault)
+lda.pre = predict(lda.all,newdata = Default)
+pred.prob = lda.pre$posterior[,2]
+
+pred</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gcHJlbmV3ZGF0YShsZGEuZml0KSA6IGNvdWxkIG5vdCBmaW5kIGZ1bmN0aW9uIFwicHJlbmV3ZGF0YVwiXG4ifQ== -->
-<pre><code>Error in prenewdata(lda.fit) : could not find function &quot;prenewdata&quot;</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<div id="section" class="section level1">
-<h1></h1>
+<p>#QDA</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuTiA9IG5yb3coRGVmYXVsdClcbjEtc3VtKGxkYS5wcmVkJGNsYXNzID09IERlZmF1bHQkZGVmYXVsdCkvTlxuYGBgIn0= -->
-<pre class="r"><code>N = nrow(Default)
-1-sum(lda.pred$class == Default$default)/N</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShNQVNTKVxuXG5cblxucWRhLmFsbCA9IGxkYShkZWZhdWx0fi4sIGRhdGEgPSBEZWZhdWx0KVxucWRhLmFsbFxucWRhLnByZWQgPSBwcmVkaWN0KGxkYS5hbGwsIG5ld2RhdGEgPSBEZWZhdWx0KVxuYGBgIn0= -->
+<pre class="r"><code>library(MASS)
+
+
+
+qda.all = lda(default~., data = Default)
+qda.all
+qda.pred = predict(lda.all, newdata = Default)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDAuMDI3NlxuIn0= -->
-<pre><code>[1] 0.0276</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
-<div id="section-1" class="section level1">
-<h1></h1>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGFibGUoRGVmYXVsdCRkZWZhdWx0KVxuYGBgIn0= -->
-<pre class="r"><code>table(Default$default)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG4gIE5vICBZZXMgXG45NjY3ICAzMzMgXG4ifQ== -->
-<pre><code>
-  No  Yes 
-9667  333 </code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="how-many" class="section level1">
-<h1>how many</h1>
-</div>
-<div id="compare-with-real-class" class="section level1">
-<h1>compare with real class</h1>
+<div id="overall-overate-0.027-3123910000" class="section level1">
+<h1>overall overate (0.027) (31+239)/10000</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGFibGUobGRhLnByZWQkY2xhc3MsIERlZmF1bHQkZGVmYXVsdClcbmBgYCJ9 -->
@@ -1846,263 +1851,17 @@ lda.pre = prenewdata(lda.fit)</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-</div>
-<div id="sensitivity-79333-0.237-yesyes" class="section level1">
-<h1>sensitivity = 79/333 = 0.237 Yes:yes</h1>
-</div>
-<div id="no-yes" class="section level1">
-<h1>NO | Yes</h1>
-</div>
-<div id="tn-no-9645-254-fn" class="section level1">
-<h1>TN NO 9645| 254 FN</h1>
-</div>
-<div id="fp-yes-22-79-tp" class="section level1">
-<h1>FP YES 22| 79 TP</h1>
-</div>
-<div id="section-2" class="section level1">
-<h1>_________________</h1>
-</div>
-<div id="section-3" class="section level1">
-<h1>9667 | 333</h1>
-</div>
-<div id="new-one" class="section level1">
-<h1>new one</h1>
-<p>#pred.class No Yes # No 9435 140 # Yes 232 193</p>
-</div>
-<div id="care-only-for-overall-error-rate" class="section level1">
-<h1>care only for overall error rate</h1>
-</div>
-<div id="specsivity-9645964522-.9977" class="section level1">
-<h1>Specsivity 9645/(9645+22) = .9977</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaGVhZChEZWZhdWx0KVxuYGBgIn0= -->
-<pre class="r"><code>head(Default)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6NiwibmNvbCI6NCwic3VtbWFyeSI6eyJEZXNjcmlwdGlvbiI6WyJkZiBbNiB4IDRdIl19fSwicmRmIjoiSDRzSUFBQUFBQUFBQmd0eWlURG1pdUJpWUdCZ1ptQmhaR1pnWmdVeUdkaWNBd3lOVEkwWUdGaVlnRHhHQmhZR1RoQmRBVlFsREdTd0FHbGVrREt3SkZhTW9wRXRKN1VzTmFjWXlCSUFZaWFvS0pOZlBwVEZISmxhakthRk5Ua25zUmltQTI1T1dtSnlTWDRSa1BVUHpRVk1hQzVnZ2hqSDlKOElPNW4vNDdPR2dROGs0dEIyeHN4WnJpM1NvYk96c09MdnYyTU9FNDRaUmZEODRuRm82R0swNWUvc2Nlam90YmZ2T2NMcjBMTm5xMys1YWlaYzM5T1ZKZ3l6OSs5ME9MNVUwUGFPOGlhSCs2d25ualF2V3Vid01KLy9YTUQ3bXc2UGpyKy9aOHRuNExEWHVlL2ZCT01zOUZESVM4eE5oWVVDQzFTUVBTVTFMYkUwcHdUR0xTNHBUVW5OZzNPVEVuTVM4NUpUWVg3SnpFdk96MDFGTTVlektMOWNEMlkyS0J5WkdoakFnQTFIa0hDbEpKWWs2cVVWSllLTUFnVUxpbkhzK1FVbG1mbDVRTU9ZaEtHUmdxeVpzUWhOUUtBMEQyUjVpbTV5Um1sZXRxNnBLWm84YzBGZU9zaFNwQWpsaGRKc1NHd1dpRE5ZWUk1bGcvazVOUzg5TXc4V0FxdzVpVW1wT1RDVFUxTExvRXcrWUJpQWcwQ3ZvQ2dUSG54Y1FORml2Wkw4a2tTWUZxN2svQnlZQ0NSRi9BTUEwb0FZOFRVREFBQT0ifQ== -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["default"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["student"],"name":[2],"type":["fctr"],"align":["left"]},{"label":["balance"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["income"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"No","2":"No","3":"729.5265","4":"44361.625","_rn_":"1"},{"1":"No","2":"Yes","3":"817.1804","4":"12106.135","_rn_":"2"},{"1":"No","2":"No","3":"1073.5492","4":"31767.139","_rn_":"3"},{"1":"No","2":"No","3":"529.2506","4":"35704.494","_rn_":"4"},{"1":"No","2":"No","3":"785.6559","4":"38463.496","_rn_":"5"},{"1":"No","2":"Yes","3":"919.5885","4":"7491.559","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10],"total":[4]},"rows":{"min":[10],"max":[10],"total":[6]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="predict-first-5-row" class="section level1">
-<h1>predict first 5 row</h1>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubmFtZXMobGRhLnByZWQpXG5gYGAifQ== -->
-<pre class="r"><code>names(lda.pred)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiY2xhc3NcIiAgICAgXCJwb3N0ZXJpb3JcIiBcInhcIiAgICAgICAgXG4ifQ== -->
-<pre><code>[1] &quot;class&quot;     &quot;posterior&quot; &quot;x&quot;        </code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGRhLnByZWQkY2xhc3NbMTo1XVxuYGBgIn0= -->
-<pre class="r"><code>lda.pred$class[1:5]</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIE5vIE5vIE5vIE5vIE5vXG5MZXZlbHM6IE5vIFllc1xuIn0= -->
-<pre><code>[1] No No No No No
-Levels: No Yes</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGRhLnByZWQkcG9zdGVyaW9yWzE6NSxdXG5gYGAifQ== -->
-<pre class="r"><code>lda.pred$posterior[1:5,]</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgTm8gICAgICAgICBZZXNcbjEgMC45OTY3NzY1IDAuMDAzMjIzNTE3XG4yIDAuOTk3MzEwNSAwLjAwMjY4OTUzMVxuMyAwLjk4NTI5MTQgMC4wMTQ3MDg2MDBcbjQgMC45OTg4MTU3IDAuMDAxMTg0MzI5XG41IDAuOTk1OTc2OCAwLjAwNDAyMzI0MlxuIn0= -->
-<pre><code>         No         Yes
-1 0.9967765 0.003223517
-2 0.9973105 0.002689531
-3 0.9852914 0.014708600
-4 0.9988157 0.001184329
-5 0.9959768 0.004023242</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="improve-sensitivity" class="section level1">
-<h1>improve sensitivity</h1>
-</div>
-<div id="how-to-improve-prabletility-0" class="section level1">
-<h1>How to improve prabletility *** 0</h1>
-</div>
-<div id="predict-yes-manual" class="section level1">
-<h1>predict yes manual</h1>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuTiA9IG5yb3coRGVmYXVsdClcbnByZWQucHJvYi55ZXMgPSBsZGEucHJlZCRwb3N0ZXJpb3JbLFwiWWVzXCJdXG5cbnRocmVzaG9sZCA9IDAuM1xucHJlZC5jbGFzcyA9cmVwKFwiTm9cIiwgTilcblxucHJlZC5jbGFzc1twcmVkLnByb2IueWVzID4gdGhyZXNob2xkXSA9IFwiWWVzXCJcblxuIyBzdW0obGRhLnByZWQkY2xhc3MgPT0gcHJlZC5jbGFzcylcbnRhYmxlKHByZWQuY2xhc3MsIERlZmF1bHQkZGVmYXVsdClcbmBgYCJ9 -->
-<pre class="r"><code>N = nrow(Default)
-pred.prob.yes = lda.pred$posterior[,&quot;Yes&quot;]
-
-threshold = 0.3
-pred.class =rep(&quot;No&quot;, N)
-
-pred.class[pred.prob.yes &gt; threshold] = &quot;Yes&quot;
-
-# sum(lda.pred$class == pred.class)
-table(pred.class, Default$default)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgIFxucHJlZC5jbGFzcyAgIE5vICBZZXNcbiAgICAgICBObyAgOTU3MSAgMTgxXG4gICAgICAgWWVzICAgOTYgIDE1MlxuIn0= -->
-<pre><code>          
-pred.class   No  Yes
-       No  9571  181
-       Yes   96  152</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="roc-curve" class="section level1">
-<h1>ROC curve</h1>
-</div>
-<div id="improve-sensitivity-1" class="section level1">
-<h1>improve sensitivity</h1>
-</div>
-<div id="how-to-improve-prabletility-0-1" class="section level1">
-<h1>How to improve prabletility *** 0</h1>
-</div>
-<div id="predict-yes-manual-1" class="section level1">
-<h1>predict yes manual</h1>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuTiA9IG5yb3coRGVmYXVsdClcbnByZWQucHJvYi55ZXMgPSBsZGEucHJlZCRwb3N0ZXJpb3JbLFwiWWVzXCJdXG5cbnRocmVzaG9sZCA9IDAuM1xucHJlZC5jbGFzcyA9cmVwKFwiTm9cIiwgTilcblxucHJlZC5jbGFzc1twcmVkLnByb2IueWVzID4gdGhyZXNob2xkXSA9IFwiWWVzXCJcblxuXG50YWIgPSB0YWJsZShwcmVkLmNsYXNzLCBEZWZhdWx0JGRlZmF1bHQpXG50biA9IHRhYlsnTm8nLCAnTm8nXSAjeCx5XG5mbiA9IHRhYlsnTm8nLCAnWWVzJ11cbmZwID0gdGFiWydZZXMnLCAnTm8nXVxudHAgPSB0YWIgWydZZXMnICwgJ1llcyddXG5cbnRwLnJhdGUgPSB0cC8odHAgKyBmbilcbmZwLnJhdGUgPSBmcC8gKGZwK3RuKVxuXG50cC5yYXRlXG5gYGAifQ== -->
-<pre class="r"><code>N = nrow(Default)
-pred.prob.yes = lda.pred$posterior[,&quot;Yes&quot;]
-
-threshold = 0.3
-pred.class =rep(&quot;No&quot;, N)
-
-pred.class[pred.prob.yes &gt; threshold] = &quot;Yes&quot;
-
-
-tab = table(pred.class, Default$default)
-tn = tab[&#39;No&#39;, &#39;No&#39;] #x,y
-fn = tab[&#39;No&#39;, &#39;Yes&#39;]
-fp = tab[&#39;Yes&#39;, &#39;No&#39;]
-tp = tab [&#39;Yes&#39; , &#39;Yes&#39;]
-
-tp.rate = tp/(tp + fn)
-fp.rate = fp/ (fp+tn)
-
-tp.rate</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDAuNDU2NDU2NVxuIn0= -->
-<pre><code>[1] 0.4564565</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZnAucmF0ZVxuYGBgIn0= -->
-<pre class="r"><code>fp.rate</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDAuMDA5OTMwNjkyXG4ifQ== -->
-<pre><code>[1] 0.009930692</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuTiA9IG5yb3coRGVmYXVsdClcbnByZWQucHJvYi55ZXMgPSBsZGEucHJlZCRwb3N0ZXJpb3JbLFwiWWVzXCJdXG5cbnRocmVzaG9sZCA9IDAuM1xucHJlZC5jbGFzcyA9cmVwKFwiTm9cIiwgTilcblxucHJlZC5jbGFzc1twcmVkLnByb2IueWVzID4gdGhyZXNob2xkXSA9IFwiWWVzXCJcblxuXG50YWIgPSB0YWJsZShwcmVkLmNsYXNzLCBEZWZhdWx0JGRlZmF1bHQpXG5cbnRuID0gdGFiWydObycsICdObyddXG50blxuYGBgIn0= -->
-<pre class="r"><code>N = nrow(Default)
-pred.prob.yes = lda.pred$posterior[,&quot;Yes&quot;]
-
-threshold = 0.3
-pred.class =rep(&quot;No&quot;, N)
-
-pred.class[pred.prob.yes &gt; threshold] = &quot;Yes&quot;
-
-
-tab = table(pred.class, Default$default)
-
-tn = tab[&#39;No&#39;, &#39;No&#39;]
-tn</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDk1NzFcbiJ9 -->
-<pre><code>[1] 9571</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>#real one</p>
-</div>
-<div id="for-loop" class="section level1">
-<h1>For loop</h1>
-</div>
-<div id="improve-sensitivity-2" class="section level1">
-<h1>improve sensitivity</h1>
-</div>
-<div id="how-to-improve-prabletility-0-2" class="section level1">
-<h1>How to improve prabletility *** 0</h1>
-</div>
-<div id="predict-yes-manual-2" class="section level1">
-<h1>predict yes manual</h1>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuTiA9IG5yb3coRGVmYXVsdClcbnByZWQucHJvYi55ZXMgPSBsZGEucHJlZCRwb3N0ZXJpb3JbLFwiWWVzXCJdXG5cbiN0aHJlc2hvbGQgPSAwLjNcbmZvciAodGhyZXNob2xkIGluIHNlcSgwLjEsMC45NCwwLjAxKSl7XG4gIHByZWQuY2xhc3MgPXJlcChcIk5vXCIsIE4pXG5cbiAgcHJlZC5jbGFzc1twcmVkLnByb2IueWVzID4gdGhyZXNob2xkXSA9IFwiWWVzXCJcblxuXG4gIHRhYiA9IHRhYmxlKHByZWQuY2xhc3MsIERlZmF1bHQkZGVmYXVsdClcbiAgdG4gPSB0YWJbJ05vJywgJ05vJ10gI3gseVxuICBmbiA9IHRhYlsnTm8nLCAnWWVzJ11cbiAgZnAgPSB0YWJbJ1llcycsICdObyddXG4gIHRwID0gdGFiIFsnWWVzJyAsICdZZXMnXVxuXG4gIHRwLnJhdGUgPSB0cC8odHAgKyBmbilcbiAgZnAucmF0ZSA9IGZwLyAoZnArdG4pXG5cbiAgdHAucmF0ZXMgPSBjKHRwLnJhdGVzLCB0cC5yYXRlKVxuICBmcC5yYXRlcyA9IGMoZnAucmF0ZXMsIGZwLnJhdGUpXG5cbn1cbmBgYCJ9 -->
-<pre class="r"><code>N = nrow(Default)
-pred.prob.yes = lda.pred$posterior[,&quot;Yes&quot;]
-
-#threshold = 0.3
-for (threshold in seq(0.1,0.94,0.01)){
-  pred.class =rep(&quot;No&quot;, N)
-
-  pred.class[pred.prob.yes &gt; threshold] = &quot;Yes&quot;
-
-
-  tab = table(pred.class, Default$default)
-  tn = tab[&#39;No&#39;, &#39;No&#39;] #x,y
-  fn = tab[&#39;No&#39;, &#39;Yes&#39;]
-  fp = tab[&#39;Yes&#39;, &#39;No&#39;]
-  tp = tab [&#39;Yes&#39; , &#39;Yes&#39;]
-
-  tp.rate = tp/(tp + fn)
-  fp.rate = fp/ (fp+tn)
-
-  tp.rates = c(tp.rates, tp.rate)
-  fp.rates = c(fp.rates, fp.rate)
-
-}</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSAoZTEwNzEpXG5uYWl2ZUJheWVzKGRlZmF1bHQgfiAuLCBkYXRhPURlZmF1bHQgKVxubmIuY2xhc3MgPSBwcmVkaWN0KG5iLmZpdCwgRGVmYXVsdClcbmBgYCJ9 -->
+<pre class="r"><code>library (e1071)
+naiveBayes(default ~ ., data=Default )
+nb.class = predict(nb.fit, Default)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>plot</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGxvdChmcC5yYXRlcyx0cC5yYXRlcylcbmBgYCJ9 -->
-<pre class="r"><code>plot(fp.rates,tp.rates)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-plot-begin eyJoZWlnaHQiOjQzMi42MzI5LCJ3aWR0aCI6NzAwLCJzaXplX2JlaGF2aW9yIjowLCJjb25kaXRpb25zIjpbXX0= -->
-<p><img src="data:image/png;base64,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" /></p>
-<!-- rnb-plot-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGhyZXNobGQgPSAwLjJcblxubGlicmFyeShNQVNTKVxubGRhLmFsbCA9IGxkYShkZWZhdWx0fi4sIGRhdGE9IERlZmF1bHQpXG5sZGEucHJlID0gcHJlZGljdChsZGEuYWxsLG5ld2RhdGEgPSBEZWZhdWx0KVxucHJlZC5wcm9iID0gbGRhLnByZSRwb3N0ZXJpb3JbLDJdXG5wcmVkLmNsYXNzID0gcmVwKFwiTm9cIiwgbnJvdyhEZWZhdWx0KSlcbnByZWQuY2xhc3NbcHJlZC5wcm9iPnRocmVzaGxkXSA9IFwiWWVzXCJcbnRhYmxlKHByZWQuY2xhc3MsIERlZmF1bHQkZGVmYXVsdClcbmhlYWQoRGVmYXVsdClcbmBgYCJ9 -->
-<pre class="r"><code>threshld = 0.2
-
-library(MASS)
-lda.all = lda(default~., data= Default)
-lda.pre = predict(lda.all,newdata = Default)
-pred.prob = lda.pre$posterior[,2]
-pred.class = rep(&quot;No&quot;, nrow(Default))
-pred.class[pred.prob&gt;threshld] = &quot;Yes&quot;
-table(pred.class, Default$default)
-head(Default)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWVhbihsZGEucHJlZCRjbGFzcyA9PSBEZWZhdWx0JGRlZmF1bHQpXG5gYGAifQ== -->
-<pre class="r"><code>mean(lda.pred$class == Default$default)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGFibGUoRGVmYXVsdCRkZWZhdWx0KVxuYGBgIn0= -->
-<pre class="r"><code>table(Default$default)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQpUaGlzIGlzIGFuIFtSIE1hcmtkb3duXShodHRwOi8vcm1hcmtkb3duLnJzdHVkaW8uY29tKSBOb3RlYm9vay4gV2hlbiB5b3UgZXhlY3V0ZSBjb2RlIHdpdGhpbiB0aGUgbm90ZWJvb2ssIHRoZSByZXN1bHRzIGFwcGVhciBiZW5lYXRoIHRoZSBjb2RlLiANCg0KVHJ5IGV4ZWN1dGluZyB0aGlzIGNodW5rIGJ5IGNsaWNraW5nIHRoZSAqUnVuKiBidXR0b24gd2l0aGluIHRoZSBjaHVuayBvciBieSBwbGFjaW5nIHlvdXIgY3Vyc29yIGluc2lkZSBpdCBhbmQgcHJlc3NpbmcgKkN0cmwrU2hpZnQrRW50ZXIqLiANCiMgbGRhDQoNCmBgYHtyfQ0KbGlicmFyeShJU0xSMikNCmxpYnJhcnkoTUFTUykNCg0KZGltKERlZmF1bHQpDQpsZGEuYWxsID0gbGRhKGRlZmF1bHR+LiwgZGF0YSA9IERlZmF1bHQpDQpsZGEucHJlZCA9IHByZWRpY3QobGRhLmFsbCwgbmV3ZGF0YSA9IERlZmF1bHQpDQpgYGANCg0KQWRkIGEgbmV3IGNodW5rIGJ5IGNsaWNraW5nIHRoZSAqSW5zZXJ0IENodW5rKiBidXR0b24gb24gdGhlIHRvb2xiYXIgb3IgYnkgcHJlc3NpbmcgKkN0cmwrQWx0K0kqLg0KDQpXaGVuIHlvdSBzYXZlIHRoZSBub3RlYm9vaywgYW4gSFRNTCBmaWxlIGNvbnRhaW5pbmcgdGhlIGNvZGUgYW5kIG91dHB1dCB3aWxsIGJlIHNhdmVkIGFsb25nc2lkZSBpdCAoY2xpY2sgdGhlICpQcmV2aWV3KiBidXR0b24gb3IgcHJlc3MgKkN0cmwrU2hpZnQrSyogdG8gcHJldmlldyB0aGUgSFRNTCBmaWxlKS4NCg0KVGhlIHByZXZpZXcgc2hvd3MgeW91IGEgcmVuZGVyZWQgSFRNTCBjb3B5IG9mIHRoZSBjb250ZW50cyBvZiB0aGUgZWRpdG9yLiBDb25zZXF1ZW50bHksIHVubGlrZSAqS25pdCosICpQcmV2aWV3KiBkb2VzIG5vdCBydW4gYW55IFIgY29kZSBjaHVua3MuIEluc3RlYWQsIHRoZSBvdXRwdXQgb2YgdGhlIGNodW5rIHdoZW4gaXQgd2FzIGxhc3QgcnVuIGluIHRoZSBlZGl0b3IgaXMgZGlzcGxheWVkLg0KYGBge3J9DQpsaWJyYXJ5KE1BU1MpDQpsZGEucHJlID0gcHJlbmV3ZGF0YShsZGEuZml0KQ0KYGBgDQoNCg0KIw0KYGBge3J9DQpOID0gbnJvdyhEZWZhdWx0KQ0KMS1zdW0obGRhLnByZWQkY2xhc3MgPT0gRGVmYXVsdCRkZWZhdWx0KS9ODQoNCmBgYA0KIw0KYGBge3J9DQp0YWJsZShEZWZhdWx0JGRlZmF1bHQpDQoNCmBgYA0KDQojIGhvdyBtYW55IA0KIyBjb21wYXJlIHdpdGggcmVhbCBjbGFzcw0KYGBge3J9DQp0YWJsZShsZGEucHJlZCRjbGFzcywgRGVmYXVsdCRkZWZhdWx0KQ0KDQpgYGANCiMgc2Vuc2l0aXZpdHkgPSA3OS8zMzMgPSAwLjIzNyBZZXM6eWVzIA0KIyAgICAgICAgICAgTk8gfCBZZXMNCiMgVE4gIE5PICAgOTY0NXwgMjU0ICBGTg0KIyBGUCAgWUVTICAgIDIyfCAgNzkgIFRQDQojIF9fX19fX19fX19fX19fX19fDQojICAgICAgICAgOTY2NyB8ICAzMzMgDQoNCiMgbmV3IG9uZQ0KDQojcHJlZC5jbGFzcyAgIE5vICBZZXMNCiMgICAgICAgTm8gIDk0MzUgIDE0MA0KIyAgICAgICBZZXMgIDIzMiAgMTkzDQoNCg0KIyBjYXJlIG9ubHkgZm9yIG92ZXJhbGwgZXJyb3IgcmF0ZQ0KIyBTcGVjc2l2aXR5IDk2NDUvKDk2NDUrMjIpID0gLjk5NzcgDQpgYGB7cn0NCmhlYWQoRGVmYXVsdCkNCg0KYGBgDQoNCg0KDQoNCiMgcHJlZGljdCBmaXJzdCA1IHJvdw0KYGBge3J9DQpuYW1lcyhsZGEucHJlZCkNCmxkYS5wcmVkJGNsYXNzWzE6NV0NCmxkYS5wcmVkJHBvc3RlcmlvclsxOjUsXQ0KYGBgDQoNCiMgaW1wcm92ZSBzZW5zaXRpdml0eQ0KDQojIEhvdyB0byBpbXByb3ZlIHByYWJsZXRpbGl0eSAqKiogMA0KIyBwcmVkaWN0IHllcyBtYW51YWwNCmBgYHtyfQ0KTiA9IG5yb3coRGVmYXVsdCkNCnByZWQucHJvYi55ZXMgPSBsZGEucHJlZCRwb3N0ZXJpb3JbLCJZZXMiXQ0KDQp0aHJlc2hvbGQgPSAwLjMNCnByZWQuY2xhc3MgPXJlcCgiTm8iLCBOKQ0KDQpwcmVkLmNsYXNzW3ByZWQucHJvYi55ZXMgPiB0aHJlc2hvbGRdID0gIlllcyINCg0KIyBzdW0obGRhLnByZWQkY2xhc3MgPT0gcHJlZC5jbGFzcykNCnRhYmxlKHByZWQuY2xhc3MsIERlZmF1bHQkZGVmYXVsdCkNCg0KYGBgDQojIFJPQyBjdXJ2ZQ0KIyBpbXByb3ZlIHNlbnNpdGl2aXR5DQoNCiMgSG93IHRvIGltcHJvdmUgcHJhYmxldGlsaXR5ICoqKiAwDQojIHByZWRpY3QgeWVzIG1hbnVhbA0KYGBge3J9DQpOID0gbnJvdyhEZWZhdWx0KQ0KcHJlZC5wcm9iLnllcyA9IGxkYS5wcmVkJHBvc3RlcmlvclssIlllcyJdDQoNCnRocmVzaG9sZCA9IDAuMw0KcHJlZC5jbGFzcyA9cmVwKCJObyIsIE4pDQoNCnByZWQuY2xhc3NbcHJlZC5wcm9iLnllcyA+IHRocmVzaG9sZF0gPSAiWWVzIg0KDQoNCnRhYiA9IHRhYmxlKHByZWQuY2xhc3MsIERlZmF1bHQkZGVmYXVsdCkNCnRuID0gdGFiWydObycsICdObyddICN4LHkNCmZuID0gdGFiWydObycsICdZZXMnXQ0KZnAgPSB0YWJbJ1llcycsICdObyddDQp0cCA9IHRhYiBbJ1llcycgLCAnWWVzJ10NCg0KdHAucmF0ZSA9IHRwLyh0cCArIGZuKQ0KZnAucmF0ZSA9IGZwLyAoZnArdG4pDQoNCnRwLnJhdGUNCmZwLnJhdGUNCmBgYA0KDQpgYGB7cn0NCk4gPSBucm93KERlZmF1bHQpDQpwcmVkLnByb2IueWVzID0gbGRhLnByZWQkcG9zdGVyaW9yWywiWWVzIl0NCg0KdGhyZXNob2xkID0gMC4zDQpwcmVkLmNsYXNzID1yZXAoIk5vIiwgTikNCg0KcHJlZC5jbGFzc1twcmVkLnByb2IueWVzID4gdGhyZXNob2xkXSA9ICJZZXMiDQoNCg0KdGFiID0gdGFibGUocHJlZC5jbGFzcywgRGVmYXVsdCRkZWZhdWx0KQ0KDQp0biA9IHRhYlsnTm8nLCAnTm8nXQ0KdG4NCg0KYGBgDQoNCiNyZWFsIG9uZQ0KDQojIEZvciBsb29wDQoNCiMgaW1wcm92ZSBzZW5zaXRpdml0eQ0KDQojIEhvdyB0byBpbXByb3ZlIHByYWJsZXRpbGl0eSAqKiogMA0KIyBwcmVkaWN0IHllcyBtYW51YWwNCmBgYHtyfQ0KTiA9IG5yb3coRGVmYXVsdCkNCnByZWQucHJvYi55ZXMgPSBsZGEucHJlZCRwb3N0ZXJpb3JbLCJZZXMiXQ0KDQojdGhyZXNob2xkID0gMC4zDQpmb3IgKHRocmVzaG9sZCBpbiBzZXEoMC4xLDAuOTQsMC4wMSkpew0KICBwcmVkLmNsYXNzID1yZXAoIk5vIiwgTikNCg0KICBwcmVkLmNsYXNzW3ByZWQucHJvYi55ZXMgPiB0aHJlc2hvbGRdID0gIlllcyINCg0KDQogIHRhYiA9IHRhYmxlKHByZWQuY2xhc3MsIERlZmF1bHQkZGVmYXVsdCkNCiAgdG4gPSB0YWJbJ05vJywgJ05vJ10gI3gseQ0KICBmbiA9IHRhYlsnTm8nLCAnWWVzJ10NCiAgZnAgPSB0YWJbJ1llcycsICdObyddDQogIHRwID0gdGFiIFsnWWVzJyAsICdZZXMnXQ0KDQogIHRwLnJhdGUgPSB0cC8odHAgKyBmbikNCiAgZnAucmF0ZSA9IGZwLyAoZnArdG4pDQoNCiAgdHAucmF0ZXMgPSBjKHRwLnJhdGVzLCB0cC5yYXRlKQ0KICBmcC5yYXRlcyA9IGMoZnAucmF0ZXMsIGZwLnJhdGUpDQoNCn0NCmBgYA0KDQoNCnBsb3QNCmBgYHtyfQ0KcGxvdChmcC5yYXRlcyx0cC5yYXRlcykNCmBgYA0KDQpgYGB7cn0NCnRocmVzaGxkID0gMC4yDQoNCmxpYnJhcnkoTUFTUykNCmxkYS5hbGwgPSBsZGEoZGVmYXVsdH4uLCBkYXRhPSBEZWZhdWx0KQ0KbGRhLnByZSA9IHByZWRpY3QobGRhLmFsbCxuZXdkYXRhID0gRGVmYXVsdCkNCnByZWQucHJvYiA9IGxkYS5wcmUkcG9zdGVyaW9yWywyXQ0KcHJlZC5jbGFzcyA9IHJlcCgiTm8iLCBucm93KERlZmF1bHQpKQ0KcHJlZC5jbGFzc1twcmVkLnByb2I+dGhyZXNobGRdID0gIlllcyINCnRhYmxlKHByZWQuY2xhc3MsIERlZmF1bHQkZGVmYXVsdCkNCmhlYWQoRGVmYXVsdCkNCmBgYA0KDQoNCmBgYHtyfQ0KbWVhbihsZGEucHJlZCRjbGFzcyA9PSBEZWZhdWx0JGRlZmF1bHQpDQpgYGANCmBgYHtyfQ0KdGFibGUoRGVmYXVsdCRkZWZhdWx0KQ0KYGBgDQoNCg0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KYGBge3J9DQpsaWJyYXJ5KElTTFIyKQ0KZGltKERlZmF1bHQpDQoNCg0KZGF0LnkgPSBEZWZhdWx0W0RlZmF1bHQkZGVmYXVsdCA9PSAnWWVzJyxdDQpkYXQubiA9IERlZmF1bHRbRGVmYXVsdCRkZWZhdWx0ID09ICdObycsXQ0KDQpkYXQgPSByYmluZChkYXQueVsxOjUsIF0sIGRhdC5uWzE6NCwgXSkNCmRhdCA9IGRhdFssYygxLDMpXQ0KDQpgYGANCiNQaSANCiMgUGkgDQpgYGB7cn0NCnBpX3llcyA9IG1lYW4oZGF0JGRlZmF1bHQgPT0gJ1llcycpDQpwaV9ubyA9IG1lYW4oZGF0JGRlZmF1bHQgPT0gJ05vJykNCnByaW50KHBpX3llcykNCnByaW50KHBpX25vKQ0KYGBgDQoNCg0KIyBtdQ0KYGBge3J9DQptdV95ZXMgPSBtZWFuKGRhdFtkYXQkZGVmYXVsdCA9PSAnWWVzJywyXSkNCm11X25vID0gbWVhbihkYXRbZGF0JGRlZmF1bHQgPT0gJ05vJywyXSkNCm11X3llcw0KbXVfbm8NCmBgYA0KDQojIHNpZ21hDQpgYGB7cn0NCngxID0gZGF0W2RhdCRkZWZhdWx0ID09J1llcycsMl0NCngwID0gZGF0W2RhdCRkZWZhdWx0ID09J05vJywyXQ0KDQpzaWdtYSA9IHN1bSh4MS1tdV95ZXMpXjINCnNpZ21hDQpgYGANCg0KDQpgYGB7cn0NCmxpYnJhcnkoTUFTUykNCmxkYS5hbGwgPSBsZGEoZGVmYXVsdH4uLCBkYXRhID0gRGF1bHQpDQpsZGEucHJlID0gcHJlZGljdChsZGEuYWxsLG5ld2RhdGEgPSBEZWZhdWx0KQ0KcHJlZC5wcm9iID0gbGRhLnByZSRwb3N0ZXJpb3JbLDJdDQoNCnByZWQNCmBgYA0KDQojUURBDQpgYGB7cn0NCmxpYnJhcnkoTUFTUykNCg0KDQoNCnFkYS5hbGwgPSBsZGEoZGVmYXVsdH4uLCBkYXRhID0gRGVmYXVsdCkNCnFkYS5hbGwNCnFkYS5wcmVkID0gcHJlZGljdChsZGEuYWxsLCBuZXdkYXRhID0gRGVmYXVsdCkNCmBgYA0KDQojIG92ZXJhbGwgb3ZlcmF0ZSAoMC4wMjcpICgzMSsyMzkpLzEwMDAwDQpgYGB7cn0NCnRhYmxlKHFkYS5wcmVkJGNsYXNzLCBEZWZhdWx0JGRlZmF1bHQpDQoNCmBgYA0KDQpgYGB7cn0NCmxpYnJhcnkgKGUxMDcxKQ0KbmFpdmVCYXllcyhkZWZhdWx0IH4gLiwgZGF0YT1EZWZhdWx0ICkNCm5iLmNsYXNzID0gcHJlZGljdChuYi5maXQsIERlZmF1bHQpDQpgYGA=</div>
 
 
 
@@ -2149,7 +1908,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("LDA.Rmd");
+  window.initializeSourceEmbed("2_LDA2.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>
