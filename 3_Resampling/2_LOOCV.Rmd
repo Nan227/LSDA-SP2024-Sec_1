@@ -1,0 +1,64 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+# LOOCV
+## manual way
+```{r}
+library(ISLR2)
+attach(Auto)
+
+N = nrow(Auto)
+
+val.mses = c()
+for (test.indices in 1:N){
+  data.test = Auto[test.indices,]
+  data.train = Auto[-test.indices, ]
+  
+  # model = lm(mpg~horsepower+I(horsepower^2),data=data.train)
+  model = lm(mpg~poly(horsepower, 4),data=data.train)
+  
+  val.pred = predict(model, newdata = data.test)
+  mse = (data.test$mpg - val.pred)^2
+  val.mses = c(val.mses, mse)
+}
+
+mean(val.mses)
+
+```
+## cv.glm
+```{r}
+model1 = lm(mpg~horsepower, data=Auto)
+coef(model1)
+
+library(boot)
+model2 = glm(mpg~horsepower, data=Auto)
+coef(model2)
+```
+
+```{r}
+glm.fit = glm(mpg~poly(horsepower,2), data=Auto)
+
+cv.mse =  cv.glm(Auto,glm.fit)
+
+val.mse = cv.mse$delta[1]
+val.mse
+```
+
+```{r}
+val.mse.allmodel = c()
+for(degree in 1:10){
+  
+  glm.fit = glm(mpg~poly(horsepower,degree), data=Auto)
+  cv.mse =  cv.glm(Auto,glm.fit)
+  val.mse = cv.mse$delta[1]
+  
+  val.mse.allmodel = c(val.mse.allmodel, val.mse)
+}
+val.mse.allmodel
+```
+```{r}
+plot(val.mse.allmodel, pch=20, col='blue', type = 'b')
+```
+
