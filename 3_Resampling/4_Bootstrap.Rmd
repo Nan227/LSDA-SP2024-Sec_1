@@ -1,0 +1,30 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+```{r}
+library(ISLR2)
+
+model = lm(mpg~horsepower, data = Auto)
+summary(model)
+```
+```{r}
+N = nrow(Auto)
+index = sample(N, N, replace = T)
+model = lm(mpg~horsepower, data = Auto, subset = index)
+coef(model)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
