@@ -23,7 +23,64 @@ library(leaps)
 ```
 
 ```{r}
-best.subset = regsubsets(Salary ~., data = dat)
+best.subset = regsubsets(Salary ~., data = dat, nvmax = 19) # fix the one show only 8 => 19
 summary(best.subset)
 ```
+
+# We need to pick the best model
+```{r}
+reg.summary = summary(best.subset)
+reg.summary$which
+```
+
+
+```{r}
+reg.summary = summary(best.subset)
+reg.summary$outmat # rsq, adjR^@
+``````
+```{r}
+reg.summary = summary(best.subset)
+reg.summary$rsq # rsq, adjR^@
+```
+```{r}
+reg.summary = summary(best.subset)
+reg.summary$adjr2 # rsq, adjR^@
+```
+
+```{r}
+i=which.max(reg.summary$adjr2)
+i
+```
+# can count only TRUE
+```{r}
+reg.summary$which[i,]
+```
+
+# what if need do not see the false
+```{r}
+vars = reg.summary$which[i,]
+vars[1]
+vars[2]
+```
+# get the name 
+```{r}
+vars = reg.summary$which[i,]
+names(vars)[vars][-1]
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
