@@ -8,17 +8,100 @@ library(ISLR2)
 model = lm(mpg~horsepower, data = Auto)
 summary(model)
 ```
+# manual 
 ```{r}
+set.seed(2024)
 N = nrow(Auto)
-index = sample(N, N, replace = T)
-model = lm(mpg~horsepower, data = Auto, subset = index)
-coef(model)
 
+beta0s = c()
+beta1s = c()
+for(i in 1:1000){
+  index = sample(N, N, replace = T)
+  model = glm(mpg~horsepower, data = Auto, subset = index)
+  coefs =  unname(coef(model))
+  
+  beta0s = c(beta0s, coefs[1])
+  beta1s = c(beta1s, coefs[2])
+}
+
+mean(beta0s)
+sd(beta0s)
+
+mean(beta1s)
+sd(beta1s)
+```
+# boot function
+```{r}
+boot.fn = function(data, index){
+  model = glm(mpg~horsepower, data = data, subset = index)
+  coefs =  unname(coef(model))
+  return(coefs)
+}
+
+index = sample(N, N, replace = T)
+boot.fn(Auto, index)
+```
+
+```{r}
+library(boot)
+
+boot(Auto, boot.fn, 1000)
+```
+```{r}
+model = lm(mpg~horsepower, data = Auto)
+summary(model)
+```
+```{r}
+plot(Auto$mpg, Auto$horsepower)
+```
+# quadratic model 
+```{r}
+model = lm(mpg~horsepower+I(horsepower^2), data = Auto)
+summary(model)
+```
+
+```{r}
+boot.fn = function(data, index){
+  model = glm(mpg~horsepower+I(horsepower^2), data = data, subset = index)
+  coefs =  unname(coef(model))
+  return(coefs)
+}
+
+boot(Auto, boot.fn, 1000)
+
+```
+# CLT
+```{r}
+set.seed(1)
+x = runif(20, min=0, max = 200)
+x
+hist(x)
+```
+## Theory CI
+```{r}
+## 95% CI
+x_bar = mean(x)
+t = qt(1-0.05/2,length(x)-1)
+se = sd(x)/sqrt(length(x))
+
+x_bar - t* se
+x_bar + t* se
 ```
 
 
-
-
+## bootstrap Confidence interval
+```{r}
+set.seed(1)
+sample_means = c()
+for (i in 1:1000){
+  sample_x = sample(x, length(x), replace = T)
+  sample_mean = mean(sample_x)
+  
+  sample_means = c(sample_means, sample_mean)
+}
+# sample_means
+quantile(sample_means, probs = c(0.025, 0.975))
+```
 
 
 
