@@ -1,0 +1,29 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+
+```{r}
+library(ISLR2)
+dat = Hitters
+dat = na.omit(dat)
+```
+
+```{r}
+full.model = lm(Salary~., data = dat)
+summary(full.modelw)
+                # 
+                
+```
+# Best subsetion
+```{r}
+library(leaps)
+```
+
+```{r}
+best.subset = regsubsets(Salary ~., data = dat)
+summary(best.subset)
+```
+
