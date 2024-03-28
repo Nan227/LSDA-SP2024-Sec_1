@@ -1,0 +1,73 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+```{r}
+library(ISLR2)
+
+dat = Hitters
+dat = na.omit(dat)
+```
+
+```{r}
+full.model = lm(Salary~., data = dat)
+summary(full.model)
+```
+# Best subset selection
+
+```{r}
+library(leaps)
+
+best.subset = regsubsets(Salary ~ ., data = dat)
+summary(best.subset)
+```
+
+```{r}
+library(leaps)
+
+best.subset = regsubsets(Salary ~ ., data = dat, nvmax=19)
+summary(best.subset)
+```
+
+```{r}
+reg.summary = summary(best.subset)
+
+reg.summary$which
+reg.summary$outmat
+reg.summary$rsq
+reg.summary$adjr2
+```
+
+```{r}
+i = which.max(reg.summary$adjr2)
+i
+```
+```{r}
+vars = reg.summary$which[i,]
+
+names(vars)[vars][-1]
+```
+
+```{r}
+vars.selected = names(vars)[vars][-1]
+vars.selected[8] = 'League'
+vars.selected[9] = 'Division'
+
+dat.selected = dat[vars.selected]
+
+best.model = lm(dat$Salary~., data = dat.selected)
+summary(best.model)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
