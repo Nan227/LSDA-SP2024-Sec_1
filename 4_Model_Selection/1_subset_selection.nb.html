@@ -1754,20 +1754,27 @@ display: none;
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShJU0xSMilcblxuYGBgIn0= -->
-<pre class="r"><code>library(ISLR2)
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShJU0xSMilcbmBgYCJ9 -->
+<pre class="r"><code>library(ISLR2)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZzogcGFja2FnZSDigJhJU0xSMuKAmSB3YXMgYnVpbHQgdW5kZXIgUiB2ZXJzaW9uIDQuMy4zXG4ifQ== -->
 <pre><code>Warning: package ‘ISLR2’ was built under R version 4.3.3</code></pre>
 <!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGF0ID0gSGl0dGVyc1xuZGF0ID0gbmEub21pdChkYXQpXG5gYGAifQ== -->
+<pre class="r"><code>dat = Hitters
+dat = na.omit(dat)</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<div id="best-subset-approach" class="section level1">
+<h1>Best subset approach</h1>
+<div id="full-model" class="section level2">
+<h2>full model</h2>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWFyeShmdWxsLm1vZGVsKVxuXG5gYGAifQ== -->
-<pre class="r"><code>summary(full.model)
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZnVsbC5tb2RlbCA9IGxtKFNhbGFyeX4uLCBkYXRhID0gZGF0KVxuc3VtbWFyeShmdWxsLm1vZGVsKVxuYGBgIn0= -->
+<pre class="r"><code>full.model = lm(Salary~., data = dat)
+summary(full.model)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoiXG5DYWxsOlxubG0oZm9ybXVsYSA9IFNhbGFyeSB+IC4sIGRhdGEgPSBkYXQpXG5cblJlc2lkdWFsczpcbiAgICBNaW4gICAgICAxUSAgTWVkaWFuICAgICAgM1EgICAgIE1heCBcbi05MDcuNjIgLTE3OC4zNSAgLTMxLjExICAxMzkuMDkgMTg3Ny4wNCBcblxuQ29lZmZpY2llbnRzOlxuICAgICAgICAgICAgICBFc3RpbWF0ZSBTdGQuIEVycm9yIHQgdmFsdWUgUHIoPnx0fCkgICAgXG4oSW50ZXJjZXB0KSAgMTYzLjEwMzU5ICAgOTAuNzc4NTQgICAxLjc5NyAwLjA3MzYyMiAuICBcbkF0QmF0ICAgICAgICAgLTEuOTc5ODcgICAgMC42MzM5OCAgLTMuMTIzIDAuMDAyMDA4ICoqIFxuSGl0cyAgICAgICAgICAgNy41MDA3NyAgICAyLjM3NzUzICAgMy4xNTUgMC4wMDE4MDggKiogXG5IbVJ1biAgICAgICAgICA0LjMzMDg4ICAgIDYuMjAxNDUgICAwLjY5OCAwLjQ4NTYxNiAgICBcblJ1bnMgICAgICAgICAgLTIuMzc2MjEgICAgMi45ODA3NiAgLTAuNzk3IDAuNDI2MTIyICAgIFxuUkJJICAgICAgICAgICAtMS4wNDQ5NiAgICAyLjYwMDg4ICAtMC40MDIgMC42ODgyMDQgICAgXG5XYWxrcyAgICAgICAgICA2LjIzMTI5ICAgIDEuODI4NTAgICAzLjQwOCAwLjAwMDc2NiAqKipcblllYXJzICAgICAgICAgLTMuNDg5MDUgICAxMi40MTIxOSAgLTAuMjgxIDAuNzc4ODc0ICAgIFxuQ0F0QmF0ICAgICAgICAtMC4xNzEzNCAgICAwLjEzNTI0ICAtMS4yNjcgMC4yMDYzODAgICAgXG5DSGl0cyAgICAgICAgICAwLjEzMzk5ICAgIDAuNjc0NTUgICAwLjE5OSAwLjg0MjcxMyAgICBcbkNIbVJ1biAgICAgICAgLTAuMTcyODYgICAgMS42MTcyNCAgLTAuMTA3IDAuOTE0OTY3ICAgIFxuQ1J1bnMgICAgICAgICAgMS40NTQzMCAgICAwLjc1MDQ2ICAgMS45MzggMC4wNTM3OTUgLiAgXG5DUkJJICAgICAgICAgICAwLjgwNzcxICAgIDAuNjkyNjIgICAxLjE2NiAwLjI0NDY5MSAgICBcbkNXYWxrcyAgICAgICAgLTAuODExNTcgICAgMC4zMjgwOCAgLTIuNDc0IDAuMDE0MDU3ICogIFxuTGVhZ3VlTiAgICAgICA2Mi41OTk0MiAgIDc5LjI2MTQwICAgMC43OTAgMC40MzA0MjQgICAgXG5EaXZpc2lvblcgICAtMTE2Ljg0OTI1ICAgNDAuMzY2OTUgIC0yLjg5NSAwLjAwNDE0MSAqKiBcblB1dE91dHMgICAgICAgIDAuMjgxODkgICAgMC4wNzc0NCAgIDMuNjQwIDAuMDAwMzMzICoqKlxuQXNzaXN0cyAgICAgICAgMC4zNzEwNyAgICAwLjIyMTIwICAgMS42NzggMC4wOTQ3MjMgLiAgXG5FcnJvcnMgICAgICAgIC0zLjM2MDc2ICAgIDQuMzkxNjMgIC0wLjc2NSAwLjQ0NDg1NyAgICBcbk5ld0xlYWd1ZU4gICAtMjQuNzYyMzMgICA3OS4wMDI2MyAgLTAuMzEzIDAuNzU0MjE4ICAgIFxuLS0tXG5TaWduaWYuIGNvZGVzOiAgMCDigJgqKirigJkgMC4wMDEg4oCYKirigJkgMC4wMSDigJgq4oCZIDAuMDUg4oCYLuKAmSAwLjEg4oCYIOKAmSAxXG5cblJlc2lkdWFsIHN0YW5kYXJkIGVycm9yOiAzMTUuNiBvbiAyNDMgZGVncmVlcyBvZiBmcmVlZG9tXG5NdWx0aXBsZSBSLXNxdWFyZWQ6ICAwLjU0NjEsXHRBZGp1c3RlZCBSLXNxdWFyZWQ6ICAwLjUxMDYgXG5GLXN0YXRpc3RpYzogMTUuMzkgb24gMTkgYW5kIDI0MyBERiwgIHAtdmFsdWU6IDwgMi4yZS0xNlxuIn0= -->
 <pre><code>
@@ -1809,15 +1816,22 @@ F-statistic: 15.39 on 19 and 243 DF,  p-value: &lt; 2.2e-16</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<div id="best-subset-selection" class="section level1">
-<h1>Best subset selection</h1>
+</div>
+<div id="best-subset-model" class="section level2">
+<h2>Best subset model</h2>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWFyeShiZXN0LnN1YnNldClcblxuYGBgIn0= -->
-<pre class="r"><code>summary(best.subset)
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShsZWFwcylcbmBgYCJ9 -->
+<pre class="r"><code>library(leaps)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiU3Vic2V0IHNlbGVjdGlvbiBvYmplY3RcbkNhbGw6IHJlZ3N1YnNldHMuZm9ybXVsYShTYWxhcnkgfiAuLCBkYXRhID0gZGF0KVxuMTkgVmFyaWFibGVzICAoYW5kIGludGVyY2VwdClcbiAgICAgICAgICAgRm9yY2VkIGluIEZvcmNlZCBvdXRcbkF0QmF0ICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkhpdHMgICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkhtUnVuICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcblJ1bnMgICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcblJCSSAgICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbldhbGtzICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcblllYXJzICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkNBdEJhdCAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkNIaXRzICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkNIbVJ1biAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkNSdW5zICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkNSQkkgICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkNXYWxrcyAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkxlYWd1ZU4gICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkRpdmlzaW9uVyAgICAgIEZBTFNFICAgICAgRkFMU0VcblB1dE91dHMgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkFzc2lzdHMgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkVycm9ycyAgICAgICAgIEZBTFNFICAgICAgRkFMU0Vcbk5ld0xlYWd1ZU4gICAgIEZBTFNFICAgICAgRkFMU0VcbjEgc3Vic2V0cyBvZiBlYWNoIHNpemUgdXAgdG8gOFxuU2VsZWN0aW9uIEFsZ29yaXRobTogZXhoYXVzdGl2ZVxuICAgICAgICAgQXRCYXQgSGl0cyBIbVJ1biBSdW5zIFJCSSBXYWxrcyBZZWFycyBDQXRCYXQgQ0hpdHMgQ0htUnVuIENSdW5zIENSQkkgQ1dhbGtzXG4xICAoIDEgKSBcIiBcIiAgIFwiIFwiICBcIiBcIiAgIFwiIFwiICBcIiBcIiBcIiBcIiAgIFwiIFwiICAgXCIgXCIgICAgXCIgXCIgICBcIiBcIiAgICBcIiBcIiAgIFwiKlwiICBcIiBcIiAgIFxuMiAgKCAxICkgXCIgXCIgICBcIipcIiAgXCIgXCIgICBcIiBcIiAgXCIgXCIgXCIgXCIgICBcIiBcIiAgIFwiIFwiICAgIFwiIFwiICAgXCIgXCIgICAgXCIgXCIgICBcIipcIiAgXCIgXCIgICBcbjMgICggMSApIFwiIFwiICAgXCIqXCIgIFwiIFwiICAgXCIgXCIgIFwiIFwiIFwiIFwiICAgXCIgXCIgICBcIiBcIiAgICBcIiBcIiAgIFwiIFwiICAgIFwiIFwiICAgXCIqXCIgIFwiIFwiICAgXG40ICAoIDEgKSBcIiBcIiAgIFwiKlwiICBcIiBcIiAgIFwiIFwiICBcIiBcIiBcIiBcIiAgIFwiIFwiICAgXCIgXCIgICAgXCIgXCIgICBcIiBcIiAgICBcIiBcIiAgIFwiKlwiICBcIiBcIiAgIFxuNSAgKCAxICkgXCIqXCIgICBcIipcIiAgXCIgXCIgICBcIiBcIiAgXCIgXCIgXCIgXCIgICBcIiBcIiAgIFwiIFwiICAgIFwiIFwiICAgXCIgXCIgICAgXCIgXCIgICBcIipcIiAgXCIgXCIgICBcbjYgICggMSApIFwiKlwiICAgXCIqXCIgIFwiIFwiICAgXCIgXCIgIFwiIFwiIFwiKlwiICAgXCIgXCIgICBcIiBcIiAgICBcIiBcIiAgIFwiIFwiICAgIFwiIFwiICAgXCIqXCIgIFwiIFwiICAgXG43ICAoIDEgKSBcIiBcIiAgIFwiKlwiICBcIiBcIiAgIFwiIFwiICBcIiBcIiBcIipcIiAgIFwiIFwiICAgXCIqXCIgICAgXCIqXCIgICBcIipcIiAgICBcIiBcIiAgIFwiIFwiICBcIiBcIiAgIFxuOCAgKCAxICkgXCIqXCIgICBcIipcIiAgXCIgXCIgICBcIiBcIiAgXCIgXCIgXCIqXCIgICBcIiBcIiAgIFwiIFwiICAgIFwiIFwiICAgXCIqXCIgICAgXCIqXCIgICBcIiBcIiAgXCIqXCIgICBcbiAgICAgICAgIExlYWd1ZU4gRGl2aXNpb25XIFB1dE91dHMgQXNzaXN0cyBFcnJvcnMgTmV3TGVhZ3VlTlxuMSAgKCAxICkgXCIgXCIgICAgIFwiIFwiICAgICAgIFwiIFwiICAgICBcIiBcIiAgICAgXCIgXCIgICAgXCIgXCIgICAgICAgXG4yICAoIDEgKSBcIiBcIiAgICAgXCIgXCIgICAgICAgXCIgXCIgICAgIFwiIFwiICAgICBcIiBcIiAgICBcIiBcIiAgICAgICBcbjMgICggMSApIFwiIFwiICAgICBcIiBcIiAgICAgICBcIipcIiAgICAgXCIgXCIgICAgIFwiIFwiICAgIFwiIFwiICAgICAgIFxuNCAgKCAxICkgXCIgXCIgICAgIFwiKlwiICAgICAgIFwiKlwiICAgICBcIiBcIiAgICAgXCIgXCIgICAgXCIgXCIgICAgICAgXG41ICAoIDEgKSBcIiBcIiAgICAgXCIqXCIgICAgICAgXCIqXCIgICAgIFwiIFwiICAgICBcIiBcIiAgICBcIiBcIiAgICAgICBcbjYgICggMSApIFwiIFwiICAgICBcIipcIiAgICAgICBcIipcIiAgICAgXCIgXCIgICAgIFwiIFwiICAgIFwiIFwiICAgICAgIFxuNyAgKCAxICkgXCIgXCIgICAgIFwiKlwiICAgICAgIFwiKlwiICAgICBcIiBcIiAgICAgXCIgXCIgICAgXCIgXCIgICAgICAgXG44ICAoIDEgKSBcIiBcIiAgICAgXCIqXCIgICAgICAgXCIqXCIgICAgIFwiIFwiICAgICBcIiBcIiAgICBcIiBcIiAgICAgICBcbiJ9 -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZzogcGFja2FnZSDigJhsZWFwc+KAmSB3YXMgYnVpbHQgdW5kZXIgUiB2ZXJzaW9uIDQuMy4zXG4ifQ== -->
+<pre><code>Warning: package ‘leaps’ was built under R version 4.3.3</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYmVzdC5zdWJzZXQgPSByZWdzdWJzZXRzKFNhbGFyeSB+IC4sIGRhdGEgPSBkYXQpXG5zdW1tYXJ5KGJlc3Quc3Vic2V0KVxuYGBgIn0= -->
+<pre class="r"><code>best.subset = regsubsets(Salary ~ ., data = dat)
+summary(best.subset)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiU3Vic2V0IHNlbGVjdGlvbiBvYmplY3RcbkNhbGw6IHJlZ3N1YnNldHMuZm9ybXVsYShTYWxhcnkgfiAuLCBkYXRhID0gZGF0KVxuMTkgVmFyaWFibGVzICAoYW5kIGludGVyY2VwdClcbiAgICAgICAgICAgRm9yY2VkIGluIEZvcmNlZCBvdXRcbkF0QmF0ICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkhpdHMgICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkhtUnVuICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcblJ1bnMgICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcblJCSSAgICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbldhbGtzICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcblllYXJzICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkNBdEJhdCAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkNIaXRzICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkNIbVJ1biAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkNSdW5zICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkNSQkkgICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkNXYWxrcyAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkxlYWd1ZU4gICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkRpdmlzaW9uVyAgICAgIEZBTFNFICAgICAgRkFMU0VcblB1dE91dHMgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkFzc2lzdHMgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkVycm9ycyAgICAgICAgIEZBTFNFICAgICAgRkFMU0Vcbk5ld0xlYWd1ZU4gICAgIEZBTFNFICAgICAgRkFMU0VcbjEgc3Vic2V0cyBvZiBlYWNoIHNpemUgdXAgdG8gOFxuU2VsZWN0aW9uIEFsZ29yaXRobTogZXhoYXVzdGl2ZVxuICAgICAgICAgQXRCYXQgSGl0cyBIbVJ1biBSdW5zIFJCSSBXYWxrcyBZZWFycyBDQXRCYXQgQ0hpdHMgQ0htUnVuXG4xICAoIDEgKSBcIiBcIiAgIFwiIFwiICBcIiBcIiAgIFwiIFwiICBcIiBcIiBcIiBcIiAgIFwiIFwiICAgXCIgXCIgICAgXCIgXCIgICBcIiBcIiAgIFxuMiAgKCAxICkgXCIgXCIgICBcIipcIiAgXCIgXCIgICBcIiBcIiAgXCIgXCIgXCIgXCIgICBcIiBcIiAgIFwiIFwiICAgIFwiIFwiICAgXCIgXCIgICBcbjMgICggMSApIFwiIFwiICAgXCIqXCIgIFwiIFwiICAgXCIgXCIgIFwiIFwiIFwiIFwiICAgXCIgXCIgICBcIiBcIiAgICBcIiBcIiAgIFwiIFwiICAgXG40ICAoIDEgKSBcIiBcIiAgIFwiKlwiICBcIiBcIiAgIFwiIFwiICBcIiBcIiBcIiBcIiAgIFwiIFwiICAgXCIgXCIgICAgXCIgXCIgICBcIiBcIiAgIFxuNSAgKCAxICkgXCIqXCIgICBcIipcIiAgXCIgXCIgICBcIiBcIiAgXCIgXCIgXCIgXCIgICBcIiBcIiAgIFwiIFwiICAgIFwiIFwiICAgXCIgXCIgICBcbjYgICggMSApIFwiKlwiICAgXCIqXCIgIFwiIFwiICAgXCIgXCIgIFwiIFwiIFwiKlwiICAgXCIgXCIgICBcIiBcIiAgICBcIiBcIiAgIFwiIFwiICAgXG43ICAoIDEgKSBcIiBcIiAgIFwiKlwiICBcIiBcIiAgIFwiIFwiICBcIiBcIiBcIipcIiAgIFwiIFwiICAgXCIqXCIgICAgXCIqXCIgICBcIipcIiAgIFxuOCAgKCAxICkgXCIqXCIgICBcIipcIiAgXCIgXCIgICBcIiBcIiAgXCIgXCIgXCIqXCIgICBcIiBcIiAgIFwiIFwiICAgIFwiIFwiICAgXCIqXCIgICBcbiAgICAgICAgIENSdW5zIENSQkkgQ1dhbGtzIExlYWd1ZU4gRGl2aXNpb25XIFB1dE91dHMgQXNzaXN0cyBFcnJvcnNcbjEgICggMSApIFwiIFwiICAgXCIqXCIgIFwiIFwiICAgIFwiIFwiICAgICBcIiBcIiAgICAgICBcIiBcIiAgICAgXCIgXCIgICAgIFwiIFwiICAgXG4yICAoIDEgKSBcIiBcIiAgIFwiKlwiICBcIiBcIiAgICBcIiBcIiAgICAgXCIgXCIgICAgICAgXCIgXCIgICAgIFwiIFwiICAgICBcIiBcIiAgIFxuMyAgKCAxICkgXCIgXCIgICBcIipcIiAgXCIgXCIgICAgXCIgXCIgICAgIFwiIFwiICAgICAgIFwiKlwiICAgICBcIiBcIiAgICAgXCIgXCIgICBcbjQgICggMSApIFwiIFwiICAgXCIqXCIgIFwiIFwiICAgIFwiIFwiICAgICBcIipcIiAgICAgICBcIipcIiAgICAgXCIgXCIgICAgIFwiIFwiICAgXG41ICAoIDEgKSBcIiBcIiAgIFwiKlwiICBcIiBcIiAgICBcIiBcIiAgICAgXCIqXCIgICAgICAgXCIqXCIgICAgIFwiIFwiICAgICBcIiBcIiAgIFxuNiAgKCAxICkgXCIgXCIgICBcIipcIiAgXCIgXCIgICAgXCIgXCIgICAgIFwiKlwiICAgICAgIFwiKlwiICAgICBcIiBcIiAgICAgXCIgXCIgICBcbjcgICggMSApIFwiIFwiICAgXCIgXCIgIFwiIFwiICAgIFwiIFwiICAgICBcIipcIiAgICAgICBcIipcIiAgICAgXCIgXCIgICAgIFwiIFwiICAgXG44ICAoIDEgKSBcIipcIiAgIFwiIFwiICBcIipcIiAgICBcIiBcIiAgICAgXCIqXCIgICAgICAgXCIqXCIgICAgIFwiIFwiICAgICBcIiBcIiAgIFxuICAgICAgICAgTmV3TGVhZ3VlTlxuMSAgKCAxICkgXCIgXCIgICAgICAgXG4yICAoIDEgKSBcIiBcIiAgICAgICBcbjMgICggMSApIFwiIFwiICAgICAgIFxuNCAgKCAxICkgXCIgXCIgICAgICAgXG41ICAoIDEgKSBcIiBcIiAgICAgICBcbjYgICggMSApIFwiIFwiICAgICAgIFxuNyAgKCAxICkgXCIgXCIgICAgICAgXG44ICAoIDEgKSBcIiBcIiAgICAgICBcbiJ9 -->
 <pre><code>Subset selection object
 Call: regsubsets.formula(Salary ~ ., data = dat)
 19 Variables  (and intercept)
@@ -1843,36 +1857,43 @@ Errors         FALSE      FALSE
 NewLeagueN     FALSE      FALSE
 1 subsets of each size up to 8
 Selection Algorithm: exhaustive
-         AtBat Hits HmRun Runs RBI Walks Years CAtBat CHits CHmRun CRuns CRBI CWalks
-1  ( 1 ) &quot; &quot;   &quot; &quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot; &quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot;*&quot;  &quot; &quot;   
-2  ( 1 ) &quot; &quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot; &quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot;*&quot;  &quot; &quot;   
-3  ( 1 ) &quot; &quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot; &quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot;*&quot;  &quot; &quot;   
-4  ( 1 ) &quot; &quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot; &quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot;*&quot;  &quot; &quot;   
-5  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot; &quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot;*&quot;  &quot; &quot;   
-6  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot;*&quot;  &quot; &quot;   
-7  ( 1 ) &quot; &quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot;*&quot;    &quot;*&quot;   &quot;*&quot;    &quot; &quot;   &quot; &quot;  &quot; &quot;   
-8  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot;*&quot;    &quot;*&quot;   &quot; &quot;  &quot;*&quot;   
-         LeagueN DivisionW PutOuts Assists Errors NewLeagueN
-1  ( 1 ) &quot; &quot;     &quot; &quot;       &quot; &quot;     &quot; &quot;     &quot; &quot;    &quot; &quot;       
-2  ( 1 ) &quot; &quot;     &quot; &quot;       &quot; &quot;     &quot; &quot;     &quot; &quot;    &quot; &quot;       
-3  ( 1 ) &quot; &quot;     &quot; &quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;    &quot; &quot;       
-4  ( 1 ) &quot; &quot;     &quot;*&quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;    &quot; &quot;       
-5  ( 1 ) &quot; &quot;     &quot;*&quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;    &quot; &quot;       
-6  ( 1 ) &quot; &quot;     &quot;*&quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;    &quot; &quot;       
-7  ( 1 ) &quot; &quot;     &quot;*&quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;    &quot; &quot;       
-8  ( 1 ) &quot; &quot;     &quot;*&quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;    &quot; &quot;       </code></pre>
+         AtBat Hits HmRun Runs RBI Walks Years CAtBat CHits CHmRun
+1  ( 1 ) &quot; &quot;   &quot; &quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot; &quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot; &quot;   
+2  ( 1 ) &quot; &quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot; &quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot; &quot;   
+3  ( 1 ) &quot; &quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot; &quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot; &quot;   
+4  ( 1 ) &quot; &quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot; &quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot; &quot;   
+5  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot; &quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot; &quot;   
+6  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot; &quot;   
+7  ( 1 ) &quot; &quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot;*&quot;    &quot;*&quot;   &quot;*&quot;   
+8  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot;*&quot;   
+         CRuns CRBI CWalks LeagueN DivisionW PutOuts Assists Errors
+1  ( 1 ) &quot; &quot;   &quot;*&quot;  &quot; &quot;    &quot; &quot;     &quot; &quot;       &quot; &quot;     &quot; &quot;     &quot; &quot;   
+2  ( 1 ) &quot; &quot;   &quot;*&quot;  &quot; &quot;    &quot; &quot;     &quot; &quot;       &quot; &quot;     &quot; &quot;     &quot; &quot;   
+3  ( 1 ) &quot; &quot;   &quot;*&quot;  &quot; &quot;    &quot; &quot;     &quot; &quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;   
+4  ( 1 ) &quot; &quot;   &quot;*&quot;  &quot; &quot;    &quot; &quot;     &quot;*&quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;   
+5  ( 1 ) &quot; &quot;   &quot;*&quot;  &quot; &quot;    &quot; &quot;     &quot;*&quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;   
+6  ( 1 ) &quot; &quot;   &quot;*&quot;  &quot; &quot;    &quot; &quot;     &quot;*&quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;   
+7  ( 1 ) &quot; &quot;   &quot; &quot;  &quot; &quot;    &quot; &quot;     &quot;*&quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;   
+8  ( 1 ) &quot;*&quot;   &quot; &quot;  &quot;*&quot;    &quot; &quot;     &quot;*&quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;   
+         NewLeagueN
+1  ( 1 ) &quot; &quot;       
+2  ( 1 ) &quot; &quot;       
+3  ( 1 ) &quot; &quot;       
+4  ( 1 ) &quot; &quot;       
+5  ( 1 ) &quot; &quot;       
+6  ( 1 ) &quot; &quot;       
+7  ( 1 ) &quot; &quot;       
+8  ( 1 ) &quot; &quot;       </code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShsZWFwcylcblxuYmVzdC5zdWJzZXQgPSByZWdzdWJzZXRzKFNhbGFyeSB+IC4sIGRhdGEgPSBkYXQsIG52bWF4PTE5KVxuc3VtbWFyeShiZXN0LnN1YnNldClcbmBgYCJ9 -->
-<pre class="r"><code>library(leaps)
-
-best.subset = regsubsets(Salary ~ ., data = dat, nvmax=19)
-summary(best.subset)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWFyeShiZXN0LnN1YnNldClcblxuYGBgIn0= -->
+<pre class="r"><code>summary(best.subset)
+</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiU3Vic2V0IHNlbGVjdGlvbiBvYmplY3RcbkNhbGw6IHJlZ3N1YnNldHMuZm9ybXVsYShTYWxhcnkgfiAuLCBkYXRhID0gZGF0LCBudm1heCA9IDE5KVxuMTkgVmFyaWFibGVzICAoYW5kIGludGVyY2VwdClcbiAgICAgICAgICAgRm9yY2VkIGluIEZvcmNlZCBvdXRcbkF0QmF0ICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkhpdHMgICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkhtUnVuICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcblJ1bnMgICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcblJCSSAgICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbldhbGtzICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcblllYXJzICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkNBdEJhdCAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkNIaXRzICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkNIbVJ1biAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkNSdW5zICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkNSQkkgICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkNXYWxrcyAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkxlYWd1ZU4gICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkRpdmlzaW9uVyAgICAgIEZBTFNFICAgICAgRkFMU0VcblB1dE91dHMgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkFzc2lzdHMgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkVycm9ycyAgICAgICAgIEZBTFNFICAgICAgRkFMU0Vcbk5ld0xlYWd1ZU4gICAgIEZBTFNFICAgICAgRkFMU0VcbjEgc3Vic2V0cyBvZiBlYWNoIHNpemUgdXAgdG8gMTlcblNlbGVjdGlvbiBBbGdvcml0aG06IGV4aGF1c3RpdmVcbiAgICAgICAgICBBdEJhdCBIaXRzIEhtUnVuIFJ1bnMgUkJJIFdhbGtzIFllYXJzIENBdEJhdCBDSGl0c1xuMSAgKCAxICkgIFwiIFwiICAgXCIgXCIgIFwiIFwiICAgXCIgXCIgIFwiIFwiIFwiIFwiICAgXCIgXCIgICBcIiBcIiAgICBcIiBcIiAgXG4yICAoIDEgKSAgXCIgXCIgICBcIipcIiAgXCIgXCIgICBcIiBcIiAgXCIgXCIgXCIgXCIgICBcIiBcIiAgIFwiIFwiICAgIFwiIFwiICBcbjMgICggMSApICBcIiBcIiAgIFwiKlwiICBcIiBcIiAgIFwiIFwiICBcIiBcIiBcIiBcIiAgIFwiIFwiICAgXCIgXCIgICAgXCIgXCIgIFxuNCAgKCAxICkgIFwiIFwiICAgXCIqXCIgIFwiIFwiICAgXCIgXCIgIFwiIFwiIFwiIFwiICAgXCIgXCIgICBcIiBcIiAgICBcIiBcIiAgXG41ICAoIDEgKSAgXCIqXCIgICBcIipcIiAgXCIgXCIgICBcIiBcIiAgXCIgXCIgXCIgXCIgICBcIiBcIiAgIFwiIFwiICAgIFwiIFwiICBcbjYgICggMSApICBcIipcIiAgIFwiKlwiICBcIiBcIiAgIFwiIFwiICBcIiBcIiBcIipcIiAgIFwiIFwiICAgXCIgXCIgICAgXCIgXCIgIFxuNyAgKCAxICkgIFwiIFwiICAgXCIqXCIgIFwiIFwiICAgXCIgXCIgIFwiIFwiIFwiKlwiICAgXCIgXCIgICBcIipcIiAgICBcIipcIiAgXG44ICAoIDEgKSAgXCIqXCIgICBcIipcIiAgXCIgXCIgICBcIiBcIiAgXCIgXCIgXCIqXCIgICBcIiBcIiAgIFwiIFwiICAgIFwiIFwiICBcbjkgICggMSApICBcIipcIiAgIFwiKlwiICBcIiBcIiAgIFwiIFwiICBcIiBcIiBcIipcIiAgIFwiIFwiICAgXCIqXCIgICAgXCIgXCIgIFxuMTAgICggMSApIFwiKlwiICAgXCIqXCIgIFwiIFwiICAgXCIgXCIgIFwiIFwiIFwiKlwiICAgXCIgXCIgICBcIipcIiAgICBcIiBcIiAgXG4xMSAgKCAxICkgXCIqXCIgICBcIipcIiAgXCIgXCIgICBcIiBcIiAgXCIgXCIgXCIqXCIgICBcIiBcIiAgIFwiKlwiICAgIFwiIFwiICBcbjEyICAoIDEgKSBcIipcIiAgIFwiKlwiICBcIiBcIiAgIFwiKlwiICBcIiBcIiBcIipcIiAgIFwiIFwiICAgXCIqXCIgICAgXCIgXCIgIFxuMTMgICggMSApIFwiKlwiICAgXCIqXCIgIFwiIFwiICAgXCIqXCIgIFwiIFwiIFwiKlwiICAgXCIgXCIgICBcIipcIiAgICBcIiBcIiAgXG4xNCAgKCAxICkgXCIqXCIgICBcIipcIiAgXCIqXCIgICBcIipcIiAgXCIgXCIgXCIqXCIgICBcIiBcIiAgIFwiKlwiICAgIFwiIFwiICBcbjE1ICAoIDEgKSBcIipcIiAgIFwiKlwiICBcIipcIiAgIFwiKlwiICBcIiBcIiBcIipcIiAgIFwiIFwiICAgXCIqXCIgICAgXCIqXCIgIFxuMTYgICggMSApIFwiKlwiICAgXCIqXCIgIFwiKlwiICAgXCIqXCIgIFwiKlwiIFwiKlwiICAgXCIgXCIgICBcIipcIiAgICBcIipcIiAgXG4xNyAgKCAxICkgXCIqXCIgICBcIipcIiAgXCIqXCIgICBcIipcIiAgXCIqXCIgXCIqXCIgICBcIiBcIiAgIFwiKlwiICAgIFwiKlwiICBcbjE4ICAoIDEgKSBcIipcIiAgIFwiKlwiICBcIipcIiAgIFwiKlwiICBcIipcIiBcIipcIiAgIFwiKlwiICAgXCIqXCIgICAgXCIqXCIgIFxuMTkgICggMSApIFwiKlwiICAgXCIqXCIgIFwiKlwiICAgXCIqXCIgIFwiKlwiIFwiKlwiICAgXCIqXCIgICBcIipcIiAgICBcIipcIiAgXG4gICAgICAgICAgQ0htUnVuIENSdW5zIENSQkkgQ1dhbGtzIExlYWd1ZU4gRGl2aXNpb25XIFB1dE91dHNcbjEgICggMSApICBcIiBcIiAgICBcIiBcIiAgIFwiKlwiICBcIiBcIiAgICBcIiBcIiAgICAgXCIgXCIgICAgICAgXCIgXCIgICAgXG4yICAoIDEgKSAgXCIgXCIgICAgXCIgXCIgICBcIipcIiAgXCIgXCIgICAgXCIgXCIgICAgIFwiIFwiICAgICAgIFwiIFwiICAgIFxuMyAgKCAxICkgIFwiIFwiICAgIFwiIFwiICAgXCIqXCIgIFwiIFwiICAgIFwiIFwiICAgICBcIiBcIiAgICAgICBcIipcIiAgICBcbjQgICggMSApICBcIiBcIiAgICBcIiBcIiAgIFwiKlwiICBcIiBcIiAgICBcIiBcIiAgICAgXCIqXCIgICAgICAgXCIqXCIgICAgXG41ICAoIDEgKSAgXCIgXCIgICAgXCIgXCIgICBcIipcIiAgXCIgXCIgICAgXCIgXCIgICAgIFwiKlwiICAgICAgIFwiKlwiICAgIFxuNiAgKCAxICkgIFwiIFwiICAgIFwiIFwiICAgXCIqXCIgIFwiIFwiICAgIFwiIFwiICAgICBcIipcIiAgICAgICBcIipcIiAgICBcbjcgICggMSApICBcIipcIiAgICBcIiBcIiAgIFwiIFwiICBcIiBcIiAgICBcIiBcIiAgICAgXCIqXCIgICAgICAgXCIqXCIgICAgXG44ICAoIDEgKSAgXCIqXCIgICAgXCIqXCIgICBcIiBcIiAgXCIqXCIgICAgXCIgXCIgICAgIFwiKlwiICAgICAgIFwiKlwiICAgIFxuOSAgKCAxICkgIFwiIFwiICAgIFwiKlwiICAgXCIqXCIgIFwiKlwiICAgIFwiIFwiICAgICBcIipcIiAgICAgICBcIipcIiAgICBcbjEwICAoIDEgKSBcIiBcIiAgICBcIipcIiAgIFwiKlwiICBcIipcIiAgICBcIiBcIiAgICAgXCIqXCIgICAgICAgXCIqXCIgICAgXG4xMSAgKCAxICkgXCIgXCIgICAgXCIqXCIgICBcIipcIiAgXCIqXCIgICAgXCIqXCIgICAgIFwiKlwiICAgICAgIFwiKlwiICAgIFxuMTIgICggMSApIFwiIFwiICAgIFwiKlwiICAgXCIqXCIgIFwiKlwiICAgIFwiKlwiICAgICBcIipcIiAgICAgICBcIipcIiAgICBcbjEzICAoIDEgKSBcIiBcIiAgICBcIipcIiAgIFwiKlwiICBcIipcIiAgICBcIipcIiAgICAgXCIqXCIgICAgICAgXCIqXCIgICAgXG4xNCAgKCAxICkgXCIgXCIgICAgXCIqXCIgICBcIipcIiAgXCIqXCIgICAgXCIqXCIgICAgIFwiKlwiICAgICAgIFwiKlwiICAgIFxuMTUgICggMSApIFwiIFwiICAgIFwiKlwiICAgXCIqXCIgIFwiKlwiICAgIFwiKlwiICAgICBcIipcIiAgICAgICBcIipcIiAgICBcbjE2ICAoIDEgKSBcIiBcIiAgICBcIipcIiAgIFwiKlwiICBcIipcIiAgICBcIipcIiAgICAgXCIqXCIgICAgICAgXCIqXCIgICAgXG4xNyAgKCAxICkgXCIgXCIgICAgXCIqXCIgICBcIipcIiAgXCIqXCIgICAgXCIqXCIgICAgIFwiKlwiICAgICAgIFwiKlwiICAgIFxuMTggICggMSApIFwiIFwiICAgIFwiKlwiICAgXCIqXCIgIFwiKlwiICAgIFwiKlwiICAgICBcIipcIiAgICAgICBcIipcIiAgICBcbjE5ICAoIDEgKSBcIipcIiAgICBcIipcIiAgIFwiKlwiICBcIipcIiAgICBcIipcIiAgICAgXCIqXCIgICAgICAgXCIqXCIgICAgXG4gICAgICAgICAgQXNzaXN0cyBFcnJvcnMgTmV3TGVhZ3VlTlxuMSAgKCAxICkgIFwiIFwiICAgICBcIiBcIiAgICBcIiBcIiAgICAgICBcbjIgICggMSApICBcIiBcIiAgICAgXCIgXCIgICAgXCIgXCIgICAgICAgXG4zICAoIDEgKSAgXCIgXCIgICAgIFwiIFwiICAgIFwiIFwiICAgICAgIFxuNCAgKCAxICkgIFwiIFwiICAgICBcIiBcIiAgICBcIiBcIiAgICAgICBcbjUgICggMSApICBcIiBcIiAgICAgXCIgXCIgICAgXCIgXCIgICAgICAgXG42ICAoIDEgKSAgXCIgXCIgICAgIFwiIFwiICAgIFwiIFwiICAgICAgIFxuNyAgKCAxICkgIFwiIFwiICAgICBcIiBcIiAgICBcIiBcIiAgICAgICBcbjggICggMSApICBcIiBcIiAgICAgXCIgXCIgICAgXCIgXCIgICAgICAgXG45ICAoIDEgKSAgXCIgXCIgICAgIFwiIFwiICAgIFwiIFwiICAgICAgIFxuMTAgICggMSApIFwiKlwiICAgICBcIiBcIiAgICBcIiBcIiAgICAgICBcbjExICAoIDEgKSBcIipcIiAgICAgXCIgXCIgICAgXCIgXCIgICAgICAgXG4xMiAgKCAxICkgXCIqXCIgICAgIFwiIFwiICAgIFwiIFwiICAgICAgIFxuMTMgICggMSApIFwiKlwiICAgICBcIipcIiAgICBcIiBcIiAgICAgICBcbjE0ICAoIDEgKSBcIipcIiAgICAgXCIqXCIgICAgXCIgXCIgICAgICAgXG4xNSAgKCAxICkgXCIqXCIgICAgIFwiKlwiICAgIFwiIFwiICAgICAgIFxuMTYgICggMSApIFwiKlwiICAgICBcIipcIiAgICBcIiBcIiAgICAgICBcbjE3ICAoIDEgKSBcIipcIiAgICAgXCIqXCIgICAgXCIqXCIgICAgICAgXG4xOCAgKCAxICkgXCIqXCIgICAgIFwiKlwiICAgIFwiKlwiICAgICAgIFxuMTkgICggMSApIFwiKlwiICAgICBcIipcIiAgICBcIipcIiAgICAgICBcbiJ9 -->
+<!-- rnb-output-begin eyJkYXRhIjoiU3Vic2V0IHNlbGVjdGlvbiBvYmplY3RcbkNhbGw6IHJlZ3N1YnNldHMuZm9ybXVsYShTYWxhcnkgfiAuLCBkYXRhID0gZGF0LCBudm1heCA9IDE5KVxuMTkgVmFyaWFibGVzICAoYW5kIGludGVyY2VwdClcbiAgICAgICAgICAgRm9yY2VkIGluIEZvcmNlZCBvdXRcbkF0QmF0ICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkhpdHMgICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkhtUnVuICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcblJ1bnMgICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcblJCSSAgICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbldhbGtzICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcblllYXJzICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkNBdEJhdCAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkNIaXRzICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkNIbVJ1biAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkNSdW5zICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkNSQkkgICAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkNXYWxrcyAgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkxlYWd1ZU4gICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkRpdmlzaW9uVyAgICAgIEZBTFNFICAgICAgRkFMU0VcblB1dE91dHMgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkFzc2lzdHMgICAgICAgIEZBTFNFICAgICAgRkFMU0VcbkVycm9ycyAgICAgICAgIEZBTFNFICAgICAgRkFMU0Vcbk5ld0xlYWd1ZU4gICAgIEZBTFNFICAgICAgRkFMU0VcbjEgc3Vic2V0cyBvZiBlYWNoIHNpemUgdXAgdG8gMTlcblNlbGVjdGlvbiBBbGdvcml0aG06IGV4aGF1c3RpdmVcbiAgICAgICAgICBBdEJhdCBIaXRzIEhtUnVuIFJ1bnMgUkJJIFdhbGtzIFllYXJzIENBdEJhdCBDSGl0cyBDSG1SdW5cbjEgICggMSApICBcIiBcIiAgIFwiIFwiICBcIiBcIiAgIFwiIFwiICBcIiBcIiBcIiBcIiAgIFwiIFwiICAgXCIgXCIgICAgXCIgXCIgICBcIiBcIiAgIFxuMiAgKCAxICkgIFwiIFwiICAgXCIqXCIgIFwiIFwiICAgXCIgXCIgIFwiIFwiIFwiIFwiICAgXCIgXCIgICBcIiBcIiAgICBcIiBcIiAgIFwiIFwiICAgXG4zICAoIDEgKSAgXCIgXCIgICBcIipcIiAgXCIgXCIgICBcIiBcIiAgXCIgXCIgXCIgXCIgICBcIiBcIiAgIFwiIFwiICAgIFwiIFwiICAgXCIgXCIgICBcbjQgICggMSApICBcIiBcIiAgIFwiKlwiICBcIiBcIiAgIFwiIFwiICBcIiBcIiBcIiBcIiAgIFwiIFwiICAgXCIgXCIgICAgXCIgXCIgICBcIiBcIiAgIFxuNSAgKCAxICkgIFwiKlwiICAgXCIqXCIgIFwiIFwiICAgXCIgXCIgIFwiIFwiIFwiIFwiICAgXCIgXCIgICBcIiBcIiAgICBcIiBcIiAgIFwiIFwiICAgXG42ICAoIDEgKSAgXCIqXCIgICBcIipcIiAgXCIgXCIgICBcIiBcIiAgXCIgXCIgXCIqXCIgICBcIiBcIiAgIFwiIFwiICAgIFwiIFwiICAgXCIgXCIgICBcbjcgICggMSApICBcIiBcIiAgIFwiKlwiICBcIiBcIiAgIFwiIFwiICBcIiBcIiBcIipcIiAgIFwiIFwiICAgXCIqXCIgICAgXCIqXCIgICBcIipcIiAgIFxuOCAgKCAxICkgIFwiKlwiICAgXCIqXCIgIFwiIFwiICAgXCIgXCIgIFwiIFwiIFwiKlwiICAgXCIgXCIgICBcIiBcIiAgICBcIiBcIiAgIFwiKlwiICAgXG45ICAoIDEgKSAgXCIqXCIgICBcIipcIiAgXCIgXCIgICBcIiBcIiAgXCIgXCIgXCIqXCIgICBcIiBcIiAgIFwiKlwiICAgIFwiIFwiICAgXCIgXCIgICBcbjEwICAoIDEgKSBcIipcIiAgIFwiKlwiICBcIiBcIiAgIFwiIFwiICBcIiBcIiBcIipcIiAgIFwiIFwiICAgXCIqXCIgICAgXCIgXCIgICBcIiBcIiAgIFxuMTEgICggMSApIFwiKlwiICAgXCIqXCIgIFwiIFwiICAgXCIgXCIgIFwiIFwiIFwiKlwiICAgXCIgXCIgICBcIipcIiAgICBcIiBcIiAgIFwiIFwiICAgXG4xMiAgKCAxICkgXCIqXCIgICBcIipcIiAgXCIgXCIgICBcIipcIiAgXCIgXCIgXCIqXCIgICBcIiBcIiAgIFwiKlwiICAgIFwiIFwiICAgXCIgXCIgICBcbjEzICAoIDEgKSBcIipcIiAgIFwiKlwiICBcIiBcIiAgIFwiKlwiICBcIiBcIiBcIipcIiAgIFwiIFwiICAgXCIqXCIgICAgXCIgXCIgICBcIiBcIiAgIFxuMTQgICggMSApIFwiKlwiICAgXCIqXCIgIFwiKlwiICAgXCIqXCIgIFwiIFwiIFwiKlwiICAgXCIgXCIgICBcIipcIiAgICBcIiBcIiAgIFwiIFwiICAgXG4xNSAgKCAxICkgXCIqXCIgICBcIipcIiAgXCIqXCIgICBcIipcIiAgXCIgXCIgXCIqXCIgICBcIiBcIiAgIFwiKlwiICAgIFwiKlwiICAgXCIgXCIgICBcbjE2ICAoIDEgKSBcIipcIiAgIFwiKlwiICBcIipcIiAgIFwiKlwiICBcIipcIiBcIipcIiAgIFwiIFwiICAgXCIqXCIgICAgXCIqXCIgICBcIiBcIiAgIFxuMTcgICggMSApIFwiKlwiICAgXCIqXCIgIFwiKlwiICAgXCIqXCIgIFwiKlwiIFwiKlwiICAgXCIgXCIgICBcIipcIiAgICBcIipcIiAgIFwiIFwiICAgXG4xOCAgKCAxICkgXCIqXCIgICBcIipcIiAgXCIqXCIgICBcIipcIiAgXCIqXCIgXCIqXCIgICBcIipcIiAgIFwiKlwiICAgIFwiKlwiICAgXCIgXCIgICBcbjE5ICAoIDEgKSBcIipcIiAgIFwiKlwiICBcIipcIiAgIFwiKlwiICBcIipcIiBcIipcIiAgIFwiKlwiICAgXCIqXCIgICAgXCIqXCIgICBcIipcIiAgIFxuICAgICAgICAgIENSdW5zIENSQkkgQ1dhbGtzIExlYWd1ZU4gRGl2aXNpb25XIFB1dE91dHMgQXNzaXN0cyBFcnJvcnNcbjEgICggMSApICBcIiBcIiAgIFwiKlwiICBcIiBcIiAgICBcIiBcIiAgICAgXCIgXCIgICAgICAgXCIgXCIgICAgIFwiIFwiICAgICBcIiBcIiAgIFxuMiAgKCAxICkgIFwiIFwiICAgXCIqXCIgIFwiIFwiICAgIFwiIFwiICAgICBcIiBcIiAgICAgICBcIiBcIiAgICAgXCIgXCIgICAgIFwiIFwiICAgXG4zICAoIDEgKSAgXCIgXCIgICBcIipcIiAgXCIgXCIgICAgXCIgXCIgICAgIFwiIFwiICAgICAgIFwiKlwiICAgICBcIiBcIiAgICAgXCIgXCIgICBcbjQgICggMSApICBcIiBcIiAgIFwiKlwiICBcIiBcIiAgICBcIiBcIiAgICAgXCIqXCIgICAgICAgXCIqXCIgICAgIFwiIFwiICAgICBcIiBcIiAgIFxuNSAgKCAxICkgIFwiIFwiICAgXCIqXCIgIFwiIFwiICAgIFwiIFwiICAgICBcIipcIiAgICAgICBcIipcIiAgICAgXCIgXCIgICAgIFwiIFwiICAgXG42ICAoIDEgKSAgXCIgXCIgICBcIipcIiAgXCIgXCIgICAgXCIgXCIgICAgIFwiKlwiICAgICAgIFwiKlwiICAgICBcIiBcIiAgICAgXCIgXCIgICBcbjcgICggMSApICBcIiBcIiAgIFwiIFwiICBcIiBcIiAgICBcIiBcIiAgICAgXCIqXCIgICAgICAgXCIqXCIgICAgIFwiIFwiICAgICBcIiBcIiAgIFxuOCAgKCAxICkgIFwiKlwiICAgXCIgXCIgIFwiKlwiICAgIFwiIFwiICAgICBcIipcIiAgICAgICBcIipcIiAgICAgXCIgXCIgICAgIFwiIFwiICAgXG45ICAoIDEgKSAgXCIqXCIgICBcIipcIiAgXCIqXCIgICAgXCIgXCIgICAgIFwiKlwiICAgICAgIFwiKlwiICAgICBcIiBcIiAgICAgXCIgXCIgICBcbjEwICAoIDEgKSBcIipcIiAgIFwiKlwiICBcIipcIiAgICBcIiBcIiAgICAgXCIqXCIgICAgICAgXCIqXCIgICAgIFwiKlwiICAgICBcIiBcIiAgIFxuMTEgICggMSApIFwiKlwiICAgXCIqXCIgIFwiKlwiICAgIFwiKlwiICAgICBcIipcIiAgICAgICBcIipcIiAgICAgXCIqXCIgICAgIFwiIFwiICAgXG4xMiAgKCAxICkgXCIqXCIgICBcIipcIiAgXCIqXCIgICAgXCIqXCIgICAgIFwiKlwiICAgICAgIFwiKlwiICAgICBcIipcIiAgICAgXCIgXCIgICBcbjEzICAoIDEgKSBcIipcIiAgIFwiKlwiICBcIipcIiAgICBcIipcIiAgICAgXCIqXCIgICAgICAgXCIqXCIgICAgIFwiKlwiICAgICBcIipcIiAgIFxuMTQgICggMSApIFwiKlwiICAgXCIqXCIgIFwiKlwiICAgIFwiKlwiICAgICBcIipcIiAgICAgICBcIipcIiAgICAgXCIqXCIgICAgIFwiKlwiICAgXG4xNSAgKCAxICkgXCIqXCIgICBcIipcIiAgXCIqXCIgICAgXCIqXCIgICAgIFwiKlwiICAgICAgIFwiKlwiICAgICBcIipcIiAgICAgXCIqXCIgICBcbjE2ICAoIDEgKSBcIipcIiAgIFwiKlwiICBcIipcIiAgICBcIipcIiAgICAgXCIqXCIgICAgICAgXCIqXCIgICAgIFwiKlwiICAgICBcIipcIiAgIFxuMTcgICggMSApIFwiKlwiICAgXCIqXCIgIFwiKlwiICAgIFwiKlwiICAgICBcIipcIiAgICAgICBcIipcIiAgICAgXCIqXCIgICAgIFwiKlwiICAgXG4xOCAgKCAxICkgXCIqXCIgICBcIipcIiAgXCIqXCIgICAgXCIqXCIgICAgIFwiKlwiICAgICAgIFwiKlwiICAgICBcIipcIiAgICAgXCIqXCIgICBcbjE5ICAoIDEgKSBcIipcIiAgIFwiKlwiICBcIipcIiAgICBcIipcIiAgICAgXCIqXCIgICAgICAgXCIqXCIgICAgIFwiKlwiICAgICBcIipcIiAgIFxuICAgICAgICAgIE5ld0xlYWd1ZU5cbjEgICggMSApICBcIiBcIiAgICAgICBcbjIgICggMSApICBcIiBcIiAgICAgICBcbjMgICggMSApICBcIiBcIiAgICAgICBcbjQgICggMSApICBcIiBcIiAgICAgICBcbjUgICggMSApICBcIiBcIiAgICAgICBcbjYgICggMSApICBcIiBcIiAgICAgICBcbjcgICggMSApICBcIiBcIiAgICAgICBcbjggICggMSApICBcIiBcIiAgICAgICBcbjkgICggMSApICBcIiBcIiAgICAgICBcbjEwICAoIDEgKSBcIiBcIiAgICAgICBcbjExICAoIDEgKSBcIiBcIiAgICAgICBcbjEyICAoIDEgKSBcIiBcIiAgICAgICBcbjEzICAoIDEgKSBcIiBcIiAgICAgICBcbjE0ICAoIDEgKSBcIiBcIiAgICAgICBcbjE1ICAoIDEgKSBcIiBcIiAgICAgICBcbjE2ICAoIDEgKSBcIiBcIiAgICAgICBcbjE3ICAoIDEgKSBcIipcIiAgICAgICBcbjE4ICAoIDEgKSBcIipcIiAgICAgICBcbjE5ICAoIDEgKSBcIipcIiAgICAgICBcbiJ9 -->
 <pre><code>Subset selection object
 Call: regsubsets.formula(Salary ~ ., data = dat, nvmax = 19)
 19 Variables  (and intercept)
@@ -1898,116 +1919,178 @@ Errors         FALSE      FALSE
 NewLeagueN     FALSE      FALSE
 1 subsets of each size up to 19
 Selection Algorithm: exhaustive
-          AtBat Hits HmRun Runs RBI Walks Years CAtBat CHits
-1  ( 1 )  &quot; &quot;   &quot; &quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot; &quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;  
-2  ( 1 )  &quot; &quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot; &quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;  
-3  ( 1 )  &quot; &quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot; &quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;  
-4  ( 1 )  &quot; &quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot; &quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;  
-5  ( 1 )  &quot;*&quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot; &quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;  
-6  ( 1 )  &quot;*&quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;  
-7  ( 1 )  &quot; &quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot;*&quot;    &quot;*&quot;  
-8  ( 1 )  &quot;*&quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;  
-9  ( 1 )  &quot;*&quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot;*&quot;    &quot; &quot;  
-10  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot;*&quot;    &quot; &quot;  
-11  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot;*&quot;    &quot; &quot;  
-12  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot; &quot;   &quot;*&quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot;*&quot;    &quot; &quot;  
-13  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot; &quot;   &quot;*&quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot;*&quot;    &quot; &quot;  
-14  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot;*&quot;   &quot;*&quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot;*&quot;    &quot; &quot;  
-15  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot;*&quot;   &quot;*&quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot;*&quot;    &quot;*&quot;  
-16  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot;*&quot;   &quot;*&quot;  &quot;*&quot; &quot;*&quot;   &quot; &quot;   &quot;*&quot;    &quot;*&quot;  
-17  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot;*&quot;   &quot;*&quot;  &quot;*&quot; &quot;*&quot;   &quot; &quot;   &quot;*&quot;    &quot;*&quot;  
-18  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot;*&quot;   &quot;*&quot;  &quot;*&quot; &quot;*&quot;   &quot;*&quot;   &quot;*&quot;    &quot;*&quot;  
-19  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot;*&quot;   &quot;*&quot;  &quot;*&quot; &quot;*&quot;   &quot;*&quot;   &quot;*&quot;    &quot;*&quot;  
-          CHmRun CRuns CRBI CWalks LeagueN DivisionW PutOuts
-1  ( 1 )  &quot; &quot;    &quot; &quot;   &quot;*&quot;  &quot; &quot;    &quot; &quot;     &quot; &quot;       &quot; &quot;    
-2  ( 1 )  &quot; &quot;    &quot; &quot;   &quot;*&quot;  &quot; &quot;    &quot; &quot;     &quot; &quot;       &quot; &quot;    
-3  ( 1 )  &quot; &quot;    &quot; &quot;   &quot;*&quot;  &quot; &quot;    &quot; &quot;     &quot; &quot;       &quot;*&quot;    
-4  ( 1 )  &quot; &quot;    &quot; &quot;   &quot;*&quot;  &quot; &quot;    &quot; &quot;     &quot;*&quot;       &quot;*&quot;    
-5  ( 1 )  &quot; &quot;    &quot; &quot;   &quot;*&quot;  &quot; &quot;    &quot; &quot;     &quot;*&quot;       &quot;*&quot;    
-6  ( 1 )  &quot; &quot;    &quot; &quot;   &quot;*&quot;  &quot; &quot;    &quot; &quot;     &quot;*&quot;       &quot;*&quot;    
-7  ( 1 )  &quot;*&quot;    &quot; &quot;   &quot; &quot;  &quot; &quot;    &quot; &quot;     &quot;*&quot;       &quot;*&quot;    
-8  ( 1 )  &quot;*&quot;    &quot;*&quot;   &quot; &quot;  &quot;*&quot;    &quot; &quot;     &quot;*&quot;       &quot;*&quot;    
-9  ( 1 )  &quot; &quot;    &quot;*&quot;   &quot;*&quot;  &quot;*&quot;    &quot; &quot;     &quot;*&quot;       &quot;*&quot;    
-10  ( 1 ) &quot; &quot;    &quot;*&quot;   &quot;*&quot;  &quot;*&quot;    &quot; &quot;     &quot;*&quot;       &quot;*&quot;    
-11  ( 1 ) &quot; &quot;    &quot;*&quot;   &quot;*&quot;  &quot;*&quot;    &quot;*&quot;     &quot;*&quot;       &quot;*&quot;    
-12  ( 1 ) &quot; &quot;    &quot;*&quot;   &quot;*&quot;  &quot;*&quot;    &quot;*&quot;     &quot;*&quot;       &quot;*&quot;    
-13  ( 1 ) &quot; &quot;    &quot;*&quot;   &quot;*&quot;  &quot;*&quot;    &quot;*&quot;     &quot;*&quot;       &quot;*&quot;    
-14  ( 1 ) &quot; &quot;    &quot;*&quot;   &quot;*&quot;  &quot;*&quot;    &quot;*&quot;     &quot;*&quot;       &quot;*&quot;    
-15  ( 1 ) &quot; &quot;    &quot;*&quot;   &quot;*&quot;  &quot;*&quot;    &quot;*&quot;     &quot;*&quot;       &quot;*&quot;    
-16  ( 1 ) &quot; &quot;    &quot;*&quot;   &quot;*&quot;  &quot;*&quot;    &quot;*&quot;     &quot;*&quot;       &quot;*&quot;    
-17  ( 1 ) &quot; &quot;    &quot;*&quot;   &quot;*&quot;  &quot;*&quot;    &quot;*&quot;     &quot;*&quot;       &quot;*&quot;    
-18  ( 1 ) &quot; &quot;    &quot;*&quot;   &quot;*&quot;  &quot;*&quot;    &quot;*&quot;     &quot;*&quot;       &quot;*&quot;    
-19  ( 1 ) &quot;*&quot;    &quot;*&quot;   &quot;*&quot;  &quot;*&quot;    &quot;*&quot;     &quot;*&quot;       &quot;*&quot;    
-          Assists Errors NewLeagueN
-1  ( 1 )  &quot; &quot;     &quot; &quot;    &quot; &quot;       
-2  ( 1 )  &quot; &quot;     &quot; &quot;    &quot; &quot;       
-3  ( 1 )  &quot; &quot;     &quot; &quot;    &quot; &quot;       
-4  ( 1 )  &quot; &quot;     &quot; &quot;    &quot; &quot;       
-5  ( 1 )  &quot; &quot;     &quot; &quot;    &quot; &quot;       
-6  ( 1 )  &quot; &quot;     &quot; &quot;    &quot; &quot;       
-7  ( 1 )  &quot; &quot;     &quot; &quot;    &quot; &quot;       
-8  ( 1 )  &quot; &quot;     &quot; &quot;    &quot; &quot;       
-9  ( 1 )  &quot; &quot;     &quot; &quot;    &quot; &quot;       
-10  ( 1 ) &quot;*&quot;     &quot; &quot;    &quot; &quot;       
-11  ( 1 ) &quot;*&quot;     &quot; &quot;    &quot; &quot;       
-12  ( 1 ) &quot;*&quot;     &quot; &quot;    &quot; &quot;       
-13  ( 1 ) &quot;*&quot;     &quot;*&quot;    &quot; &quot;       
-14  ( 1 ) &quot;*&quot;     &quot;*&quot;    &quot; &quot;       
-15  ( 1 ) &quot;*&quot;     &quot;*&quot;    &quot; &quot;       
-16  ( 1 ) &quot;*&quot;     &quot;*&quot;    &quot; &quot;       
-17  ( 1 ) &quot;*&quot;     &quot;*&quot;    &quot;*&quot;       
-18  ( 1 ) &quot;*&quot;     &quot;*&quot;    &quot;*&quot;       
-19  ( 1 ) &quot;*&quot;     &quot;*&quot;    &quot;*&quot;       </code></pre>
+          AtBat Hits HmRun Runs RBI Walks Years CAtBat CHits CHmRun
+1  ( 1 )  &quot; &quot;   &quot; &quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot; &quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot; &quot;   
+2  ( 1 )  &quot; &quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot; &quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot; &quot;   
+3  ( 1 )  &quot; &quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot; &quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot; &quot;   
+4  ( 1 )  &quot; &quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot; &quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot; &quot;   
+5  ( 1 )  &quot;*&quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot; &quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot; &quot;   
+6  ( 1 )  &quot;*&quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot; &quot;   
+7  ( 1 )  &quot; &quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot;*&quot;    &quot;*&quot;   &quot;*&quot;   
+8  ( 1 )  &quot;*&quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot;*&quot;   
+9  ( 1 )  &quot;*&quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot;*&quot;    &quot; &quot;   &quot; &quot;   
+10  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot;*&quot;    &quot; &quot;   &quot; &quot;   
+11  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot;*&quot;    &quot; &quot;   &quot; &quot;   
+12  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot; &quot;   &quot;*&quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot;*&quot;    &quot; &quot;   &quot; &quot;   
+13  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot; &quot;   &quot;*&quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot;*&quot;    &quot; &quot;   &quot; &quot;   
+14  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot;*&quot;   &quot;*&quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot;*&quot;    &quot; &quot;   &quot; &quot;   
+15  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot;*&quot;   &quot;*&quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot;*&quot;    &quot;*&quot;   &quot; &quot;   
+16  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot;*&quot;   &quot;*&quot;  &quot;*&quot; &quot;*&quot;   &quot; &quot;   &quot;*&quot;    &quot;*&quot;   &quot; &quot;   
+17  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot;*&quot;   &quot;*&quot;  &quot;*&quot; &quot;*&quot;   &quot; &quot;   &quot;*&quot;    &quot;*&quot;   &quot; &quot;   
+18  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot;*&quot;   &quot;*&quot;  &quot;*&quot; &quot;*&quot;   &quot;*&quot;   &quot;*&quot;    &quot;*&quot;   &quot; &quot;   
+19  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot;*&quot;   &quot;*&quot;  &quot;*&quot; &quot;*&quot;   &quot;*&quot;   &quot;*&quot;    &quot;*&quot;   &quot;*&quot;   
+          CRuns CRBI CWalks LeagueN DivisionW PutOuts Assists Errors
+1  ( 1 )  &quot; &quot;   &quot;*&quot;  &quot; &quot;    &quot; &quot;     &quot; &quot;       &quot; &quot;     &quot; &quot;     &quot; &quot;   
+2  ( 1 )  &quot; &quot;   &quot;*&quot;  &quot; &quot;    &quot; &quot;     &quot; &quot;       &quot; &quot;     &quot; &quot;     &quot; &quot;   
+3  ( 1 )  &quot; &quot;   &quot;*&quot;  &quot; &quot;    &quot; &quot;     &quot; &quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;   
+4  ( 1 )  &quot; &quot;   &quot;*&quot;  &quot; &quot;    &quot; &quot;     &quot;*&quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;   
+5  ( 1 )  &quot; &quot;   &quot;*&quot;  &quot; &quot;    &quot; &quot;     &quot;*&quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;   
+6  ( 1 )  &quot; &quot;   &quot;*&quot;  &quot; &quot;    &quot; &quot;     &quot;*&quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;   
+7  ( 1 )  &quot; &quot;   &quot; &quot;  &quot; &quot;    &quot; &quot;     &quot;*&quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;   
+8  ( 1 )  &quot;*&quot;   &quot; &quot;  &quot;*&quot;    &quot; &quot;     &quot;*&quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;   
+9  ( 1 )  &quot;*&quot;   &quot;*&quot;  &quot;*&quot;    &quot; &quot;     &quot;*&quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;   
+10  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot;*&quot;    &quot; &quot;     &quot;*&quot;       &quot;*&quot;     &quot;*&quot;     &quot; &quot;   
+11  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot;*&quot;    &quot;*&quot;     &quot;*&quot;       &quot;*&quot;     &quot;*&quot;     &quot; &quot;   
+12  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot;*&quot;    &quot;*&quot;     &quot;*&quot;       &quot;*&quot;     &quot;*&quot;     &quot; &quot;   
+13  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot;*&quot;    &quot;*&quot;     &quot;*&quot;       &quot;*&quot;     &quot;*&quot;     &quot;*&quot;   
+14  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot;*&quot;    &quot;*&quot;     &quot;*&quot;       &quot;*&quot;     &quot;*&quot;     &quot;*&quot;   
+15  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot;*&quot;    &quot;*&quot;     &quot;*&quot;       &quot;*&quot;     &quot;*&quot;     &quot;*&quot;   
+16  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot;*&quot;    &quot;*&quot;     &quot;*&quot;       &quot;*&quot;     &quot;*&quot;     &quot;*&quot;   
+17  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot;*&quot;    &quot;*&quot;     &quot;*&quot;       &quot;*&quot;     &quot;*&quot;     &quot;*&quot;   
+18  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot;*&quot;    &quot;*&quot;     &quot;*&quot;       &quot;*&quot;     &quot;*&quot;     &quot;*&quot;   
+19  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot;*&quot;    &quot;*&quot;     &quot;*&quot;       &quot;*&quot;     &quot;*&quot;     &quot;*&quot;   
+          NewLeagueN
+1  ( 1 )  &quot; &quot;       
+2  ( 1 )  &quot; &quot;       
+3  ( 1 )  &quot; &quot;       
+4  ( 1 )  &quot; &quot;       
+5  ( 1 )  &quot; &quot;       
+6  ( 1 )  &quot; &quot;       
+7  ( 1 )  &quot; &quot;       
+8  ( 1 )  &quot; &quot;       
+9  ( 1 )  &quot; &quot;       
+10  ( 1 ) &quot; &quot;       
+11  ( 1 ) &quot; &quot;       
+12  ( 1 ) &quot; &quot;       
+13  ( 1 ) &quot; &quot;       
+14  ( 1 ) &quot; &quot;       
+15  ( 1 ) &quot; &quot;       
+16  ( 1 ) &quot; &quot;       
+17  ( 1 ) &quot;*&quot;       
+18  ( 1 ) &quot;*&quot;       
+19  ( 1 ) &quot;*&quot;       </code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVnLnN1bW1hcnkkd2hpY2hcblxuYGBgIn0= -->
-<pre class="r"><code>reg.summary$which
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVnLnN1bW1hcnkgPSBzdW1tYXJ5KGJlc3Quc3Vic2V0KVxuXG5yZWcuc3VtbWFyeSR3aGljaFxuYGBgIn0= -->
+<pre class="r"><code>reg.summary = summary(best.subset)
+
+reg.summary$which</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiICAgKEludGVyY2VwdCkgQXRCYXQgIEhpdHMgSG1SdW4gIFJ1bnMgICBSQkkgV2Fsa3MgWWVhcnMgQ0F0QmF0IENIaXRzIENIbVJ1biBDUnVucyAgQ1JCSVxuMSAgICAgICAgIFRSVUUgRkFMU0UgRkFMU0UgRkFMU0UgRkFMU0UgRkFMU0UgRkFMU0UgRkFMU0UgIEZBTFNFIEZBTFNFICBGQUxTRSBGQUxTRSAgVFJVRVxuMiAgICAgICAgIFRSVUUgRkFMU0UgIFRSVUUgRkFMU0UgRkFMU0UgRkFMU0UgRkFMU0UgRkFMU0UgIEZBTFNFIEZBTFNFICBGQUxTRSBGQUxTRSAgVFJVRVxuMyAgICAgICAgIFRSVUUgRkFMU0UgIFRSVUUgRkFMU0UgRkFMU0UgRkFMU0UgRkFMU0UgRkFMU0UgIEZBTFNFIEZBTFNFICBGQUxTRSBGQUxTRSAgVFJVRVxuNCAgICAgICAgIFRSVUUgRkFMU0UgIFRSVUUgRkFMU0UgRkFMU0UgRkFMU0UgRkFMU0UgRkFMU0UgIEZBTFNFIEZBTFNFICBGQUxTRSBGQUxTRSAgVFJVRVxuNSAgICAgICAgIFRSVUUgIFRSVUUgIFRSVUUgRkFMU0UgRkFMU0UgRkFMU0UgRkFMU0UgRkFMU0UgIEZBTFNFIEZBTFNFICBGQUxTRSBGQUxTRSAgVFJVRVxuNiAgICAgICAgIFRSVUUgIFRSVUUgIFRSVUUgRkFMU0UgRkFMU0UgRkFMU0UgIFRSVUUgRkFMU0UgIEZBTFNFIEZBTFNFICBGQUxTRSBGQUxTRSAgVFJVRVxuNyAgICAgICAgIFRSVUUgRkFMU0UgIFRSVUUgRkFMU0UgRkFMU0UgRkFMU0UgIFRSVUUgRkFMU0UgICBUUlVFICBUUlVFICAgVFJVRSBGQUxTRSBGQUxTRVxuOCAgICAgICAgIFRSVUUgIFRSVUUgIFRSVUUgRkFMU0UgRkFMU0UgRkFMU0UgIFRSVUUgRkFMU0UgIEZBTFNFIEZBTFNFICAgVFJVRSAgVFJVRSBGQUxTRVxuOSAgICAgICAgIFRSVUUgIFRSVUUgIFRSVUUgRkFMU0UgRkFMU0UgRkFMU0UgIFRSVUUgRkFMU0UgICBUUlVFIEZBTFNFICBGQUxTRSAgVFJVRSAgVFJVRVxuMTAgICAgICAgIFRSVUUgIFRSVUUgIFRSVUUgRkFMU0UgRkFMU0UgRkFMU0UgIFRSVUUgRkFMU0UgICBUUlVFIEZBTFNFICBGQUxTRSAgVFJVRSAgVFJVRVxuMTEgICAgICAgIFRSVUUgIFRSVUUgIFRSVUUgRkFMU0UgRkFMU0UgRkFMU0UgIFRSVUUgRkFMU0UgICBUUlVFIEZBTFNFICBGQUxTRSAgVFJVRSAgVFJVRVxuMTIgICAgICAgIFRSVUUgIFRSVUUgIFRSVUUgRkFMU0UgIFRSVUUgRkFMU0UgIFRSVUUgRkFMU0UgICBUUlVFIEZBTFNFICBGQUxTRSAgVFJVRSAgVFJVRVxuMTMgICAgICAgIFRSVUUgIFRSVUUgIFRSVUUgRkFMU0UgIFRSVUUgRkFMU0UgIFRSVUUgRkFMU0UgICBUUlVFIEZBTFNFICBGQUxTRSAgVFJVRSAgVFJVRVxuMTQgICAgICAgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgRkFMU0UgIFRSVUUgRkFMU0UgICBUUlVFIEZBTFNFICBGQUxTRSAgVFJVRSAgVFJVRVxuMTUgICAgICAgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgRkFMU0UgIFRSVUUgRkFMU0UgICBUUlVFICBUUlVFICBGQUxTRSAgVFJVRSAgVFJVRVxuMTYgICAgICAgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgRkFMU0UgICBUUlVFICBUUlVFICBGQUxTRSAgVFJVRSAgVFJVRVxuMTcgICAgICAgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgRkFMU0UgICBUUlVFICBUUlVFICBGQUxTRSAgVFJVRSAgVFJVRVxuMTggICAgICAgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgICBUUlVFICBUUlVFICBGQUxTRSAgVFJVRSAgVFJVRVxuMTkgICAgICAgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgICBUUlVFICBUUlVFICAgVFJVRSAgVFJVRSAgVFJVRVxuICAgQ1dhbGtzIExlYWd1ZU4gRGl2aXNpb25XIFB1dE91dHMgQXNzaXN0cyBFcnJvcnMgTmV3TGVhZ3VlTlxuMSAgIEZBTFNFICAgRkFMU0UgICAgIEZBTFNFICAgRkFMU0UgICBGQUxTRSAgRkFMU0UgICAgICBGQUxTRVxuMiAgIEZBTFNFICAgRkFMU0UgICAgIEZBTFNFICAgRkFMU0UgICBGQUxTRSAgRkFMU0UgICAgICBGQUxTRVxuMyAgIEZBTFNFICAgRkFMU0UgICAgIEZBTFNFICAgIFRSVUUgICBGQUxTRSAgRkFMU0UgICAgICBGQUxTRVxuNCAgIEZBTFNFICAgRkFMU0UgICAgICBUUlVFICAgIFRSVUUgICBGQUxTRSAgRkFMU0UgICAgICBGQUxTRVxuNSAgIEZBTFNFICAgRkFMU0UgICAgICBUUlVFICAgIFRSVUUgICBGQUxTRSAgRkFMU0UgICAgICBGQUxTRVxuNiAgIEZBTFNFICAgRkFMU0UgICAgICBUUlVFICAgIFRSVUUgICBGQUxTRSAgRkFMU0UgICAgICBGQUxTRVxuNyAgIEZBTFNFICAgRkFMU0UgICAgICBUUlVFICAgIFRSVUUgICBGQUxTRSAgRkFMU0UgICAgICBGQUxTRVxuOCAgICBUUlVFICAgRkFMU0UgICAgICBUUlVFICAgIFRSVUUgICBGQUxTRSAgRkFMU0UgICAgICBGQUxTRVxuOSAgICBUUlVFICAgRkFMU0UgICAgICBUUlVFICAgIFRSVUUgICBGQUxTRSAgRkFMU0UgICAgICBGQUxTRVxuMTAgICBUUlVFICAgRkFMU0UgICAgICBUUlVFICAgIFRSVUUgICAgVFJVRSAgRkFMU0UgICAgICBGQUxTRVxuMTEgICBUUlVFICAgIFRSVUUgICAgICBUUlVFICAgIFRSVUUgICAgVFJVRSAgRkFMU0UgICAgICBGQUxTRVxuMTIgICBUUlVFICAgIFRSVUUgICAgICBUUlVFICAgIFRSVUUgICAgVFJVRSAgRkFMU0UgICAgICBGQUxTRVxuMTMgICBUUlVFICAgIFRSVUUgICAgICBUUlVFICAgIFRSVUUgICAgVFJVRSAgIFRSVUUgICAgICBGQUxTRVxuMTQgICBUUlVFICAgIFRSVUUgICAgICBUUlVFICAgIFRSVUUgICAgVFJVRSAgIFRSVUUgICAgICBGQUxTRVxuMTUgICBUUlVFICAgIFRSVUUgICAgICBUUlVFICAgIFRSVUUgICAgVFJVRSAgIFRSVUUgICAgICBGQUxTRVxuMTYgICBUUlVFICAgIFRSVUUgICAgICBUUlVFICAgIFRSVUUgICAgVFJVRSAgIFRSVUUgICAgICBGQUxTRVxuMTcgICBUUlVFICAgIFRSVUUgICAgICBUUlVFICAgIFRSVUUgICAgVFJVRSAgIFRSVUUgICAgICAgVFJVRVxuMTggICBUUlVFICAgIFRSVUUgICAgICBUUlVFICAgIFRSVUUgICAgVFJVRSAgIFRSVUUgICAgICAgVFJVRVxuMTkgICBUUlVFICAgIFRSVUUgICAgICBUUlVFICAgIFRSVUUgICAgVFJVRSAgIFRSVUUgICAgICAgVFJVRVxuIn0= -->
-<pre><code>   (Intercept) AtBat  Hits HmRun  Runs   RBI Walks Years CAtBat CHits CHmRun CRuns  CRBI
-1         TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  FALSE FALSE  FALSE FALSE  TRUE
-2         TRUE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE  FALSE FALSE  FALSE FALSE  TRUE
-3         TRUE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE  FALSE FALSE  FALSE FALSE  TRUE
-4         TRUE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE  FALSE FALSE  FALSE FALSE  TRUE
-5         TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE  FALSE FALSE  FALSE FALSE  TRUE
-6         TRUE  TRUE  TRUE FALSE FALSE FALSE  TRUE FALSE  FALSE FALSE  FALSE FALSE  TRUE
-7         TRUE FALSE  TRUE FALSE FALSE FALSE  TRUE FALSE   TRUE  TRUE   TRUE FALSE FALSE
-8         TRUE  TRUE  TRUE FALSE FALSE FALSE  TRUE FALSE  FALSE FALSE   TRUE  TRUE FALSE
-9         TRUE  TRUE  TRUE FALSE FALSE FALSE  TRUE FALSE   TRUE FALSE  FALSE  TRUE  TRUE
-10        TRUE  TRUE  TRUE FALSE FALSE FALSE  TRUE FALSE   TRUE FALSE  FALSE  TRUE  TRUE
-11        TRUE  TRUE  TRUE FALSE FALSE FALSE  TRUE FALSE   TRUE FALSE  FALSE  TRUE  TRUE
-12        TRUE  TRUE  TRUE FALSE  TRUE FALSE  TRUE FALSE   TRUE FALSE  FALSE  TRUE  TRUE
-13        TRUE  TRUE  TRUE FALSE  TRUE FALSE  TRUE FALSE   TRUE FALSE  FALSE  TRUE  TRUE
-14        TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE FALSE   TRUE FALSE  FALSE  TRUE  TRUE
-15        TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE FALSE   TRUE  TRUE  FALSE  TRUE  TRUE
-16        TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE   TRUE  TRUE  FALSE  TRUE  TRUE
-17        TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE   TRUE  TRUE  FALSE  TRUE  TRUE
-18        TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE   TRUE  TRUE  FALSE  TRUE  TRUE
-19        TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE   TRUE  TRUE   TRUE  TRUE  TRUE
-   CWalks LeagueN DivisionW PutOuts Assists Errors NewLeagueN
-1   FALSE   FALSE     FALSE   FALSE   FALSE  FALSE      FALSE
-2   FALSE   FALSE     FALSE   FALSE   FALSE  FALSE      FALSE
-3   FALSE   FALSE     FALSE    TRUE   FALSE  FALSE      FALSE
-4   FALSE   FALSE      TRUE    TRUE   FALSE  FALSE      FALSE
-5   FALSE   FALSE      TRUE    TRUE   FALSE  FALSE      FALSE
-6   FALSE   FALSE      TRUE    TRUE   FALSE  FALSE      FALSE
-7   FALSE   FALSE      TRUE    TRUE   FALSE  FALSE      FALSE
-8    TRUE   FALSE      TRUE    TRUE   FALSE  FALSE      FALSE
-9    TRUE   FALSE      TRUE    TRUE   FALSE  FALSE      FALSE
-10   TRUE   FALSE      TRUE    TRUE    TRUE  FALSE      FALSE
-11   TRUE    TRUE      TRUE    TRUE    TRUE  FALSE      FALSE
-12   TRUE    TRUE      TRUE    TRUE    TRUE  FALSE      FALSE
-13   TRUE    TRUE      TRUE    TRUE    TRUE   TRUE      FALSE
-14   TRUE    TRUE      TRUE    TRUE    TRUE   TRUE      FALSE
-15   TRUE    TRUE      TRUE    TRUE    TRUE   TRUE      FALSE
-16   TRUE    TRUE      TRUE    TRUE    TRUE   TRUE      FALSE
-17   TRUE    TRUE      TRUE    TRUE    TRUE   TRUE       TRUE
-18   TRUE    TRUE      TRUE    TRUE    TRUE   TRUE       TRUE
-19   TRUE    TRUE      TRUE    TRUE    TRUE   TRUE       TRUE</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiICAgKEludGVyY2VwdCkgQXRCYXQgIEhpdHMgSG1SdW4gIFJ1bnMgICBSQkkgV2Fsa3MgWWVhcnMgQ0F0QmF0IENIaXRzIENIbVJ1blxuMSAgICAgICAgIFRSVUUgRkFMU0UgRkFMU0UgRkFMU0UgRkFMU0UgRkFMU0UgRkFMU0UgRkFMU0UgIEZBTFNFIEZBTFNFICBGQUxTRVxuMiAgICAgICAgIFRSVUUgRkFMU0UgIFRSVUUgRkFMU0UgRkFMU0UgRkFMU0UgRkFMU0UgRkFMU0UgIEZBTFNFIEZBTFNFICBGQUxTRVxuMyAgICAgICAgIFRSVUUgRkFMU0UgIFRSVUUgRkFMU0UgRkFMU0UgRkFMU0UgRkFMU0UgRkFMU0UgIEZBTFNFIEZBTFNFICBGQUxTRVxuNCAgICAgICAgIFRSVUUgRkFMU0UgIFRSVUUgRkFMU0UgRkFMU0UgRkFMU0UgRkFMU0UgRkFMU0UgIEZBTFNFIEZBTFNFICBGQUxTRVxuNSAgICAgICAgIFRSVUUgIFRSVUUgIFRSVUUgRkFMU0UgRkFMU0UgRkFMU0UgRkFMU0UgRkFMU0UgIEZBTFNFIEZBTFNFICBGQUxTRVxuNiAgICAgICAgIFRSVUUgIFRSVUUgIFRSVUUgRkFMU0UgRkFMU0UgRkFMU0UgIFRSVUUgRkFMU0UgIEZBTFNFIEZBTFNFICBGQUxTRVxuNyAgICAgICAgIFRSVUUgRkFMU0UgIFRSVUUgRkFMU0UgRkFMU0UgRkFMU0UgIFRSVUUgRkFMU0UgICBUUlVFICBUUlVFICAgVFJVRVxuOCAgICAgICAgIFRSVUUgIFRSVUUgIFRSVUUgRkFMU0UgRkFMU0UgRkFMU0UgIFRSVUUgRkFMU0UgIEZBTFNFIEZBTFNFICAgVFJVRVxuOSAgICAgICAgIFRSVUUgIFRSVUUgIFRSVUUgRkFMU0UgRkFMU0UgRkFMU0UgIFRSVUUgRkFMU0UgICBUUlVFIEZBTFNFICBGQUxTRVxuMTAgICAgICAgIFRSVUUgIFRSVUUgIFRSVUUgRkFMU0UgRkFMU0UgRkFMU0UgIFRSVUUgRkFMU0UgICBUUlVFIEZBTFNFICBGQUxTRVxuMTEgICAgICAgIFRSVUUgIFRSVUUgIFRSVUUgRkFMU0UgRkFMU0UgRkFMU0UgIFRSVUUgRkFMU0UgICBUUlVFIEZBTFNFICBGQUxTRVxuMTIgICAgICAgIFRSVUUgIFRSVUUgIFRSVUUgRkFMU0UgIFRSVUUgRkFMU0UgIFRSVUUgRkFMU0UgICBUUlVFIEZBTFNFICBGQUxTRVxuMTMgICAgICAgIFRSVUUgIFRSVUUgIFRSVUUgRkFMU0UgIFRSVUUgRkFMU0UgIFRSVUUgRkFMU0UgICBUUlVFIEZBTFNFICBGQUxTRVxuMTQgICAgICAgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgRkFMU0UgIFRSVUUgRkFMU0UgICBUUlVFIEZBTFNFICBGQUxTRVxuMTUgICAgICAgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgRkFMU0UgIFRSVUUgRkFMU0UgICBUUlVFICBUUlVFICBGQUxTRVxuMTYgICAgICAgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgRkFMU0UgICBUUlVFICBUUlVFICBGQUxTRVxuMTcgICAgICAgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgRkFMU0UgICBUUlVFICBUUlVFICBGQUxTRVxuMTggICAgICAgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgICBUUlVFICBUUlVFICBGQUxTRVxuMTkgICAgICAgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgIFRSVUUgICBUUlVFICBUUlVFICAgVFJVRVxuICAgQ1J1bnMgIENSQkkgQ1dhbGtzIExlYWd1ZU4gRGl2aXNpb25XIFB1dE91dHMgQXNzaXN0cyBFcnJvcnMgTmV3TGVhZ3VlTlxuMSAgRkFMU0UgIFRSVUUgIEZBTFNFICAgRkFMU0UgICAgIEZBTFNFICAgRkFMU0UgICBGQUxTRSAgRkFMU0UgICAgICBGQUxTRVxuMiAgRkFMU0UgIFRSVUUgIEZBTFNFICAgRkFMU0UgICAgIEZBTFNFICAgRkFMU0UgICBGQUxTRSAgRkFMU0UgICAgICBGQUxTRVxuMyAgRkFMU0UgIFRSVUUgIEZBTFNFICAgRkFMU0UgICAgIEZBTFNFICAgIFRSVUUgICBGQUxTRSAgRkFMU0UgICAgICBGQUxTRVxuNCAgRkFMU0UgIFRSVUUgIEZBTFNFICAgRkFMU0UgICAgICBUUlVFICAgIFRSVUUgICBGQUxTRSAgRkFMU0UgICAgICBGQUxTRVxuNSAgRkFMU0UgIFRSVUUgIEZBTFNFICAgRkFMU0UgICAgICBUUlVFICAgIFRSVUUgICBGQUxTRSAgRkFMU0UgICAgICBGQUxTRVxuNiAgRkFMU0UgIFRSVUUgIEZBTFNFICAgRkFMU0UgICAgICBUUlVFICAgIFRSVUUgICBGQUxTRSAgRkFMU0UgICAgICBGQUxTRVxuNyAgRkFMU0UgRkFMU0UgIEZBTFNFICAgRkFMU0UgICAgICBUUlVFICAgIFRSVUUgICBGQUxTRSAgRkFMU0UgICAgICBGQUxTRVxuOCAgIFRSVUUgRkFMU0UgICBUUlVFICAgRkFMU0UgICAgICBUUlVFICAgIFRSVUUgICBGQUxTRSAgRkFMU0UgICAgICBGQUxTRVxuOSAgIFRSVUUgIFRSVUUgICBUUlVFICAgRkFMU0UgICAgICBUUlVFICAgIFRSVUUgICBGQUxTRSAgRkFMU0UgICAgICBGQUxTRVxuMTAgIFRSVUUgIFRSVUUgICBUUlVFICAgRkFMU0UgICAgICBUUlVFICAgIFRSVUUgICAgVFJVRSAgRkFMU0UgICAgICBGQUxTRVxuMTEgIFRSVUUgIFRSVUUgICBUUlVFICAgIFRSVUUgICAgICBUUlVFICAgIFRSVUUgICAgVFJVRSAgRkFMU0UgICAgICBGQUxTRVxuMTIgIFRSVUUgIFRSVUUgICBUUlVFICAgIFRSVUUgICAgICBUUlVFICAgIFRSVUUgICAgVFJVRSAgRkFMU0UgICAgICBGQUxTRVxuMTMgIFRSVUUgIFRSVUUgICBUUlVFICAgIFRSVUUgICAgICBUUlVFICAgIFRSVUUgICAgVFJVRSAgIFRSVUUgICAgICBGQUxTRVxuMTQgIFRSVUUgIFRSVUUgICBUUlVFICAgIFRSVUUgICAgICBUUlVFICAgIFRSVUUgICAgVFJVRSAgIFRSVUUgICAgICBGQUxTRVxuMTUgIFRSVUUgIFRSVUUgICBUUlVFICAgIFRSVUUgICAgICBUUlVFICAgIFRSVUUgICAgVFJVRSAgIFRSVUUgICAgICBGQUxTRVxuMTYgIFRSVUUgIFRSVUUgICBUUlVFICAgIFRSVUUgICAgICBUUlVFICAgIFRSVUUgICAgVFJVRSAgIFRSVUUgICAgICBGQUxTRVxuMTcgIFRSVUUgIFRSVUUgICBUUlVFICAgIFRSVUUgICAgICBUUlVFICAgIFRSVUUgICAgVFJVRSAgIFRSVUUgICAgICAgVFJVRVxuMTggIFRSVUUgIFRSVUUgICBUUlVFICAgIFRSVUUgICAgICBUUlVFICAgIFRSVUUgICAgVFJVRSAgIFRSVUUgICAgICAgVFJVRVxuMTkgIFRSVUUgIFRSVUUgICBUUlVFICAgIFRSVUUgICAgICBUUlVFICAgIFRSVUUgICAgVFJVRSAgIFRSVUUgICAgICAgVFJVRVxuIn0= -->
+<pre><code>   (Intercept) AtBat  Hits HmRun  Runs   RBI Walks Years CAtBat CHits CHmRun
+1         TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  FALSE FALSE  FALSE
+2         TRUE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE  FALSE FALSE  FALSE
+3         TRUE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE  FALSE FALSE  FALSE
+4         TRUE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE  FALSE FALSE  FALSE
+5         TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE  FALSE FALSE  FALSE
+6         TRUE  TRUE  TRUE FALSE FALSE FALSE  TRUE FALSE  FALSE FALSE  FALSE
+7         TRUE FALSE  TRUE FALSE FALSE FALSE  TRUE FALSE   TRUE  TRUE   TRUE
+8         TRUE  TRUE  TRUE FALSE FALSE FALSE  TRUE FALSE  FALSE FALSE   TRUE
+9         TRUE  TRUE  TRUE FALSE FALSE FALSE  TRUE FALSE   TRUE FALSE  FALSE
+10        TRUE  TRUE  TRUE FALSE FALSE FALSE  TRUE FALSE   TRUE FALSE  FALSE
+11        TRUE  TRUE  TRUE FALSE FALSE FALSE  TRUE FALSE   TRUE FALSE  FALSE
+12        TRUE  TRUE  TRUE FALSE  TRUE FALSE  TRUE FALSE   TRUE FALSE  FALSE
+13        TRUE  TRUE  TRUE FALSE  TRUE FALSE  TRUE FALSE   TRUE FALSE  FALSE
+14        TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE FALSE   TRUE FALSE  FALSE
+15        TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE FALSE   TRUE  TRUE  FALSE
+16        TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE   TRUE  TRUE  FALSE
+17        TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE   TRUE  TRUE  FALSE
+18        TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE   TRUE  TRUE  FALSE
+19        TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE   TRUE  TRUE   TRUE
+   CRuns  CRBI CWalks LeagueN DivisionW PutOuts Assists Errors NewLeagueN
+1  FALSE  TRUE  FALSE   FALSE     FALSE   FALSE   FALSE  FALSE      FALSE
+2  FALSE  TRUE  FALSE   FALSE     FALSE   FALSE   FALSE  FALSE      FALSE
+3  FALSE  TRUE  FALSE   FALSE     FALSE    TRUE   FALSE  FALSE      FALSE
+4  FALSE  TRUE  FALSE   FALSE      TRUE    TRUE   FALSE  FALSE      FALSE
+5  FALSE  TRUE  FALSE   FALSE      TRUE    TRUE   FALSE  FALSE      FALSE
+6  FALSE  TRUE  FALSE   FALSE      TRUE    TRUE   FALSE  FALSE      FALSE
+7  FALSE FALSE  FALSE   FALSE      TRUE    TRUE   FALSE  FALSE      FALSE
+8   TRUE FALSE   TRUE   FALSE      TRUE    TRUE   FALSE  FALSE      FALSE
+9   TRUE  TRUE   TRUE   FALSE      TRUE    TRUE   FALSE  FALSE      FALSE
+10  TRUE  TRUE   TRUE   FALSE      TRUE    TRUE    TRUE  FALSE      FALSE
+11  TRUE  TRUE   TRUE    TRUE      TRUE    TRUE    TRUE  FALSE      FALSE
+12  TRUE  TRUE   TRUE    TRUE      TRUE    TRUE    TRUE  FALSE      FALSE
+13  TRUE  TRUE   TRUE    TRUE      TRUE    TRUE    TRUE   TRUE      FALSE
+14  TRUE  TRUE   TRUE    TRUE      TRUE    TRUE    TRUE   TRUE      FALSE
+15  TRUE  TRUE   TRUE    TRUE      TRUE    TRUE    TRUE   TRUE      FALSE
+16  TRUE  TRUE   TRUE    TRUE      TRUE    TRUE    TRUE   TRUE      FALSE
+17  TRUE  TRUE   TRUE    TRUE      TRUE    TRUE    TRUE   TRUE       TRUE
+18  TRUE  TRUE   TRUE    TRUE      TRUE    TRUE    TRUE   TRUE       TRUE
+19  TRUE  TRUE   TRUE    TRUE      TRUE    TRUE    TRUE   TRUE       TRUE</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVnLnN1bW1hcnkkb3V0bWF0XG5gYGAifQ== -->
+<pre class="r"><code>reg.summary$outmat</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgIEF0QmF0IEhpdHMgSG1SdW4gUnVucyBSQkkgV2Fsa3MgWWVhcnMgQ0F0QmF0IENIaXRzIENIbVJ1biBDUnVucyBDUkJJXG4xICAoIDEgKSAgXCIgXCIgICBcIiBcIiAgXCIgXCIgICBcIiBcIiAgXCIgXCIgXCIgXCIgICBcIiBcIiAgIFwiIFwiICAgIFwiIFwiICAgXCIgXCIgICAgXCIgXCIgICBcIipcIiBcbjIgICggMSApICBcIiBcIiAgIFwiKlwiICBcIiBcIiAgIFwiIFwiICBcIiBcIiBcIiBcIiAgIFwiIFwiICAgXCIgXCIgICAgXCIgXCIgICBcIiBcIiAgICBcIiBcIiAgIFwiKlwiIFxuMyAgKCAxICkgIFwiIFwiICAgXCIqXCIgIFwiIFwiICAgXCIgXCIgIFwiIFwiIFwiIFwiICAgXCIgXCIgICBcIiBcIiAgICBcIiBcIiAgIFwiIFwiICAgIFwiIFwiICAgXCIqXCIgXG40ICAoIDEgKSAgXCIgXCIgICBcIipcIiAgXCIgXCIgICBcIiBcIiAgXCIgXCIgXCIgXCIgICBcIiBcIiAgIFwiIFwiICAgIFwiIFwiICAgXCIgXCIgICAgXCIgXCIgICBcIipcIiBcbjUgICggMSApICBcIipcIiAgIFwiKlwiICBcIiBcIiAgIFwiIFwiICBcIiBcIiBcIiBcIiAgIFwiIFwiICAgXCIgXCIgICAgXCIgXCIgICBcIiBcIiAgICBcIiBcIiAgIFwiKlwiIFxuNiAgKCAxICkgIFwiKlwiICAgXCIqXCIgIFwiIFwiICAgXCIgXCIgIFwiIFwiIFwiKlwiICAgXCIgXCIgICBcIiBcIiAgICBcIiBcIiAgIFwiIFwiICAgIFwiIFwiICAgXCIqXCIgXG43ICAoIDEgKSAgXCIgXCIgICBcIipcIiAgXCIgXCIgICBcIiBcIiAgXCIgXCIgXCIqXCIgICBcIiBcIiAgIFwiKlwiICAgIFwiKlwiICAgXCIqXCIgICAgXCIgXCIgICBcIiBcIiBcbjggICggMSApICBcIipcIiAgIFwiKlwiICBcIiBcIiAgIFwiIFwiICBcIiBcIiBcIipcIiAgIFwiIFwiICAgXCIgXCIgICAgXCIgXCIgICBcIipcIiAgICBcIipcIiAgIFwiIFwiIFxuOSAgKCAxICkgIFwiKlwiICAgXCIqXCIgIFwiIFwiICAgXCIgXCIgIFwiIFwiIFwiKlwiICAgXCIgXCIgICBcIipcIiAgICBcIiBcIiAgIFwiIFwiICAgIFwiKlwiICAgXCIqXCIgXG4xMCAgKCAxICkgXCIqXCIgICBcIipcIiAgXCIgXCIgICBcIiBcIiAgXCIgXCIgXCIqXCIgICBcIiBcIiAgIFwiKlwiICAgIFwiIFwiICAgXCIgXCIgICAgXCIqXCIgICBcIipcIiBcbjExICAoIDEgKSBcIipcIiAgIFwiKlwiICBcIiBcIiAgIFwiIFwiICBcIiBcIiBcIipcIiAgIFwiIFwiICAgXCIqXCIgICAgXCIgXCIgICBcIiBcIiAgICBcIipcIiAgIFwiKlwiIFxuMTIgICggMSApIFwiKlwiICAgXCIqXCIgIFwiIFwiICAgXCIqXCIgIFwiIFwiIFwiKlwiICAgXCIgXCIgICBcIipcIiAgICBcIiBcIiAgIFwiIFwiICAgIFwiKlwiICAgXCIqXCIgXG4xMyAgKCAxICkgXCIqXCIgICBcIipcIiAgXCIgXCIgICBcIipcIiAgXCIgXCIgXCIqXCIgICBcIiBcIiAgIFwiKlwiICAgIFwiIFwiICAgXCIgXCIgICAgXCIqXCIgICBcIipcIiBcbjE0ICAoIDEgKSBcIipcIiAgIFwiKlwiICBcIipcIiAgIFwiKlwiICBcIiBcIiBcIipcIiAgIFwiIFwiICAgXCIqXCIgICAgXCIgXCIgICBcIiBcIiAgICBcIipcIiAgIFwiKlwiIFxuMTUgICggMSApIFwiKlwiICAgXCIqXCIgIFwiKlwiICAgXCIqXCIgIFwiIFwiIFwiKlwiICAgXCIgXCIgICBcIipcIiAgICBcIipcIiAgIFwiIFwiICAgIFwiKlwiICAgXCIqXCIgXG4xNiAgKCAxICkgXCIqXCIgICBcIipcIiAgXCIqXCIgICBcIipcIiAgXCIqXCIgXCIqXCIgICBcIiBcIiAgIFwiKlwiICAgIFwiKlwiICAgXCIgXCIgICAgXCIqXCIgICBcIipcIiBcbjE3ICAoIDEgKSBcIipcIiAgIFwiKlwiICBcIipcIiAgIFwiKlwiICBcIipcIiBcIipcIiAgIFwiIFwiICAgXCIqXCIgICAgXCIqXCIgICBcIiBcIiAgICBcIipcIiAgIFwiKlwiIFxuMTggICggMSApIFwiKlwiICAgXCIqXCIgIFwiKlwiICAgXCIqXCIgIFwiKlwiIFwiKlwiICAgXCIqXCIgICBcIipcIiAgICBcIipcIiAgIFwiIFwiICAgIFwiKlwiICAgXCIqXCIgXG4xOSAgKCAxICkgXCIqXCIgICBcIipcIiAgXCIqXCIgICBcIipcIiAgXCIqXCIgXCIqXCIgICBcIipcIiAgIFwiKlwiICAgIFwiKlwiICAgXCIqXCIgICAgXCIqXCIgICBcIipcIiBcbiAgICAgICAgICBDV2Fsa3MgTGVhZ3VlTiBEaXZpc2lvblcgUHV0T3V0cyBBc3Npc3RzIEVycm9ycyBOZXdMZWFndWVOXG4xICAoIDEgKSAgXCIgXCIgICAgXCIgXCIgICAgIFwiIFwiICAgICAgIFwiIFwiICAgICBcIiBcIiAgICAgXCIgXCIgICAgXCIgXCIgICAgICAgXG4yICAoIDEgKSAgXCIgXCIgICAgXCIgXCIgICAgIFwiIFwiICAgICAgIFwiIFwiICAgICBcIiBcIiAgICAgXCIgXCIgICAgXCIgXCIgICAgICAgXG4zICAoIDEgKSAgXCIgXCIgICAgXCIgXCIgICAgIFwiIFwiICAgICAgIFwiKlwiICAgICBcIiBcIiAgICAgXCIgXCIgICAgXCIgXCIgICAgICAgXG40ICAoIDEgKSAgXCIgXCIgICAgXCIgXCIgICAgIFwiKlwiICAgICAgIFwiKlwiICAgICBcIiBcIiAgICAgXCIgXCIgICAgXCIgXCIgICAgICAgXG41ICAoIDEgKSAgXCIgXCIgICAgXCIgXCIgICAgIFwiKlwiICAgICAgIFwiKlwiICAgICBcIiBcIiAgICAgXCIgXCIgICAgXCIgXCIgICAgICAgXG42ICAoIDEgKSAgXCIgXCIgICAgXCIgXCIgICAgIFwiKlwiICAgICAgIFwiKlwiICAgICBcIiBcIiAgICAgXCIgXCIgICAgXCIgXCIgICAgICAgXG43ICAoIDEgKSAgXCIgXCIgICAgXCIgXCIgICAgIFwiKlwiICAgICAgIFwiKlwiICAgICBcIiBcIiAgICAgXCIgXCIgICAgXCIgXCIgICAgICAgXG44ICAoIDEgKSAgXCIqXCIgICAgXCIgXCIgICAgIFwiKlwiICAgICAgIFwiKlwiICAgICBcIiBcIiAgICAgXCIgXCIgICAgXCIgXCIgICAgICAgXG45ICAoIDEgKSAgXCIqXCIgICAgXCIgXCIgICAgIFwiKlwiICAgICAgIFwiKlwiICAgICBcIiBcIiAgICAgXCIgXCIgICAgXCIgXCIgICAgICAgXG4xMCAgKCAxICkgXCIqXCIgICAgXCIgXCIgICAgIFwiKlwiICAgICAgIFwiKlwiICAgICBcIipcIiAgICAgXCIgXCIgICAgXCIgXCIgICAgICAgXG4xMSAgKCAxICkgXCIqXCIgICAgXCIqXCIgICAgIFwiKlwiICAgICAgIFwiKlwiICAgICBcIipcIiAgICAgXCIgXCIgICAgXCIgXCIgICAgICAgXG4xMiAgKCAxICkgXCIqXCIgICAgXCIqXCIgICAgIFwiKlwiICAgICAgIFwiKlwiICAgICBcIipcIiAgICAgXCIgXCIgICAgXCIgXCIgICAgICAgXG4xMyAgKCAxICkgXCIqXCIgICAgXCIqXCIgICAgIFwiKlwiICAgICAgIFwiKlwiICAgICBcIipcIiAgICAgXCIqXCIgICAgXCIgXCIgICAgICAgXG4xNCAgKCAxICkgXCIqXCIgICAgXCIqXCIgICAgIFwiKlwiICAgICAgIFwiKlwiICAgICBcIipcIiAgICAgXCIqXCIgICAgXCIgXCIgICAgICAgXG4xNSAgKCAxICkgXCIqXCIgICAgXCIqXCIgICAgIFwiKlwiICAgICAgIFwiKlwiICAgICBcIipcIiAgICAgXCIqXCIgICAgXCIgXCIgICAgICAgXG4xNiAgKCAxICkgXCIqXCIgICAgXCIqXCIgICAgIFwiKlwiICAgICAgIFwiKlwiICAgICBcIipcIiAgICAgXCIqXCIgICAgXCIgXCIgICAgICAgXG4xNyAgKCAxICkgXCIqXCIgICAgXCIqXCIgICAgIFwiKlwiICAgICAgIFwiKlwiICAgICBcIipcIiAgICAgXCIqXCIgICAgXCIqXCIgICAgICAgXG4xOCAgKCAxICkgXCIqXCIgICAgXCIqXCIgICAgIFwiKlwiICAgICAgIFwiKlwiICAgICBcIipcIiAgICAgXCIqXCIgICAgXCIqXCIgICAgICAgXG4xOSAgKCAxICkgXCIqXCIgICAgXCIqXCIgICAgIFwiKlwiICAgICAgIFwiKlwiICAgICBcIipcIiAgICAgXCIqXCIgICAgXCIqXCIgICAgICAgXG4ifQ== -->
+<pre><code>          AtBat Hits HmRun Runs RBI Walks Years CAtBat CHits CHmRun CRuns CRBI
+1  ( 1 )  &quot; &quot;   &quot; &quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot; &quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot;*&quot; 
+2  ( 1 )  &quot; &quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot; &quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot;*&quot; 
+3  ( 1 )  &quot; &quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot; &quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot;*&quot; 
+4  ( 1 )  &quot; &quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot; &quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot;*&quot; 
+5  ( 1 )  &quot;*&quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot; &quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot;*&quot; 
+6  ( 1 )  &quot;*&quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot;*&quot; 
+7  ( 1 )  &quot; &quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot;*&quot;    &quot;*&quot;   &quot;*&quot;    &quot; &quot;   &quot; &quot; 
+8  ( 1 )  &quot;*&quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot; &quot;    &quot; &quot;   &quot;*&quot;    &quot;*&quot;   &quot; &quot; 
+9  ( 1 )  &quot;*&quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot;*&quot;    &quot; &quot;   &quot; &quot;    &quot;*&quot;   &quot;*&quot; 
+10  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot;*&quot;    &quot; &quot;   &quot; &quot;    &quot;*&quot;   &quot;*&quot; 
+11  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot; &quot;   &quot; &quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot;*&quot;    &quot; &quot;   &quot; &quot;    &quot;*&quot;   &quot;*&quot; 
+12  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot; &quot;   &quot;*&quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot;*&quot;    &quot; &quot;   &quot; &quot;    &quot;*&quot;   &quot;*&quot; 
+13  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot; &quot;   &quot;*&quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot;*&quot;    &quot; &quot;   &quot; &quot;    &quot;*&quot;   &quot;*&quot; 
+14  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot;*&quot;   &quot;*&quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot;*&quot;    &quot; &quot;   &quot; &quot;    &quot;*&quot;   &quot;*&quot; 
+15  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot;*&quot;   &quot;*&quot;  &quot; &quot; &quot;*&quot;   &quot; &quot;   &quot;*&quot;    &quot;*&quot;   &quot; &quot;    &quot;*&quot;   &quot;*&quot; 
+16  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot;*&quot;   &quot;*&quot;  &quot;*&quot; &quot;*&quot;   &quot; &quot;   &quot;*&quot;    &quot;*&quot;   &quot; &quot;    &quot;*&quot;   &quot;*&quot; 
+17  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot;*&quot;   &quot;*&quot;  &quot;*&quot; &quot;*&quot;   &quot; &quot;   &quot;*&quot;    &quot;*&quot;   &quot; &quot;    &quot;*&quot;   &quot;*&quot; 
+18  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot;*&quot;   &quot;*&quot;  &quot;*&quot; &quot;*&quot;   &quot;*&quot;   &quot;*&quot;    &quot;*&quot;   &quot; &quot;    &quot;*&quot;   &quot;*&quot; 
+19  ( 1 ) &quot;*&quot;   &quot;*&quot;  &quot;*&quot;   &quot;*&quot;  &quot;*&quot; &quot;*&quot;   &quot;*&quot;   &quot;*&quot;    &quot;*&quot;   &quot;*&quot;    &quot;*&quot;   &quot;*&quot; 
+          CWalks LeagueN DivisionW PutOuts Assists Errors NewLeagueN
+1  ( 1 )  &quot; &quot;    &quot; &quot;     &quot; &quot;       &quot; &quot;     &quot; &quot;     &quot; &quot;    &quot; &quot;       
+2  ( 1 )  &quot; &quot;    &quot; &quot;     &quot; &quot;       &quot; &quot;     &quot; &quot;     &quot; &quot;    &quot; &quot;       
+3  ( 1 )  &quot; &quot;    &quot; &quot;     &quot; &quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;    &quot; &quot;       
+4  ( 1 )  &quot; &quot;    &quot; &quot;     &quot;*&quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;    &quot; &quot;       
+5  ( 1 )  &quot; &quot;    &quot; &quot;     &quot;*&quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;    &quot; &quot;       
+6  ( 1 )  &quot; &quot;    &quot; &quot;     &quot;*&quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;    &quot; &quot;       
+7  ( 1 )  &quot; &quot;    &quot; &quot;     &quot;*&quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;    &quot; &quot;       
+8  ( 1 )  &quot;*&quot;    &quot; &quot;     &quot;*&quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;    &quot; &quot;       
+9  ( 1 )  &quot;*&quot;    &quot; &quot;     &quot;*&quot;       &quot;*&quot;     &quot; &quot;     &quot; &quot;    &quot; &quot;       
+10  ( 1 ) &quot;*&quot;    &quot; &quot;     &quot;*&quot;       &quot;*&quot;     &quot;*&quot;     &quot; &quot;    &quot; &quot;       
+11  ( 1 ) &quot;*&quot;    &quot;*&quot;     &quot;*&quot;       &quot;*&quot;     &quot;*&quot;     &quot; &quot;    &quot; &quot;       
+12  ( 1 ) &quot;*&quot;    &quot;*&quot;     &quot;*&quot;       &quot;*&quot;     &quot;*&quot;     &quot; &quot;    &quot; &quot;       
+13  ( 1 ) &quot;*&quot;    &quot;*&quot;     &quot;*&quot;       &quot;*&quot;     &quot;*&quot;     &quot;*&quot;    &quot; &quot;       
+14  ( 1 ) &quot;*&quot;    &quot;*&quot;     &quot;*&quot;       &quot;*&quot;     &quot;*&quot;     &quot;*&quot;    &quot; &quot;       
+15  ( 1 ) &quot;*&quot;    &quot;*&quot;     &quot;*&quot;       &quot;*&quot;     &quot;*&quot;     &quot;*&quot;    &quot; &quot;       
+16  ( 1 ) &quot;*&quot;    &quot;*&quot;     &quot;*&quot;       &quot;*&quot;     &quot;*&quot;     &quot;*&quot;    &quot; &quot;       
+17  ( 1 ) &quot;*&quot;    &quot;*&quot;     &quot;*&quot;       &quot;*&quot;     &quot;*&quot;     &quot;*&quot;    &quot;*&quot;       
+18  ( 1 ) &quot;*&quot;    &quot;*&quot;     &quot;*&quot;       &quot;*&quot;     &quot;*&quot;     &quot;*&quot;    &quot;*&quot;       
+19  ( 1 ) &quot;*&quot;    &quot;*&quot;     &quot;*&quot;       &quot;*&quot;     &quot;*&quot;     &quot;*&quot;    &quot;*&quot;       </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVnLnN1bW1hcnkkcnNxXG5gYGAifQ== -->
+<pre class="r"><code>reg.summary$rsq</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiIFsxXSAwLjMyMTQ1MDEgMC40MjUyMjM3IDAuNDUxNDI5NCAwLjQ3NTQwNjcgMC40OTA4MDM2IDAuNTA4NzE0NiAwLjUxNDEyMjdcbiBbOF0gMC41Mjg1NTY5IDAuNTM0NjEyNCAwLjU0MDQ5NTAgMC41NDI2MTUzIDAuNTQzNjMwMiAwLjU0NDQ1NzAgMC41NDUyMTY0XG5bMTVdIDAuNTQ1NDY5MiAwLjU0NTc2NTYgMC41NDU5NTE4IDAuNTQ2MDk0NSAwLjU0NjExNTlcbiJ9 -->
+<pre><code> [1] 0.3214501 0.4252237 0.4514294 0.4754067 0.4908036 0.5087146 0.5141227
+ [8] 0.5285569 0.5346124 0.5404950 0.5426153 0.5436302 0.5444570 0.5452164
+[15] 0.5454692 0.5457656 0.5459518 0.5460945 0.5461159</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVnLnN1bW1hcnkkYWRqcjJcbmBgYCJ9 -->
+<pre class="r"><code>reg.summary$adjr2</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiIFsxXSAwLjMxODg1MDMgMC40MjA4MDI0IDAuNDQ1MDc1MyAwLjQ2NzI3MzQgMC40ODA4OTcxIDAuNDk3MjAwMSAwLjUwMDc4NDlcbiBbOF0gMC41MTM3MDgzIDAuNTE4MDU3MiAwLjUyMjI2MDYgMC41MjI1NzA2IDAuNTIxNzI0NSAwLjUyMDY3MzYgMC41MTk1NDMxXG5bMTVdIDAuNTE3ODY2MSAwLjUxNjIyMTkgMC41MTQ0NDY0IDAuNTEyNjA5NyAwLjUxMDYyNzBcbiJ9 -->
+<pre><code> [1] 0.3188503 0.4208024 0.4450753 0.4672734 0.4808971 0.4972001 0.5007849
+ [8] 0.5137083 0.5180572 0.5222606 0.5225706 0.5217245 0.5206736 0.5195431
+[15] 0.5178661 0.5162219 0.5144464 0.5126097 0.5106270</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -2021,25 +2104,38 @@ i</code></pre>
 <pre><code>[1] 11</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="index-of-the-model-with-largest-adj-rsq" class="section level2">
+<h2>index of the model with largest adj-Rsq</h2>
+<!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubmFtZXModmFycylbdmFyc11bLTFdXG5cbmBgYCJ9 -->
-<pre class="r"><code>names(vars)[vars][-1]
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudmFycy5zZWxlY3RlZFxuXG5gYGAifQ== -->
+<pre class="r"><code>vars.selected
 </code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiIFsxXSBcIkF0QmF0XCIgICAgIFwiSGl0c1wiICAgICAgXCJXYWxrc1wiICAgICBcIkNBdEJhdFwiICAgXG4gWzVdIFwiQ1J1bnNcIiAgICAgXCJDUkJJXCIgICAgICBcIkNXYWxrc1wiICAgIFwiTGVhZ3VlTlwiICBcbiBbOV0gXCJEaXZpc2lvbldcIiBcIlB1dE91dHNcIiAgIFwiQXNzaXN0c1wiICBcbiJ9 -->
-<pre><code> [1] &quot;AtBat&quot;     &quot;Hits&quot;      &quot;Walks&quot;     &quot;CAtBat&quot;   
- [5] &quot;CRuns&quot;     &quot;CRBI&quot;      &quot;CWalks&quot;    &quot;LeagueN&quot;  
- [9] &quot;DivisionW&quot; &quot;PutOuts&quot;   &quot;Assists&quot;  </code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiIFsxXSBcIkF0QmF0XCIgICAgIFwiSGl0c1wiICAgICAgXCJXYWxrc1wiICAgICBcIkNBdEJhdFwiICAgIFwiQ1J1bnNcIiAgICBcbiBbNl0gXCJDUkJJXCIgICAgICBcIkNXYWxrc1wiICAgIFwiTGVhZ3VlTlwiICAgXCJEaXZpc2lvbldcIiBcIlB1dE91dHNcIiAgXG5bMTFdIFwiQXNzaXN0c1wiICBcbiJ9 -->
+<pre><code> [1] &quot;AtBat&quot;     &quot;Hits&quot;      &quot;Walks&quot;     &quot;CAtBat&quot;    &quot;CRuns&quot;    
+ [6] &quot;CRBI&quot;      &quot;CWalks&quot;    &quot;LeagueN&quot;   &quot;DivisionW&quot; &quot;PutOuts&quot;  
+[11] &quot;Assists&quot;  </code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+</div>
+<div id="best-model" class="section level2">
+<h2>best model</h2>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWFyeShiZXN0Lm1vZGVsKVxuXG5gYGAifQ== -->
-<pre class="r"><code>summary(best.model)
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGF0Lm1vZGVsID0gbW9kZWwubWF0cml4KFNhbGFyeX4uLCBkYXRhPWRhdClcbmRhdC5tb2RlbCA9IGRhdGEuZnJhbWUoZGF0Lm1vZGVsKVxuXG5kYXQuc2VsZWN0ZWQgPSBkYXQubW9kZWxbdmFycy5zZWxlY3RlZF1cblxuYmVzdC5tb2RlbCA9IGxtKGRhdCRTYWxhcnl+LiwgZGF0YSA9IGRhdC5zZWxlY3RlZClcbnN1bW1hcnkoYmVzdC5tb2RlbClcbmBgYCJ9 -->
+<pre class="r"><code>dat.model = model.matrix(Salary~., data=dat)
+dat.model = data.frame(dat.model)
+
+dat.selected = dat.model[vars.selected]
+
+best.model = lm(dat$Salary~., data = dat.selected)
+summary(best.model)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG5DYWxsOlxubG0oZm9ybXVsYSA9IGRhdCRTYWxhcnkgfiAuLCBkYXRhID0gZGF0LnNlbGVjdGVkKVxuXG5SZXNpZHVhbHM6XG4gICBNaW4gICAgIDFRIE1lZGlhbiAgICAgM1EgICAgTWF4IFxuLTkzMi4yIC0xNzUuNCAgLTI5LjIgIDEzMC40IDE4OTcuMiBcblxuQ29lZmZpY2llbnRzOlxuICAgICAgICAgICAgICBFc3RpbWF0ZSBTdGQuIEVycm9yIHQgdmFsdWUgUHIoPnx0fCkgICAgXG4oSW50ZXJjZXB0KSAgMTM1Ljc1MTIyICAgNzEuMzQ2MjMgICAxLjkwMyAwLjA1ODIyMyAuICBcbkF0QmF0ICAgICAgICAgLTIuMTI3NzUgICAgMC41Mzc0NiAgLTMuOTU5IDkuODFlLTA1ICoqKlxuSGl0cyAgICAgICAgICAgNi45MjM3MCAgICAxLjY0NjEyICAgNC4yMDYgMy42MmUtMDUgKioqXG5XYWxrcyAgICAgICAgICA1LjYyMDI4ICAgIDEuNTkwNjQgICAzLjUzMyAwLjAwMDQ4OCAqKipcbkNBdEJhdCAgICAgICAgLTAuMTM4OTkgICAgMC4wNTYwOSAgLTIuNDc4IDAuMDEzODcwICogIFxuQ1J1bnMgICAgICAgICAgMS40NTUzMyAgICAwLjM5MjcwICAgMy43MDYgMC4wMDAyNTkgKioqXG5DUkJJICAgICAgICAgICAwLjc4NTI1ICAgIDAuMjA5NzggICAzLjc0MyAwLjAwMDIyNSAqKipcbkNXYWxrcyAgICAgICAgLTAuODIyODYgICAgMC4yNjM2MSAgLTMuMTIxIDAuMDAyMDEwICoqIFxuTGVhZ3VlTiAgICAgICA0My4xMTE2MiAgIDM5Ljk2NjEyICAgMS4wNzkgMC4yODE3NTUgICAgXG5EaXZpc2lvblcgICAtMTExLjE0NjAzICAgMzkuMjE4MzUgIC0yLjgzNCAwLjAwNDk3MCAqKiBcblB1dE91dHMgICAgICAgIDAuMjg5NDEgICAgMC4wNzQ3OCAgIDMuODcwIDAuMDAwMTM5ICoqKlxuQXNzaXN0cyAgICAgICAgMC4yNjg4MyAgICAwLjE1ODE2ICAgMS43MDAgMC4wOTA0MzAgLiAgXG4tLS1cblNpZ25pZi4gY29kZXM6ICBcbjAg4oCYKioq4oCZIDAuMDAxIOKAmCoq4oCZIDAuMDEg4oCYKuKAmSAwLjA1IOKAmC7igJkgMC4xIOKAmCDigJkgMVxuXG5SZXNpZHVhbCBzdGFuZGFyZCBlcnJvcjogMzExLjcgb24gMjUxIGRlZ3JlZXMgb2YgZnJlZWRvbVxuTXVsdGlwbGUgUi1zcXVhcmVkOiAgMC41NDI2LFx0QWRqdXN0ZWQgUi1zcXVhcmVkOiAgMC41MjI2IFxuRi1zdGF0aXN0aWM6IDI3LjA3IG9uIDExIGFuZCAyNTEgREYsICBwLXZhbHVlOiA8IDIuMmUtMTZcbiJ9 -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5DYWxsOlxubG0oZm9ybXVsYSA9IGRhdCRTYWxhcnkgfiAuLCBkYXRhID0gZGF0LnNlbGVjdGVkKVxuXG5SZXNpZHVhbHM6XG4gICBNaW4gICAgIDFRIE1lZGlhbiAgICAgM1EgICAgTWF4IFxuLTkzMi4yIC0xNzUuNCAgLTI5LjIgIDEzMC40IDE4OTcuMiBcblxuQ29lZmZpY2llbnRzOlxuICAgICAgICAgICAgICBFc3RpbWF0ZSBTdGQuIEVycm9yIHQgdmFsdWUgUHIoPnx0fCkgICAgXG4oSW50ZXJjZXB0KSAgMTM1Ljc1MTIyICAgNzEuMzQ2MjMgICAxLjkwMyAwLjA1ODIyMyAuICBcbkF0QmF0ICAgICAgICAgLTIuMTI3NzUgICAgMC41Mzc0NiAgLTMuOTU5IDkuODFlLTA1ICoqKlxuSGl0cyAgICAgICAgICAgNi45MjM3MCAgICAxLjY0NjEyICAgNC4yMDYgMy42MmUtMDUgKioqXG5XYWxrcyAgICAgICAgICA1LjYyMDI4ICAgIDEuNTkwNjQgICAzLjUzMyAwLjAwMDQ4OCAqKipcbkNBdEJhdCAgICAgICAgLTAuMTM4OTkgICAgMC4wNTYwOSAgLTIuNDc4IDAuMDEzODcwICogIFxuQ1J1bnMgICAgICAgICAgMS40NTUzMyAgICAwLjM5MjcwICAgMy43MDYgMC4wMDAyNTkgKioqXG5DUkJJICAgICAgICAgICAwLjc4NTI1ICAgIDAuMjA5NzggICAzLjc0MyAwLjAwMDIyNSAqKipcbkNXYWxrcyAgICAgICAgLTAuODIyODYgICAgMC4yNjM2MSAgLTMuMTIxIDAuMDAyMDEwICoqIFxuTGVhZ3VlTiAgICAgICA0My4xMTE2MiAgIDM5Ljk2NjEyICAgMS4wNzkgMC4yODE3NTUgICAgXG5EaXZpc2lvblcgICAtMTExLjE0NjAzICAgMzkuMjE4MzUgIC0yLjgzNCAwLjAwNDk3MCAqKiBcblB1dE91dHMgICAgICAgIDAuMjg5NDEgICAgMC4wNzQ3OCAgIDMuODcwIDAuMDAwMTM5ICoqKlxuQXNzaXN0cyAgICAgICAgMC4yNjg4MyAgICAwLjE1ODE2ICAgMS43MDAgMC4wOTA0MzAgLiAgXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcblxuUmVzaWR1YWwgc3RhbmRhcmQgZXJyb3I6IDMxMS43IG9uIDI1MSBkZWdyZWVzIG9mIGZyZWVkb21cbk11bHRpcGxlIFItc3F1YXJlZDogIDAuNTQyNixcdEFkanVzdGVkIFItc3F1YXJlZDogIDAuNTIyNiBcbkYtc3RhdGlzdGljOiAyNy4wNyBvbiAxMSBhbmQgMjUxIERGLCAgcC12YWx1ZTogPCAyLjJlLTE2XG4ifQ== -->
 <pre><code>
 Call:
 lm(formula = dat$Salary ~ ., data = dat.selected)
@@ -2063,8 +2159,7 @@ DivisionW   -111.14603   39.21835  -2.834 0.004970 **
 PutOuts        0.28941    0.07478   3.870 0.000139 ***
 Assists        0.26883    0.15816   1.700 0.090430 .  
 ---
-Signif. codes:  
-0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 Residual standard error: 311.7 on 251 degrees of freedom
 Multiple R-squared:  0.5426,    Adjusted R-squared:  0.5226 
@@ -2072,10 +2167,69 @@ F-statistic: 27.07 on 11 and 251 DF,  p-value: &lt; 2.2e-16</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+</div>
+</div>
+<div id="forward-stepwise" class="section level1">
+<h1>Forward stepwise</h1>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVnZml0LmZvcndhcmQuc21yeSRhZGpyMlxuXG5gYGAifQ== -->
+<pre class="r"><code>regfit.forward.smry$adjr2
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiIFsxXSAwLjMxODg1MDMgMC40MjA4MDI0IDAuNDQ1MDc1MyAwLjQ2NzI3MzQgMC40ODA4OTcxIDAuNDk3MjAwMVxuIFs3XSAwLjQ5OTg2NjMgMC41MTMyNzY4IDAuNTE4MDU3MiAwLjUyMjI2MDYgMC41MjI1NzA2IDAuNTIxNzI0NVxuWzEzXSAwLjUyMDY3MzYgMC41MTk1NDMxIDAuNTE3ODY2MSAwLjUxNjIyMTkgMC41MTQ0NDY0IDAuNTEyNjA5N1xuWzE5XSAwLjUxMDYyNzBcbiJ9 -->
+<pre><code> [1] 0.3188503 0.4208024 0.4450753 0.4672734 0.4808971 0.4972001
+ [7] 0.4998663 0.5132768 0.5180572 0.5222606 0.5225706 0.5217245
+[13] 0.5206736 0.5195431 0.5178661 0.5162219 0.5144464 0.5126097
+[19] 0.5106270</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZm9yIChpIGluIDE6Nil7XG4gIHZhcnMubm1zID0gcmVnZml0LmZvcndhcmQuc21yeSR3aGljaFtpLF1cbiAgbm1zID0gbmFtZXModmFycy5ubXNbdmFycy5ubXNdKVstMV1cbiAgcHJpbnQobm1zKVxufSAgXG5gYGAifQ== -->
+<pre class="r"><code>for (i in 1:6){
+  vars.nms = regfit.forward.smry$which[i,]
+  nms = names(vars.nms[vars.nms])[-1]
+  print(nms)
+}  </code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiQ1JCSVwiXG5bMV0gXCJIaXRzXCIgXCJDUkJJXCJcblsxXSBcIkhpdHNcIiAgICBcIkNSQklcIiAgICBcIlB1dE91dHNcIlxuWzFdIFwiSGl0c1wiICAgICAgXCJDUkJJXCIgICAgICBcIkRpdmlzaW9uV1wiIFwiUHV0T3V0c1wiICBcblsxXSBcIkF0QmF0XCIgICAgIFwiSGl0c1wiICAgICAgXCJDUkJJXCIgICAgICBcIkRpdmlzaW9uV1wiIFwiUHV0T3V0c1wiICBcblsxXSBcIkF0QmF0XCIgICAgIFwiSGl0c1wiICAgICAgXCJXYWxrc1wiICAgICBcIkNSQklcIiAgICAgIFwiRGl2aXNpb25XXCJcbls2XSBcIlB1dE91dHNcIiAgXG4ifQ== -->
+<pre><code>[1] &quot;CRBI&quot;
+[1] &quot;Hits&quot; &quot;CRBI&quot;
+[1] &quot;Hits&quot;    &quot;CRBI&quot;    &quot;PutOuts&quot;
+[1] &quot;Hits&quot;      &quot;CRBI&quot;      &quot;DivisionW&quot; &quot;PutOuts&quot;  
+[1] &quot;AtBat&quot;     &quot;Hits&quot;      &quot;CRBI&quot;      &quot;DivisionW&quot; &quot;PutOuts&quot;  
+[1] &quot;AtBat&quot;     &quot;Hits&quot;      &quot;Walks&quot;     &quot;CRBI&quot;      &quot;DivisionW&quot;
+[6] &quot;PutOuts&quot;  </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaW5kZXggPSB3aGljaC5tYXgocmVnZml0LmZvcndhcmQuc21yeSRhZGpyMilcbmluZGV4XG5gYGAifQ== -->
+<pre class="r"><code>index = which.max(regfit.forward.smry$adjr2)
+index</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDExXG4ifQ== -->
+<pre><code>[1] 11</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuICB2YXJzLm5tcyA9IHJlZ2ZpdC5mb3J3YXJkLnNtcnkkd2hpY2hbaW5kZXgsXVxuICBubXMgPSBuYW1lcyh2YXJzLm5tc1t2YXJzLm5tc10pWy0xXVxuICBwcmludChubXMpXG5gYGAifQ== -->
+<pre class="r"><code>  vars.nms = regfit.forward.smry$which[index,]
+  nms = names(vars.nms[vars.nms])[-1]
+  print(nms)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiIFsxXSBcIkF0QmF0XCIgICAgIFwiSGl0c1wiICAgICAgXCJXYWxrc1wiICAgICBcIkNBdEJhdFwiICAgIFwiQ1J1bnNcIiAgICBcbiBbNl0gXCJDUkJJXCIgICAgICBcIkNXYWxrc1wiICAgIFwiTGVhZ3VlTlwiICAgXCJEaXZpc2lvbldcIiBcIlB1dE91dHNcIiAgXG5bMTFdIFwiQXNzaXN0c1wiICBcbiJ9 -->
+<pre><code> [1] &quot;AtBat&quot;     &quot;Hits&quot;      &quot;Walks&quot;     &quot;CAtBat&quot;    &quot;CRuns&quot;    
+ [6] &quot;CRBI&quot;      &quot;CWalks&quot;    &quot;LeagueN&quot;   &quot;DivisionW&quot; &quot;PutOuts&quot;  
+[11] &quot;Assists&quot;  </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KYGBge3J9DQpsaWJyYXJ5KElTTFIyKQ0KDQpkYXQgPSBIaXR0ZXJzDQpkYXQgPSBuYS5vbWl0KGRhdCkNCmBgYA0KDQpgYGB7cn0NCmZ1bGwubW9kZWwgPSBsbShTYWxhcnl+LiwgZGF0YSA9IGRhdCkNCnN1bW1hcnkoZnVsbC5tb2RlbCkNCmBgYA0KIyBCZXN0IHN1YnNldCBzZWxlY3Rpb24NCg0KYGBge3J9DQpsaWJyYXJ5KGxlYXBzKQ0KDQpiZXN0LnN1YnNldCA9IHJlZ3N1YnNldHMoU2FsYXJ5IH4gLiwgZGF0YSA9IGRhdCkNCnN1bW1hcnkoYmVzdC5zdWJzZXQpDQpgYGANCg0KYGBge3J9DQpsaWJyYXJ5KGxlYXBzKQ0KDQpiZXN0LnN1YnNldCA9IHJlZ3N1YnNldHMoU2FsYXJ5IH4gLiwgZGF0YSA9IGRhdCwgbnZtYXg9MTkpDQpzdW1tYXJ5KGJlc3Quc3Vic2V0KQ0KYGBgDQoNCmBgYHtyfQ0KcmVnLnN1bW1hcnkgPSBzdW1tYXJ5KGJlc3Quc3Vic2V0KQ0KDQpyZWcuc3VtbWFyeSR3aGljaA0KcmVnLnN1bW1hcnkkb3V0bWF0DQpyZWcuc3VtbWFyeSRyc3ENCnJlZy5zdW1tYXJ5JGFkanIyDQpgYGANCg0KYGBge3J9DQppID0gd2hpY2gubWF4KHJlZy5zdW1tYXJ5JGFkanIyKQ0KaQ0KYGBgDQpgYGB7cn0NCnZhcnMgPSByZWcuc3VtbWFyeSR3aGljaFtpLF0NCg0KbmFtZXModmFycylbdmFyc11bLTFdDQpgYGANCg0KYGBge3J9DQp2YXJzLnNlbGVjdGVkID0gbmFtZXModmFycylbdmFyc11bLTFdDQp2YXJzLnNlbGVjdGVkWzhdID0gJ0xlYWd1ZScNCnZhcnMuc2VsZWN0ZWRbOV0gPSAnRGl2aXNpb24nDQoNCmRhdC5zZWxlY3RlZCA9IGRhdFt2YXJzLnNlbGVjdGVkXQ0KDQpiZXN0Lm1vZGVsID0gbG0oZGF0JFNhbGFyeX4uLCBkYXRhID0gZGF0LnNlbGVjdGVkKQ0Kc3VtbWFyeShiZXN0Lm1vZGVsKQ0KYGBgDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KYGBge3J9DQpsaWJyYXJ5KElTTFIyKQ0KDQpkYXQgPSBIaXR0ZXJzDQpkYXQgPSBuYS5vbWl0KGRhdCkNCmBgYA0KIyBCZXN0IHN1YnNldCBhcHByb2FjaA0KIyMgZnVsbCBtb2RlbA0KYGBge3J9DQpmdWxsLm1vZGVsID0gbG0oU2FsYXJ5fi4sIGRhdGEgPSBkYXQpDQpzdW1tYXJ5KGZ1bGwubW9kZWwpDQpgYGANCiMjIEJlc3Qgc3Vic2V0IG1vZGVsDQoNCmBgYHtyfQ0KbGlicmFyeShsZWFwcykNCg0KYmVzdC5zdWJzZXQgPSByZWdzdWJzZXRzKFNhbGFyeSB+IC4sIGRhdGEgPSBkYXQpDQpzdW1tYXJ5KGJlc3Quc3Vic2V0KQ0KYGBgDQoNCmBgYHtyfQ0KbGlicmFyeShsZWFwcykNCg0KYmVzdC5zdWJzZXQgPSByZWdzdWJzZXRzKFNhbGFyeSB+IC4sIGRhdGEgPSBkYXQsIG52bWF4PTE5KQ0Kc3VtbWFyeShiZXN0LnN1YnNldCkNCmBgYA0KDQpgYGB7cn0NCnJlZy5zdW1tYXJ5ID0gc3VtbWFyeShiZXN0LnN1YnNldCkNCg0KcmVnLnN1bW1hcnkkd2hpY2gNCiMgcmVnLnN1bW1hcnkkb3V0bWF0DQpyZWcuc3VtbWFyeSRyc3ENCnJlZy5zdW1tYXJ5JGFkanIyDQpgYGANCg0KYGBge3J9DQppID0gd2hpY2gubWF4KHJlZy5zdW1tYXJ5JGFkanIyKQ0KaQ0KYGBgDQojIyBpbmRleCBvZiB0aGUgbW9kZWwgd2l0aCBsYXJnZXN0IGFkai1Sc3ENCmBgYHtyfQ0KdmFycyA9IHJlZy5zdW1tYXJ5JHdoaWNoW2ksXQ0KDQp2YXJzLnNlbGVjdGVkID0gbmFtZXModmFycylbdmFyc11bLTFdDQp2YXJzLnNlbGVjdGVkIA0KYGBgDQojIyBiZXN0IG1vZGVsDQpgYGB7cn0NCmRhdC5tb2RlbCA9IG1vZGVsLm1hdHJpeChTYWxhcnl+LiwgZGF0YT1kYXQpDQpkYXQubW9kZWwgPSBkYXRhLmZyYW1lKGRhdC5tb2RlbCkNCg0KZGF0LnNlbGVjdGVkID0gZGF0Lm1vZGVsW3ZhcnMuc2VsZWN0ZWRdDQoNCmJlc3QubW9kZWwgPSBsbShkYXQkU2FsYXJ5fi4sIGRhdGEgPSBkYXQuc2VsZWN0ZWQpDQpzdW1tYXJ5KGJlc3QubW9kZWwpDQoNCmBgYA0KIyBGb3J3YXJkIHN0ZXB3aXNlDQoNCmBgYHtyfQ0KcmVnZml0LmZvcndhcmQgPSByZWdzdWJzZXRzKFNhbGFyeX4uLCBkYXRhID0gZGF0LCBudm1heCA9IDE5LCBtZXRob2QgPSAiZm9yd2FyZCIpDQpyZWdmaXQuZm9yd2FyZC5zbXJ5ID0gc3VtbWFyeShyZWdmaXQuZm9yd2FyZCkNCg0KYGBgDQpgYGB7cn0NCmZvciAoaSBpbiAxOjYpew0KICB2YXJzLm5tcyA9IHJlZ2ZpdC5mb3J3YXJkLnNtcnkkd2hpY2hbaSxdDQogIG5tcyA9IG5hbWVzKHZhcnMubm1zW3ZhcnMubm1zXSlbLTFdDQogIHByaW50KG5tcykNCn0gIA0KYGBgDQoNCg0KYGBge3J9DQppbmRleCA9IHdoaWNoLm1heChyZWdmaXQuZm9yd2FyZC5zbXJ5JGFkanIyKQ0KaW5kZXgNCmBgYA0KYGBge3J9DQp2YXJzLm5tcyA9IHJlZ2ZpdC5mb3J3YXJkLnNtcnkkd2hpY2hbaW5kZXgsXQ0Kbm1zID0gbmFtZXModmFycy5ubXNbdmFycy5ubXNdKVstMV0NCnByaW50KG5tcykNCmBgYA0KDQoNCg0KDQoNCg0KDQoNCg==</div>
 
 
 
