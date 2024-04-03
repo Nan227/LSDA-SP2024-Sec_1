@@ -8,12 +8,13 @@ library(ISLR2)
 dat = Hitters
 dat = na.omit(dat)
 ```
-
+# Best subset approach
+## full model
 ```{r}
 full.model = lm(Salary~., data = dat)
 summary(full.model)
 ```
-# Best subset selection
+## Best subset model
 
 ```{r}
 library(leaps)
@@ -33,7 +34,7 @@ summary(best.subset)
 reg.summary = summary(best.subset)
 
 reg.summary$which
-reg.summary$outmat
+# reg.summary$outmat
 reg.summary$rsq
 reg.summary$adjr2
 ```
@@ -42,27 +43,49 @@ reg.summary$adjr2
 i = which.max(reg.summary$adjr2)
 i
 ```
+## index of the model with largest adj-Rsq
 ```{r}
 vars = reg.summary$which[i,]
 
-names(vars)[vars][-1]
-```
-
-```{r}
 vars.selected = names(vars)[vars][-1]
-vars.selected[8] = 'League'
-vars.selected[9] = 'Division'
+vars.selected 
+```
+## best model
+```{r}
+dat.model = model.matrix(Salary~., data=dat)
+dat.model = data.frame(dat.model)
 
-dat.selected = dat[vars.selected]
+dat.selected = dat.model[vars.selected]
 
 best.model = lm(dat$Salary~., data = dat.selected)
 summary(best.model)
+
+```
+# Forward stepwise
+
+```{r}
+regfit.forward = regsubsets(Salary~., data = dat, nvmax = 19, method = "forward")
+regfit.forward.smry = summary(regfit.forward)
+
+```
+```{r}
+for (i in 1:6){
+  vars.nms = regfit.forward.smry$which[i,]
+  nms = names(vars.nms[vars.nms])[-1]
+  print(nms)
+}  
 ```
 
 
-
-
-
+```{r}
+index = which.max(regfit.forward.smry$adjr2)
+index
+```
+```{r}
+vars.nms = regfit.forward.smry$which[index,]
+nms = names(vars.nms[vars.nms])[-1]
+print(nms)
+```
 
 
 
