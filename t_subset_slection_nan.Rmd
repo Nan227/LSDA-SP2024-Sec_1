@@ -67,7 +67,19 @@ vars[2]
 vars = reg.summary$which[i,]
 names(vars)[vars][-1]
 ```
+```{r}
+vars.selected = names(vars)[vars]-1
+#best.model = lm(Saraly~vars.selected, data = dat) error
 
+```
+
+```{r}
+vars.selected = name(vars)[vars]-1
+#dat.seleected = dat[vars.selected]
+#v=c('AtBat','Hits')
+#dat[v]
+vars.selected[8] = 'Lea
+```
 
 
 
