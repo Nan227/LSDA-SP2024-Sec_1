@@ -1,0 +1,127 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(ISLR2)
+Hitters = na.omit(Hitters)
+```
+
+```{r}
+x = model.matrix(Salary~., Hitters)[, -1]
+y = Hitters$Salary
+```
+
+# Ridge
+
+```{r}
+library(glmnet)
+
+grid = 10^seq(10, -2, length=100)
+
+ridge.model = glmnet(x, y, alpha = 0, lambda = grid)
+```
+
+```{r}
+plot(ridge.model, xvar = "lambda", label = TRUE)
+```
+## coefficients by lambda
+```{r}
+i = 1
+
+lamb = grid[i]
+coef = coef(ridge.model)[-1,i]
+
+lamb
+sum(coef^2)
+```
+```{r}
+i = 50
+
+lamb = grid[i]
+coef = coef(ridge.model)[-1,i]
+
+lamb
+sum(coef^2)
+```
+## coef using predict()
+```{r}
+lambda.tem = 50
+
+predict(ridge.model, s=lambda.tem, type = "coefficients" )[1:20,]
+```
+# prediction and comparison
+## train & test sets
+```{r}
+set.seed(1)
+
+train.index = sample(1:nrow(x), nrow(x)/2)
+test.index = (-train.index)
+
+x.train = x[train.index, ]
+x.test = x[test.index, ]
+
+y.train = y[train.index]
+y.test = y[test.index]
+
+```
+
+## Ridge model
+```{r}
+ridge.model = glmnet(x.train, y.train, alpha = 0, lambda = grid)
+```
+
+## Test mse for a given lambda
+```{r}
+ridge.pred.test = predict(ridge.model, s=4, newx = x.test)[1:132,1]
+
+mean((ridge.pred.test - y.test)^2)
+```
+## Test mse using least squares
+```{r}
+ridge.pred.test = predict(ridge.model, s=0, newx = x.test)[1:132,1]
+# length(ridge.pred.test)
+mean((ridge.pred.test - y.test)^2)
+```
+# obtain best lambda using cross validation
+```{r}
+library(glmnet)
+
+cv.out = cv.glmnet(x.train, y.train, alpha = 0, nfolds = 10 )
+
+plot(cv.out)
+```
+```{r}
+bestlamb = cv.out$lambda.min
+bestlamb
+```
+```{r}
+ridge.pred.test = predict(ridge.model, s=bestlamb, newx = x.test)[1:132,1]
+
+mean((ridge.pred.test - y.test)^2)
+```
+## refit ridge model using best lambda
+```{r}
+ridge.refit = glmnet(x.train, y.train, alpha = 0, lambda = bestlamb)
+
+test.mse.refit = predict(ridge.refit, s=bestlamb, newx = x.test)[1:132,1]
+
+mean((test.mse.refit - y.test)^2)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
