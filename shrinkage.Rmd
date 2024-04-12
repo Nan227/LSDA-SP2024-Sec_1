@@ -1,0 +1,40 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+library(ISLR2)
+Hitters = na.omit(Hitters)
+
+```
+
+
+```{r}
+
+x = model.matrix(Salary~.,Hitters)
+y=Hitters$Salary
+
+```
+
+
+
+```{r}
+seq(1,10,10)
+seq(1,10,length=10) #9 part
+seq(1,10,length=9) #8 part
+seq(10,1,length=9) #8 part from larze to small
+grid = lllkkkkk
+```
+
+#Ridge
+
+```{r}
+library(glmnet)
+ridge.model = glmnet(x,y,alpha=0,lambda = grid
+```
+

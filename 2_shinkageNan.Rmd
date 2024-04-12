@@ -1,0 +1,114 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(ISLR2)
+Hitters =na.omit((Hitters))
+```
+
+
+```{r}
+x= model.matrix(Salary~., Hitters)[,-1]
+y = Hitters$Salary
+```
+
+# Rdge
+```{r}
+grid= 10^seq(10, -2, length=100)
+
+```
+
+
+```{r}
+seq(1,10,1)
+```
+```{r}
+seq(1,10,2)
+```
+```{r}
+seq(8,10,1)
+```
+
+```{r}
+library(glmnet)
+grid= 10^seq(10, -2, length=100)
+ridge.model = glmnet(x,y, alpha = 0, lambda = grid)
+
+```
+```{r}
+plot(ridge.model,xvar = "lambda", label = "True")
+```
+
+## coefficients by lambda
+```{r}
+lamb = grid[1]
+lamb #1e+10
+
+i = 1
+coef = coef(ridge.model)[,i]
+coef
+```
+
+```{r}
+
+#(sumcoef^2)
+sum(coef^2)
+```
+
+```{r}
+i = 1
+lamb = grid[i]
+lamb #1e+10
+
+
+coef = coef(ridge.model)[-1,i]
+lamb
+
+sum(coef^2)
+```
+
+```{r}
+lambda.tem = 50
+predict(ridge.model, s= lambda.tem, type = "coefficients")[1:20,]
+```
+# prediction comparision (compare w/ original linear model)
+
+train and test
+```{r}
+sample = set.seed(1)
+train = sample(1:nrow(x), nrow(x)/2)
+
+test.index = (-train.index)
+
+x.train = x[train.index,]
+x.test = x[test.index] # error
+
+y.train = y[train.index]
+y.test = y[test.index]
+
+```
+
+## Ridge model
+```{r}
+ridge.model = glmnet(x.train, y.train, alpha = 0, lambda = grid)
+```
+## TEst mse for a given lambda
+```{r}
+ridge.model.test = predict(ridge.model, s= 4, newx = x.train) # [1:132,1]
+mean((y.test - ridge.pred.test)^2)
+```
+
+```{r}
+ridge.model.test = predict(ridge.model, s= 0, newx = x.train)[1:131] # just only RSS
+mean((y.test - ridge.pred.test)^2)
+```
+
+
+
+
+
+
+
+
