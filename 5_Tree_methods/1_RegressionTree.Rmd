@@ -1,0 +1,77 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(ISLR2)
+library(tree)
+
+set.seed(1)
+
+N = nrow(Boston)
+
+train.indice = sample(1:N, N/2)
+test.indice = (-train.indice)
+
+
+train.set = Boston[train.indice, ]
+test.set = Boston[test.indice, ]
+
+```
+# Regression Tree
+## Create a large tree
+```{r}
+tree.boston = tree(medv~., data = train.set)
+summary(tree.boston)
+
+```
+
+```{r}
+plot(tree.boston)
+text(tree.boston)
+```
+## Prune the tree using cross validation
+```{r}
+set.seed(1)
+cv.boston = cv.tree(tree.boston, K=10)
+
+cv.boston$k
+```
+```{r}
+plot(cv.boston$size, cv.boston$dev, type = 'b')
+```
+```{r}
+i = which.min(cv.boston$dev)
+cv.boston$size[i]
+```
+```{r}
+prune.boston = prune.tree(tree.boston, best=6)
+plot(prune.boston)
+text(prune.boston)
+```
+```{r}
+predict(prune.boston, newdata = train.set[1,])
+```
+## test mse by using the large tree
+```{r}
+y_hat.0 = predict(tree.boston, newdata = test.set)
+mean( (test.set$medv - y_hat.0)^2)
+```
+## test mse by using the pruned tree
+```{r}
+y_hat.1 = predict(prune.boston, newdata = test.set)
+mean( (test.set$medv - y_hat.1)^2 )
+```
+
+
+
+
+
+
+
+
+
+
+
+
